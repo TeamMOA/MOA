@@ -83,9 +83,9 @@ async function profile(req, res) {
 
         const userId = req.params.userId
 
-        let userInfo = await db.query('select userID, email, nickname, introduce, followerCount, followingCount from users where userID = ?', [userId])
+        let userInfo = await db.query('select userID, email, nickname, introduce, followerCount, followingCount from users where uID = ?', [userId])
 
-        let userPost = await db.query('select postID, content, imgPath from posts where userID = ? order by timestamp desc', [userId])
+        // let userPost = await db.query('select postID, content, imgPath from posts where userID = ? order by timestamp desc', [userId])
 
         const returnObj = {
             userInfo : userInfo,

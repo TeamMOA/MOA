@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-
+import users from './users.js';
 import newsRouter from './news.js';
 import clusterRouter from './clusters.js';
 
-// router.use('/user', users);
+router.use('/user', users);
 router.use('/news', newsRouter);
 router.use('/cluster', clusterRouter);
 
