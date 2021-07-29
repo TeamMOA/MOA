@@ -1,22 +1,6 @@
 import React from 'react';
-import { SmileOutlined, SoundOutlined,  } from '@ant-design/icons';
-import {createGlobalStyle} from 'styled-components';
-import styled from 'styled-components';
-import {Menu, TodoTemplate, TodoHead, TodoItem, TodoCreate, navbar} from '../components';
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    background : #e9ecef;
-  }
-`;
-
-const TodoListBlock = styled.div`
-  flex: 1;
-  padding: 20px 32px;
-  padding-bottom: 48px;
-  overflow-y: auto;
-`;
-
+import {Menu} from '../components';
+import "antd/dist/antd.css";
 class Home extends React.Component {
   
   constructor(props){
@@ -52,37 +36,11 @@ class Home extends React.Component {
     ]
     this.setState({lists:lists});
     this.setState({len : lists.filter(list => list.done === false).length})
-    this.onToggle = this.onToggle.bind(this);
-    this.onRemove = this.onRemove.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
-  onRemove = async(id) => {
-    await this.setState({lists:this.state.lists.filter(list => list.id !== id)});
-    this.setState({len : this.state.lists.filter(list => list.done === false).length})
-  }
-
-  onToggle(id) {
-    let i;
-    const NewTodo = this.state.lists.find((val, index)=>{
-      if(val.id === id){
-        i = index;
-        return true;
-      }
-    })
-    this.state.lists.splice(i, 1, {id:NewTodo.id, text:NewTodo.text, done:!NewTodo.done});
-    this.setState({len : this.state.lists.filter(list => list.done === false).length});
-  }
-
-  onSubmit(text){
-    alert(text);
   }
 
   render(){
-    const {lists, len} = this.state;
     return (
-      <body>
-        <Menu />
+      <div>
         <div>
           <h1>Hello World!</h1>
           <h2>Hello World!</h2>
@@ -91,15 +49,14 @@ class Home extends React.Component {
           <h5>Hello World!</h5>
           <h6>Hello World!</h6>
         </div>
-        <div style={{position:'fixed', bottom:'0px', display:'flex', justifyContent:'space-between', width:'100%', height:'50px', backgroundColor:'#ffffff'}}>
-          <button>피드모아</button>
-          <button>작성하기</button>
-          <button>프로필</button>
-          <button>설정</button>
-        </div>
-      </body>
+      </div>
     );
   }
 };
 
 export default Home;
+
+
+const nav = {
+  
+}
