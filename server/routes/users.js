@@ -11,7 +11,4 @@ router.post('/login', user.login)
 router.post('/signUp', user.signUp)
 
 
-// 프로필
-router.get('/profile/:userId', user.profile)
-
 export default router
