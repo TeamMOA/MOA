@@ -1,7 +1,8 @@
 import React from 'react';
+import { SmileOutlined, SoundOutlined,  } from '@ant-design/icons';
 import {createGlobalStyle} from 'styled-components';
 import styled from 'styled-components';
-import {Menu, TodoTemplate, TodoHead, TodoItem, TodoCreate} from '../components';
+import {Menu, TodoTemplate, TodoHead, TodoItem, TodoCreate, navbar} from '../components';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -80,7 +81,7 @@ class Home extends React.Component {
   render(){
     const {lists, len} = this.state;
     return (
-      <div>
+      <body>
         <Menu />
         <div>
           <h1>Hello World!</h1>
@@ -90,7 +91,13 @@ class Home extends React.Component {
           <h5>Hello World!</h5>
           <h6>Hello World!</h6>
         </div>
-      </div>
+        <div style={{position:'fixed', bottom:'0px', display:'flex', justifyContent:'space-between', width:'100%', height:'50px', backgroundColor:'#ffffff'}}>
+          <button>피드모아</button>
+          <button>작성하기</button>
+          <button>프로필</button>
+          <button>설정</button>
+        </div>
+      </body>
     );
   }
 };
