@@ -1,5 +1,5 @@
 import React from 'react';
-import {Menu} from '../components';
+import {Menu, Navbar} from '../components';
 import {Comment, Tooltip, Avatar} from 'antd';
 import moment from 'moment';
 import '../style/Main.css';
@@ -31,6 +31,7 @@ const Main = () => {
           }
         />
       </div>
+      <Navbar />
     </div>
   );
 };
