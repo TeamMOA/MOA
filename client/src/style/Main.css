@@ -29,6 +29,7 @@
   z-index: 0;
 }
 
+/* 헤더 */
 .header{
   text-align: center;
   position: relative;
@@ -83,6 +84,8 @@ input.university{
 input.interest{
   margin-left: 17.5px;
 }
+
+/* 피드 */
 
 .feedWrap{
   width: 386px; height: 800px;

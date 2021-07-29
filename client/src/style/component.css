@@ -6,3 +6,12 @@
     display:flex;
     justify-content: space-between;
 }
+
+.slide-container{
+    width: 328px; height: 328px;
+    margin: 0 auto;
+  }
+
+.react-slideshow-container{
+    width: 328px; height: 328px;
+}
