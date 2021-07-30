@@ -1,6 +1,6 @@
 import React from 'react';
 import {Navbar, Category} from '../components';
-import {Comment, Tooltip, Avatar, Layout, Breadcrumb, Popover, Button} from 'antd';
+import {Comment, Tooltip, Avatar, Layout, Breadcrumb, Popover, Button, Carousel} from 'antd';
 import moment from 'moment';
 // import '../style/Main.css';
 import feedIcon from '../assets/icons/feedIcon.png';
@@ -9,16 +9,20 @@ import { Slide } from 'react-slideshow-image';
 import Slideshow from '../components/slide';
 import styled from "styled-components";
 import { Menu, ActivityIndicator, NavBar } from 'antd-mobile';
+import gwanghwamun from '../assets/images/gwanghwamun.png'
+import travel1 from '../assets/images/travel1.png'
+import travel2 from '../assets/images/travel2.png'
+import travel3 from '../assets/images/travel3.png'
 
-let clickORnot = 0;
+let clickORnot = '';
 
 const clickedStyle = {
-  background : clickORnot === 1 ? 'red' : 'white'
+  background : clickORnot.length === 1 ? 'red' : 'white'
 }
 
 const regionContent = (
   <div>
-    <button onClick={() => {alert(clickedStyle.background); clickORnot = 1}} style = {clickedStyle}>경기</button>
+    <button onClick={() => {clickORnot = 'd'; alert(clickedStyle.background)}} style = {clickedStyle}>경기</button>
     <button>서울</button>
     <button>충청</button>
     <button>강원</button>
@@ -53,6 +57,18 @@ const interestContent = (
     <button>+</button>
   </div>
 );
+
+function onChange(a, b, c) {
+  console.log(a, b, c);
+}
+
+const contentStyle = {
+  height: '160px',
+  color: '#fff',
+  lineHeight: '160px',
+  textAlign: 'center',
+  background: '#364d79',
+};
 
 const buttonWidth = 70;
 
@@ -104,6 +120,24 @@ class Main extends React.Component {
                 <h2 className="recentFeed">{this.state.headTitle}</h2>
                 <h3 className="postNum">{this.state.postNum}개</h3>
               </div>
+              <Carousel afterChange={onChange}>
+                <div width="328px" height="328px">
+                  <img className="slideImage" src={gwanghwamun} width="328px" height="328px"></img>
+                  <h3 style={contentStyle}>1</h3>
+                </div>
+                <div width="328px" height="328px">
+                <img className="slideImage" src={travel1} width="328px" height="328px"></img>
+                  <h3 style={contentStyle}>2</h3>
+                </div>
+                <div width="328px" height="328px">
+                <img className="slideImage" src={travel2} width="328px" height="328px"></img>
+                  <h3 style={contentStyle}>3</h3>
+                </div>
+                <div width="328px" height="328px">
+                <img className="slideImage" src={travel3} width="328px" height="328px"></img>
+                  <h3 style={contentStyle}>4</h3>
+                </div>
+              </Carousel>
             </div>
             
             {/*파드*/}
