@@ -417,6 +417,8 @@ input.interest{
 }
 
 .slick-slider .slick-slide{
+  box-sizing: content-box;
+  padding-top: 60px;
   width: 328px; height: 328px;
 }
 
