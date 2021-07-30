@@ -48,7 +48,43 @@ async function detail(req, res) {
     }
 }
 
+async function update(req, res) {
+    try {
+        console.log(req.body);
+        const uid = req.params.uid;
+        const nickname = req.body.nickname;
+        const introduce = req.body.introduce;
+        const region = req.body.region;
+        const univ = req.body.univ;
+        const interest = req.body.interest;
+        const profileimg = "/images/"+req.file.filename;
+        
+        let update = await db.query('update into users set nickname=?, introduce=?, profileimg=? where uid = ?',[nickname, introduce, profileimg, uid]);
+
+        if(update.errno > 0) {
+            res.status(httpStatus.NOT_FOUND).send({
+                success : false,
+                message : "Failed to update"
+            })
+        }
+        else {
+            res.status(httpStatus.OK).send({
+                success : true,
+                message : "update Profile Successful"
+            })
+        }
+
+    } catch (error) {
+        console.error(error, "update profile api error")
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
+            success:false,
+            msg:'프로필 가져오는데 실패하셨군요 크크...크림빵...'
+        })
+    }
+}
+
 export default {
     normal,
-    detail
+    detail,
+    update
 }
