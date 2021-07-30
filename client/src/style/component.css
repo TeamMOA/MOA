@@ -42,3 +42,9 @@ input.categoryButton{
   input.interest{
     margin-left: 17.5px;
   }
+
+  .smallCategory{
+    width: 64px; height: 26px;
+    background: #FFFFFF;
+    border-radius: 100px;
+  }
