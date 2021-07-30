@@ -7,8 +7,7 @@
 */
 
 html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
+p, blockquote, pre, a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
@@ -23,7 +22,7 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: 'Noto Sans KR',sans-serif;
+	font-family: 'Noto Sans KR',sans-serif;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -66,7 +65,6 @@ a:hover{color:#000000;}
   align-items:center;
   width:100vw;
   height:100vh;
-  background-Image : url('./assets/images/inner-box.png');
   background-size:cover;
   object-fit:contain;
 }
@@ -225,16 +223,31 @@ input.categoryButton{
   display: none;
 }
 
-/*Profile*/
+/*background*/
+.login-background {
+  background-Image : url('./assets/images/ProfileScreen.png');
+}
+
+.main-background {
+  background-Image : url('./assets/images/MainScreen.png');
+}
+.write-background {
+  background-Image : url('./assets/images/WriteScreen.png');
+}
+.profile-background {
+  background-Image : url('./assets/images/ProfileScreen.png');
+}
+.setting-background {
+  background-Image : url('./assets/images/SettingScreen.png');
+}
 
 
 /* 헤더 */
 
-.profileWrap {
-
+.content {
   flex:1;
   width: 374px;
-  margin : 5px;
+  padding : 10px;
   background-Color: #FFFFFF;
   box-shadow: 0px 0px 6px rgba(146, 146, 146, 0.1);
   border-radius: 30.2134px;

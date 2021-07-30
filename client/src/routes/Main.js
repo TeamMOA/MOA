@@ -111,9 +111,9 @@ class Main extends React.Component {
     );
 
     return (
-      <div class="wrap">
-          <div class="inner-box">
-            <div class="header">
+      <div className="wrap">
+          <div className="inner-box main-background">
+            <div className="header">
               <div className="textHeader">
                 <h1>모아보기</h1>
                 <h4>카테고리를 선택하여 사람들과 만나봅시다!</h4>

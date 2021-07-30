@@ -71,50 +71,61 @@ class Write extends React.Component {
     universityView = <Button onClick={this.show.bind(this)} style={{ position:"absolute", top:"560px", left:"165px", width:"100px", color: "grey", 'z-index': "1" }}>{this.state.universityInput}</Button>
     
     return (
-      <div>
-        <h1 style={{ position:"absolute", top:"50px", left:"150px", color: "black" }}>작성하기</h1>
-        <Square />
-        <ImageBox />
-        <div class="TextForm">
-          <TextArea id="titleid" placeholder="제목을 입력해주세요" value={this.state.title} onChange={(e)=>{this.setState({title:e.target.value})}} bordered={false} style={{ textAlign: "center", verticalAlign:"middle", position:"absolute", top:"160px", left:"45px", width:"324px", height:"324px", color: "black", 'z-index': "2" }} />
-        </div>
-        <h2 style={{ position:"absolute", top:"500px", left:"45px", color: "black", 'z-index': "1"}}>태그 붙이기</h2>
-        <h3 style={{ position:"absolute", top:"560px", left:"55px", color: "grey", 'z-index': "1"}}>지역별</h3>
-        <Button type="text" onClick={()=>{this.setState({ visible: true});}} style={{ position:"absolute", top:"560px", left:"165px", color: "grey", opacity: "0.5", 'z-index': "1" }}>{this.state.universityText}</Button>
-        <hr style={{ position:"absolute", top:"595px", left:"35px", color: "grey", width: "344px", 'z-index': "1" }}></hr>
-        <h3 style={{ position:"absolute", top:"630px", left:"55px", color: "grey", 'z-index': "1" }}>대학별</h3>
-        <Button type="text" style={{ position:"absolute", top:"630px", left:"165px", color: "grey", opacity: "0.5", 'z-index': "1" }}>눌러서 선택해주세요</Button>
-        <hr style={{ position:"absolute", top:"665px", left:"35px", color: "grey", width: "344px", 'z-index': "1" }}></hr>
-        <h3 style={{ position:"absolute", top:"700px", left:"55px", color: "grey", 'z-index': "1" }}>관심사별</h3>
-        <Button type="text" style={{ position:"absolute", top:"700px", left:"165px", color: "grey", opacity: "0.5", 'z-index': "1" }}>눌러서 선택해주세요</Button>
-        {universityView}
-        <div>
-          <input type='file' 
-            accept='image/jpg,impge/png,image/jpeg,image/gif' 
-            name='profile_img' 
-            onChange={this.handleFileOnChange}
-            style={{ position:"absolute", top:"120px", left:"45px", 'z-index': "3" }}>
-          </input>
-          {profile_preview}
-        </div>
-
-        <Rodal customStyles={customStyles} visible={this.state.visible} onClose={this.hide.bind(this)}>
-          <div>
-            {region.map((value, index) =>{
-              return (<Button key={index} onClick={() => {
-                this.setState({Selectregion:this.state.Selectregion.concat(value), isSelected:!this.state.isSelected})
-              }} style={{backgroundColor:this.state.isSelected?'red':'green'}}>{value}</Button>);
-            })}
-            
-          <Button onClick={() => this.getUniversity(1)} style={{ position:"absolute", top:"60px", left:"55px", color: "grey" }}>숭실대</Button>
-            <Button onClick={() => this.getUniversity(2)} style={{ position:"absolute", top:"60px", left:"165px", color: "grey" }}>서울대</Button>
-            <Button onClick={() => this.getUniversity(3)} style={{ position:"absolute", top:"60px", left:"275px", color: "grey" }}>승강기대</Button>
-            <Button onClick={() => this.getUniversity(0)} style={{ position:"absolute", top:"110px", left:"165px", color: "grey" }}>없음</Button>
+      <div className="wrap" >
+        <div className="inner-box profile-background">
+          <div className="header" >
+            <h1>작성하기</h1>
           </div>
-        </Rodal>
-        {/*bottom navigation*/}
-      <Navbar />
+          <div className="content">
+          </div>
+        </div>
+        <Navbar />
       </div>
+
+      // <div>
+      //   <h1 style={{ position:"absolute", top:"50px", left:"150px", color: "black" }}>작성하기</h1>
+      //   <Square />
+      //   <ImageBox />
+      //   <div class="TextForm">
+      //     <TextArea id="titleid" placeholder="제목을 입력해주세요" value={this.state.title} onChange={(e)=>{this.setState({title:e.target.value})}} bordered={false} style={{ textAlign: "center", verticalAlign:"middle", position:"absolute", top:"160px", left:"45px", width:"324px", height:"324px", color: "black", 'z-index': "2" }} />
+      //   </div>
+      //   <h2 style={{ position:"absolute", top:"500px", left:"45px", color: "black", 'z-index': "1"}}>태그 붙이기</h2>
+      //   <h3 style={{ position:"absolute", top:"560px", left:"55px", color: "grey", 'z-index': "1"}}>지역별</h3>
+      //   <Button type="text" onClick={()=>{this.setState({ visible: true});}} style={{ position:"absolute", top:"560px", left:"165px", color: "grey", opacity: "0.5", 'z-index': "1" }}>{this.state.universityText}</Button>
+      //   <hr style={{ position:"absolute", top:"595px", left:"35px", color: "grey", width: "344px", 'z-index': "1" }}></hr>
+      //   <h3 style={{ position:"absolute", top:"630px", left:"55px", color: "grey", 'z-index': "1" }}>대학별</h3>
+      //   <Button type="text" style={{ position:"absolute", top:"630px", left:"165px", color: "grey", opacity: "0.5", 'z-index': "1" }}>눌러서 선택해주세요</Button>
+      //   <hr style={{ position:"absolute", top:"665px", left:"35px", color: "grey", width: "344px", 'z-index': "1" }}></hr>
+      //   <h3 style={{ position:"absolute", top:"700px", left:"55px", color: "grey", 'z-index': "1" }}>관심사별</h3>
+      //   <Button type="text" style={{ position:"absolute", top:"700px", left:"165px", color: "grey", opacity: "0.5", 'z-index': "1" }}>눌러서 선택해주세요</Button>
+      //   {universityView}
+      //   <div>
+      //     <input type='file' 
+      //       accept='image/jpg,impge/png,image/jpeg,image/gif' 
+      //       name='profile_img' 
+      //       onChange={this.handleFileOnChange}
+      //       style={{ position:"absolute", top:"120px", left:"45px", 'z-index': "3" }}>
+      //     </input>
+      //     {profile_preview}
+      //   </div>
+
+      //   <Rodal customStyles={customStyles} visible={this.state.visible} onClose={this.hide.bind(this)}>
+      //     <div>
+      //       {region.map((value, index) =>{
+      //         return (<Button key={index} onClick={() => {
+      //           this.setState({Selectregion:this.state.Selectregion.concat(value), isSelected:!this.state.isSelected})
+      //         }} style={{backgroundColor:this.state.isSelected?'red':'green'}}>{value}</Button>);
+      //       })}
+            
+      //     <Button onClick={() => this.getUniversity(1)} style={{ position:"absolute", top:"60px", left:"55px", color: "grey" }}>숭실대</Button>
+      //       <Button onClick={() => this.getUniversity(2)} style={{ position:"absolute", top:"60px", left:"165px", color: "grey" }}>서울대</Button>
+      //       <Button onClick={() => this.getUniversity(3)} style={{ position:"absolute", top:"60px", left:"275px", color: "grey" }}>승강기대</Button>
+      //       <Button onClick={() => this.getUniversity(0)} style={{ position:"absolute", top:"110px", left:"165px", color: "grey" }}>없음</Button>
+      //     </div>
+      //   </Rodal>
+      //   {/*bottom navigation*/}
+      // <Navbar />
+      // </div>
     );
   }
 };

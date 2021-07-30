@@ -28,16 +28,15 @@ class Profile extends React.Component {
   render(){
     const {nickname, introduce, profile_img} = this.state;
     return (
-      <div className="wrap" style={{backgroundImage:'require("../assets/images/ProfileScreen.png")', backgroundColor:'orange'}}>
-        <div className="inner-box">
+      <div className="wrap" >
+        <div className="inner-box profile-background">
           <div className="header" >
             <h1>프로필</h1>
-            <h4>당신의 프로필 화면입니다.</h4>
           </div>
-            <div className="profileWrap">
-              <h1>{nickname}</h1>
-              <h2>{introduce}</h2>
-            </div>
+          <div className="content">
+            <h1>{nickname}</h1>
+            <h2>{introduce}</h2>
+          </div>
         </div>
         <Navbar />
       </div>
