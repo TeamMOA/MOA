@@ -44,7 +44,7 @@ class Profile extends React.Component {
             <h1>프로필</h1>
           </div>
           <div className="content">
-            <div className="profile" style={{display:'flex', paddingTop:'20px'}}>
+            <div className="profile" style={{display:'flex', paddingTop:'20px', borderWidth:'0.5px', borderBottom:'solid #CCCCCC'}}>
               <div className="center">
                 <Image style={{flex:1, borderRadius:"50%"}} width={80} height={80} src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"/>
               </div>
@@ -66,7 +66,6 @@ class Profile extends React.Component {
                 </div>
               </div>
             </div>
-            <Divider />
             <div className="profile">
               <h2>자기소개</h2>
               <h4 style={IntoduceStyle}>{introduce}</h4>
