@@ -3,12 +3,12 @@ var router = express.Router();
 
 import users from './users.js';
 import profile from './profile.js';
-import newsRouter from './news.js';
+import posts from './posts.js';
 import clusterRouter from './clusters.js';
 
 router.use('/user', users);
 router.use('/profile', profile);
-router.use('/news', newsRouter);
+router.use('/post', posts);
 router.use('/cluster', clusterRouter);
 
 /* GET home page. */

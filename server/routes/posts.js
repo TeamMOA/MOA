@@ -1,4 +1,4 @@
-import news from '../controller/news.js'
+import posts from '../controller/posts.js'
 var express = require('express');
 var router = express.Router();
 var multer = require('multer') // 
@@ -14,10 +14,10 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage }); // 3-2
 
 /* GET users listing. */
-router.get('/', news.getNews);
-router.get('/:aId', news.getNewsId);
-// router.post('/', upload.single('images'), post.createPost);
-// router.put('/:id', upload.single('images'), post.updatePost);
-// router.delete('/:id', post.deletePost);
+router.get('/', posts.getPosts);
+router.get('/:pid', posts.getPostId);
+router.post('/', upload.single('images'), posts.createPost);
+// router.put('/:pid', upload.single('images'), post.updatePost);
+router.delete('/:pid', posts.deletePost);
 
 module.exports = router;
