@@ -34,11 +34,12 @@ class Button extends React.Component {
       initData: '',
       show: false,
       categoryName: '지역별',
+      data: data,
     };
   }
   onChange = (value) => {
     let label = '';
-    data.forEach((dataItem) => {
+    this.props.data.forEach((dataItem) => {
       if (dataItem.value === value[0]) {
         label = dataItem.label;
         if (dataItem.children && value[1]) {
@@ -61,7 +62,7 @@ class Button extends React.Component {
     if (!this.state.initData) {
       setTimeout(() => {
         this.setState({
-          initData: data,
+          initData: this.props.data,
         });
       }, 500);
     }
@@ -83,6 +84,7 @@ class Button extends React.Component {
         level={1}
         onChange={this.onChange}
         height={document.documentElement.clientHeight * 0.6}
+        
       />
     );
     const loadingEl = (
@@ -96,7 +98,7 @@ class Button extends React.Component {
         <div>
           <NavBar
             leftContent={this.props.categoryName}
-            mode="light"
+            mode="dark"
             onLeftClick={this.handleClick}
             className="single-top-nav-bar"
           >

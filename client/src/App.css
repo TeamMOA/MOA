@@ -166,8 +166,9 @@ input.categoryButton{
 /*누르면 펼쳐지는 것*/
 .single-foo-menu {
   position: absolute;
+  left: 0;
   z-index: 90 !important;
-  width: 104px;
+  width: 414px;
   text-align: center;
 }
 
@@ -196,6 +197,7 @@ input.categoryButton{
 .am-navbar-title {
   color: #FFF!important;
 }
+
 .menu-mask {
   position: absolute;
   top: 0;
@@ -206,10 +208,14 @@ input.categoryButton{
 }
 
 .am-list-body{
-  width: 374px;
+  width: 414px;
   height: 62px;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
+  justify-content: space-around;
+  align-content: space-around;
+  margin-top: 31px;
 }
 
 .am-list-item{
@@ -219,6 +225,8 @@ input.categoryButton{
   color: #FA959B;
   width: 64px; height: 26px;
   text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .am-radio-input{
