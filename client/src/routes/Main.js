@@ -15,7 +15,7 @@ function onChange(a, b, c) {
 }
 
 const contentStyle = {
-  fontSize: '30px',
+  fontSize: '20px',
   fontWeight: 'bold',
   width: '328px',
   height: '328px',
