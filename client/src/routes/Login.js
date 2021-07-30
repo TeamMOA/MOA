@@ -1,5 +1,4 @@
-import React from 'react';
-import {Button} from 'antd';
+import {React, Button} from 'react';
 import { useHistory } from 'react-router';
 
 const Login = () => {
@@ -14,11 +13,15 @@ const Login = () => {
 
   return (
     <div>
-      <h1>로그인</h1>
-      <p>이 프로젝트는 리액트 라우터 기초를 실습해보는 예제 프로젝트랍니다.</p>
-      <div style={{display:'flex', flexDirection:'column'}}>
-        <Button type="primary" onClick={()=>{postlogin(1)}}>소글(User1) 로그인</Button>
-        <Button type="primary" onClick={()=>{postlogin(2)}}>글소(User2) 로그인</Button>
+      <div className="wrap" >
+        <div className="inner-box login-background">
+          <div className="center" style={{height:'100vh'}}>
+            <div className="btn btn-lg btn-pink" onClick={()=>{alert("2")}}>
+              소글이로 로그인 하기
+            </div>
+            <div className="btn btn-lg btn-white" onClick={()=>{alert("2")}}>글소로 로그인 하기</div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -225,7 +225,7 @@ input.categoryButton{
 
 /*background*/
 .login-background {
-  background-Image : url('./assets/images/ProfileScreen.png');
+  background-Image : url('./assets/images/MoaLogo2.png');
 }
 
 .main-background {
@@ -253,6 +253,24 @@ input.categoryButton{
   border-radius: 30.2134px;
 }
 
+
+/*로그인 login*/
+.center {
+  display:flex;
+  flex-Direction:column;
+  justify-content:center;
+  align-items: center;
+  text-align:center;
+}
+
+.center Button{
+  margin : 30px;
+}
+
+
+
+
+/* 컴포넌트 component */
 
 .nav {
   position:fixed;
@@ -320,4 +338,40 @@ input.interest{
   width: 64px; height: 26px;
   background: #FFFFFF;
   border-radius: 100px;
+}
+
+.btn {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  border-radius : 10px;
+  border-width: 2px;
+}
+
+.btn-sm {
+  width : 86px;
+  height : 41px;
+  font-size:13px;
+}
+
+.btn-md {
+  width : 186px;
+  height : 39px;
+  font-size:16px;
+}
+
+.btn-lg {
+  width : 374px;
+  height : 49px;
+  font-size:16px;
+}
+
+.btn-pink {
+  background-color: #FA959B;
+  color : #FFFFFF;
+}
+
+.btn-white {
+  background-color: #FFFFFF;
+  color : #FA959B;
 }
