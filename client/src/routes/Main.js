@@ -1,5 +1,6 @@
 import React from 'react';
 import {Navbar, Category} from '../components';
+import instance from '../module/instance';
 import {Comment, Tooltip, Avatar, Layout, Breadcrumb, Popover, Button, Carousel} from 'antd';
 import moment from 'moment';
 // import '../style/Main.css';
@@ -85,14 +86,24 @@ class Main extends React.Component {
       posts : [],
       headTitle : "최신 피드",
       postNum : 0,
-      
     }
   }
 
+  componentDidMount = async() => {
+    await instance.get("/api/post/3")
+      .then((res) => {
+        console.log(res.data);
+        if(res.data.success){
+          this.setState({posts:res.data.posts});
+        }
+      }).catch((error)=>{
+        console.log(error);
+      })
+
+    console.log(this.state.posts);
+  }
+
   render(){
-
-    
-
     return (
       <div className="wrap">
           <div className="inner-box main-background">
@@ -121,22 +132,14 @@ class Main extends React.Component {
                 <h3 className="postNum">{this.state.postNum}개</h3>
               </div>
               <Carousel afterChange={onChange}>
-                <div width="328px" height="328px">
-                  <img className="slideImage" src={gwanghwamun} width="328px" height="328px"></img>
-                  <h3 style={contentStyle}>1</h3>
-                </div>
-                <div width="328px" height="328px">
-                <img className="slideImage" src={travel1} width="328px" height="328px"></img>
-                  <h3 style={contentStyle}>2</h3>
-                </div>
-                <div width="328px" height="328px">
-                <img className="slideImage" src={travel2} width="328px" height="328px"></img>
-                  <h3 style={contentStyle}>3</h3>
-                </div>
-                <div width="328px" height="328px">
-                <img className="slideImage" src={travel3} width="328px" height="328px"></img>
-                  <h3 style={contentStyle}>4</h3>
-                </div>
+                {this.state.posts.map((value, index)=>{
+                  return (
+                    <div width="328px" height="328px" key={index}>
+                      <img className="slideImage" src={value.img} width="328px" height="328px"></img>
+                      <h3 style={contentStyle}>{value.content}</h3>
+                    </div>
+                  );
+                })}
               </Carousel>
             </div>
             

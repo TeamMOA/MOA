@@ -16,11 +16,11 @@ const Login = () => {
       <div className="wrap" >
         <div className="inner-box login-background">
           <div className="center" style={{height:'100vh'}}>
-            <div className="btn btn-lg btn-pink" style={{margin:'10px'}} onClick={()=>{postlogin(1)}}>
-              소글이로 로그인 하기
+            <div className="btn btn-lg btn-pink" style={{margin:'10px'}} onClick={()=>{postlogin(5)}}>
+              김소글로 로그인 하기
             </div>
-            <div className="btn btn-lg btn-white" style={{margin:'10px'}} onClick={()=>{postlogin(2)}}>
-              글소로 로그인 하기
+            <div className="btn btn-lg btn-white" style={{margin:'10px'}} onClick={()=>{postlogin(6)}}>
+              하글소로 로그인 하기
             </div>
           </div>
         </div>
