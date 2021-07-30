@@ -69,12 +69,12 @@ class Profile extends React.Component {
             <Divider />
             <div className="profile">
               <h2>자기소개</h2>
-              <h3>{introduce}</h3>
+              <h4 style={IntoduceStyle}>{introduce}</h4>
             </div>
             <div className="profile">
               <h2>최근 올린 피드</h2>
               <div style={{borderRadius:'10px'}}>
-                <Carousel autoplay dotPosition={"Top"}>
+                <Carousel autoplay dotPosition={"Top"} autoplaySpeed={5000}>
                   <div>
                     <h3 style={contentStyle}>1</h3>
                   </div>
@@ -99,3 +99,12 @@ class Profile extends React.Component {
 };
 
 export default Profile;
+
+const IntoduceStyle = {
+  width:'100%',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  display: '-webkit-box',
+  WebkitLineClamp: 3,
+  WebkitBoxOrient: 'vertical',
+}
