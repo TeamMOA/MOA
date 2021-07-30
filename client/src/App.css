@@ -94,9 +94,11 @@ a:hover{color:#000000;}
 .categoryButtonWrap{
   display: flex;
   flex-direction: row;
-  width: 414px;
+  width: 100%;
   position: relative;
   top: 20px;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 input.categoryButton{
