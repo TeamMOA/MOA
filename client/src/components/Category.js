@@ -9,9 +9,7 @@ class Category extends React.Component {
 
     render(){
         return(
-            <div>
-                {this.props.name}
-            </div>
+            <input type="button" value="{this.props.value}"></input>
         );
     }
 }
