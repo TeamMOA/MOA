@@ -261,10 +261,11 @@ input.categoryButton{
   text-align:center;
   justify-content:center;
   align-items: center;
+  font-family:'Noto Sans KR',sans-serif;
 }
 
-.nav .item > span {
-  font-family:'Noto Sans KR',sans-serif;
+.nav .item > img {
+  margin-bottom:5px;
 }
 
 .slide-container{
