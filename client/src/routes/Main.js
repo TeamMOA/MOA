@@ -2,12 +2,11 @@ import React from 'react';
 import {Navbar, Category} from '../components';
 import instance from '../module/instance';
 import {Popover, Button, Carousel} from 'antd';
-import feedIcon from '../assets/icons/feedIcon.png';
+import feedDefault from '../assets/icons/feedDefault.png';
+import feedRegion from '../assets/icons/feedRegion.png';
+import feedUniv from '../assets/icons/feedUniv.png';
+import feedInterest from '../assets/icons/feedInterest.png';
 import 'react-slideshow-image/dist/styles.css'
-import gwanghwamun from '../assets/images/gwanghwamun.png'
-import travel1 from '../assets/images/travel1.png'
-import travel2 from '../assets/images/travel2.png'
-import travel3 from '../assets/images/travel3.png'
 
 
 function onChange(a, b, c) {
@@ -41,12 +40,23 @@ class Main extends React.Component {
       region : ["경기", "서울", "충청", "강원", "전라", "경상", "제주"],
       univ : ["서울대", "숭실대", "고려대", "홍익대", "해양대", "한국대", "서강대", "+",],
       interest : ["미술", "게암", "운동", "취업", "공부", "뜨개질", "+"],
+      feedIcon : feedDefault,
+      color: '#FA959B',
+      backgroundColor: '#ffffff',
+      upDown: '-52px',
     }
     this.setRegion = this.setRegion.bind(this);
     this.setUniv = this.setUniv.bind(this);
     this.setInterest = this.setInterest.bind(this);
-  }
 
+    this.feedRegionIcon = this.feedRegionIcon.bind(this);
+    this.feedUnivIcon = this.feedUnivIcon.bind(this);
+    this.feedInterestIcon = this.feedInterestIcon.bind(this);
+
+    this.upDown = this.upDown.bind(this);
+
+    this.setColor = this.setColor.bind(this);
+  }
   
 
   componentDidMount = async() => {
@@ -81,20 +91,55 @@ class Main extends React.Component {
     })
   }
 
+  feedRegionIcon() {
+    this.setState({
+      feedIcon: feedRegion
+    })
+  }
+
+  feedUnivIcon() {
+    this.setState({
+      feedIcon: feedUniv
+    })
+  }
+
+  feedInterestIcon() {
+    this.setState({
+      feedIcon: feedInterest
+    })
+  }
+
+  upDown() {
+    this.setState({
+      upDown: '-122px'
+    })
+  }
+
+  // test용!!!
+
+  setColor() {
+    this.setState({
+      color: 'white',
+      backgroundColor: '#FA959B'
+    })
+  }
+
+  
+
   render(){
     
     const regionContent = () => {
-      const result = this.state.region.map((value, index)=>{return (<button key="value">{value}</button>);})
+      const result = this.state.region.map((value, index)=>{return (<button key="index" style={{color: this.state.color, backgroundColor: this.state.backgroundColor}} onClick={this.setColor}>{value}</button>);})
       return <div>{result}</div>
     };
 
     const univContent = () => {
-      const result = this.state.univ.map((value, index)=>{return (<button key="value">{value}</button>);})
+      const result = this.state.univ.map((value, index)=>{return (<button key="index" onClick={() => alert(value)}>{value}</button>);})
       return <div>{result}</div>
     };
 
     const interestContent = () => {
-      const result = this.state.interest.map((value, index)=>{return (<button key="value">{value}</button>);})
+      const result = this.state.interest.map((value, index)=>{return (<button key="index" onClick={() => alert(value)}>{value}</button>);})
       return <div>{result}</div>
     };
     
@@ -110,18 +155,18 @@ class Main extends React.Component {
               </div>
               <div className="categoryButtonWrap">
               <Popover placement="bottom" content={regionContent} trigger="click">
-                <Button className="categoryButton" onClick={this.setRegion}>지역별</Button>
+                <Button className="categoryButton" onClick={this.setRegion, this.feedRegionIcon, this.upDown}>지역별</Button>
               </Popover>
               <Popover placement="bottom" content={univContent} trigger="click">
-                <Button className="categoryButton" onClick={this.setUniv}>학교별</Button>
+                <Button className="categoryButton" onClick={this.setUniv, this.feedUnivIcon, this.upDown}>학교별</Button>
               </Popover>
               <Popover placement="bottom" content={interestContent} trigger="click">
-                <Button className="categoryButton" onClick={this.setInterest}>관심사별</Button>
+                <Button className="categoryButton" onClick={this.setInterest, this.feedInterestIcon, this.upDown}>관심사별</Button>
               </Popover>
             </div>
-            <div className="feedWrap">
+            <div className="feedWrap" style={{bottom: this.state.upDown}}>
               <div className="feedTitle">
-                <img className="feedLogo" src={feedIcon} width="18px" height="16px"></img>
+                <img className="feedLogo" src={this.state.feedIcon} width="18px" height="16px"></img>
                 <h2 className="recentFeed">{this.state.headTitle}</h2>
                 <h3 className="postNum">{this.state.posts.length}개</h3>
               </div>
@@ -131,6 +176,8 @@ class Main extends React.Component {
                     <div width="328px" height="328px" key={index}>
                       <img className="slideImage" src={value.img} width="328px" height="328px"></img>
                       <div style={contentStyle}>{value.content}</div>
+                      {/* 지역 여러개 있는 것 짤림 (어떻게 할지 얘기해보기) */}
+                      <h3 className="slideUser">{value.nickname} · {value.region} · {value.univ}</h3>
                     </div>
                   );
                 })}
@@ -148,6 +195,7 @@ class Main extends React.Component {
   }
   
 };
+
 
 
 
