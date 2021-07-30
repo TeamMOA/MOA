@@ -17,6 +17,7 @@
   border-Top:solid;
   border-width: 2px;
   border-color:#FFE3E4;
+  z-index: 6;
 }
 
 .nav .item {
