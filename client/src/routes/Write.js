@@ -2,13 +2,14 @@ import React from 'react';
 import {Menu, Navbar} from '../components';
 import instance from '../module/instance';
 import { ImagePicker} from 'antd-mobile';
-import {Input} from 'antd';
+import {Input, Tag} from 'antd';
 import 'antd-mobile/dist/antd-mobile.css';
 import moment from 'moment';
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
 
 const {TextArea} = Input;
+const { CheckableTag } = Tag;
 
 const contentStyle = {
   height: '328px',
@@ -45,7 +46,7 @@ class Write extends React.Component {
       categoryNum : 0,
       images:null,
       visible: false,
-      showCloseButton: false,
+      selectedTags: ['Books'],
     };
   }
   
@@ -79,15 +80,31 @@ class Write extends React.Component {
     formData.append('images', this.state.files);
   }
 
-  addTags=(categoryNum, value)=>{
+  // addTags=(categoryNum, value)=>{
+  //   if (categoryNum == 0) {
+  //     this.setState({region:this.state.region.concat(value)});
+  //   } else if (categoryNum == 1){
+  //     this.setState({univ:this.state.univ.concat(value)});
+  //   } else if (categoryNum == 2){
+  //     this.setState({interest:this.state.interest.concat(value)});
+  //   }
+  // }
+
+  handleChange(value, checked) {
+    const { region, univ, interest, categoryNum } = this.state;
     if (categoryNum == 0) {
-      this.setState({region:this.state.region.concat(value)});
+      const nextSelectedTags = checked ? [...region, value] : region.filter(t => t !== value);
+      this.setState({ region: nextSelectedTags });
     } else if (categoryNum == 1){
-      this.setState({univ:this.state.univ.concat(value)});
+      const nextSelectedTags = checked ? [...univ, value] : univ.filter(t => t !== value);
+      this.setState({ univ: nextSelectedTags });
     } else if (categoryNum == 2){
-      this.setState({interest:this.state.interest.concat(value)});
+      const nextSelectedTags = checked ? [...interest, value] : interest.filter(t => t !== value);
+      this.setState({ interest: nextSelectedTags });
     }
   }
+
+  
 
   render(){
     // let profile_preview = null;
@@ -97,6 +114,7 @@ class Write extends React.Component {
     // let regionView = null;
     // regionView = <Button type="text" onClick={this.show.bind(this)} style={{ position:"absolute", top:"560px", left:"165px", width:"100px", color: "grey", 'z-index': "1" }}>{this.state.Selectregion}</Button>
     const {content, categoryNum, region, univ, interest} = this.state;
+    const type = [region, univ, interest];
     return (
       <div className="wrap" >
         <div className="inner-box profile-background">
@@ -124,7 +142,7 @@ class Write extends React.Component {
                 </div>
                 <div className="row border-bottom write-category">
                   <h4 className="type">대학별</h4>
-                  <div className="tags" onClick={()=>{this.show(1);}}>{univ.length==0?'눌러서 선택하세요':univ.map((value, index)=>{
+                  <div className="tags row" onClick={()=>{this.show(1);}}>{univ.length==0?'눌러서 선택하세요':univ.map((value, index)=>{
                     return(
                       <div key={index}>
                         {value}
@@ -134,7 +152,7 @@ class Write extends React.Component {
                 </div>
                 <div className="row write-category">
                   <h4 className="type">관심사별</h4>
-                  <div className="tags" onClick={()=>{this.show(2);}}>{interest.length==0?'눌러서 선택하세요':interest.map((value, index)=>{
+                  <div className="tags row" onClick={()=>{this.show(2);}}>{interest.length==0?'눌러서 선택하세요':interest.map((value, index)=>{
                     return(
                       <div key={index}>
                         {value}
@@ -150,9 +168,17 @@ class Write extends React.Component {
             <h1>{categoriesList[categoryNum].Title}</h1>
             {categoriesList[categoryNum].tags.map((value, index)=>{
               return (
-                <div key={index} onClick={()=>{this.addTags(categoryNum, value)}}>
+                <CheckableTag
+                  key={index}
+                  checked={type[categoryNum].indexOf(value) > -1}
+                  onChange={checked => this.handleChange(value, checked)}
+                >
                   {value}
-                </div>
+                </CheckableTag>
+
+                // <div key={index} onClick={()=>{this.addTags(categoryNum, value)}}>
+                //   {value}
+                // </div>
               );
             })}
           </Rodal>
