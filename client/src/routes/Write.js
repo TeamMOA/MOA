@@ -1,12 +1,15 @@
 import React from 'react';
 import {Menu, Navbar} from '../components';
 import instance from '../module/instance';
-import { Button, Input, Carousel } from 'antd';
+import { ImagePicker} from 'antd-mobile';
+import {Input} from 'antd';
+import 'antd-mobile/dist/antd-mobile.css';
 import moment from 'moment';
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
 
-const { TextArea } = Input;
+const {TextArea} = Input;
+
 const contentStyle = {
   height: '328px',
   color: '#fff',
@@ -16,80 +19,48 @@ const contentStyle = {
   borderRadius : '10px',
 };
 
-
-const region = ['없음', '서울', '경기', '인천', '충청', '강원' ,'전라', '경상', '제주'];
-const univ = ['없음', '숭실대', '서울대', '연세대', '고려대', '중앙대', '하버드'];
-const interest = ['없음', '게임', '운동', '공부', '취미'];
+const categoriesList = [
+  {
+    Title : '지역을 선택해주세요',
+    tags : ['없음', '서울', '경기', '인천', '충청', '강원' ,'전라', '경상', '제주'],
+  },
+  {
+    Title : '대학을 선택해주세요',
+    tags : ['서울대', '숭실대', '고려대', '홍익대','해양대', '한국대', '서강대', '건국대']
+  },
+  {
+    Title : '관심사를 선택해주세요',
+    tags : ['미술', '게임', '운동', '음악', '취업', '공부', '뜨개질', '여행']
+  },
+]
 
 class Write extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      text: "지역별",
+      content:'',
+      region:[],
+      univ:[],
+      interest:[],
+      categoryNum : 0,
+      images:null,
       visible: false,
       showCloseButton: false,
-      Selectregion : [],
-      Selectuniversity: [],
-      Selectinterest: [],
-      regionText: "눌러서 선택해주세요",
-      regionInput: "",
-      universityText: "눌러서 선택해주세요",
-      universityInput: "",
-      title: "음",
-      file : '',
-      previewURL : '',
-      isSelectedRegion0: false,
-      isSelectedRegion1: false,
-      isSelectedRegion2: false,
-      isSelectedRegion3: false,
-      isSelectedRegion4: false,
-      isSelectedRegion5: false,
-      isSelectedRegion6: false,
-      isSelectedRegion7: false,
-      isSelectedRegion8: false
     };
-
-    this.getRegion = this.getRegion.bind(this);
   }
   
-  show() {
-    this.setState({ visible: true });
+  show=(value)=>{
+    this.setState({ visible: true, categoryNum:value });
   }
 
   hide() {
+    const {region, univ, interest} = this.state;
     this.setState({ visible: false });
-    
+    console.log(region);
+    console.log(univ);
+    console.log(interest);
   }
-
-  getUniversity = (universityNum) => {
-    this.setState({ universityText: "" });
-    this.setState({ visible: false });
-    this.setState({ universityInput: this.state.university[universityNum] });
-    console.log(this.state.universityInput);
-  }
-
-  getRegion = (regionNum) => {
-    this.setState({ regionText: "s"});
-    if(this.state.isSelectedRegion0) {
-      this.setState({ Selectregion:this.state.Selectregion.concat(region[0]) });
-      console.log("0");
-    }
-    else {
-      if(this.state.isSelectedRegion1) {
-        this.setState({ Selectregion:this.state.Selectregion.concat(region[1]) });
-        console.log("1");
-      } 
-      else if(this.state.isSelectedRegion2) {
-        this.setState({ Selectregion:this.state.Selectregion.concat(region[2]) });
-        console.log("2");
-      }
-    }
-    console.log(this.state.Selectregion);
-    this.setState({ visible: false });
-  }
-    
   
-
   handleFileOnChange = (event) => {
     event.preventDefault();
     let reader = new FileReader();
@@ -102,64 +73,72 @@ class Write extends React.Component {
     }
     reader.readAsDataURL(file);
   }
-  
+
+  createPost = async() => {
+    const formData = new FormData();
+    formData.append('images', this.state.files);
+  }
+
+  addTags(categoryNum, value) {
+    if (categoryNum == 0) {
+      this.setState({region:this.state.region.concat(value)});
+    } else if (categoryNum == 1){
+      this.setState({univ:this.state.univ.concat(value)});
+    } else if (categoryNum == 2){
+      this.setState({interest:this.state.interest.concat(value)});
+    }
+  }
 
   render(){
-    let profile_preview = null;
-    if(this.state.file !== ''){
-      profile_preview = <img className='profile_preview' src={this.state.previewURL} style={{ position:"absolute", top:"160px", left:"45px", width:"324px", height:"324px", 'z-index':"2" }}></img>
-    }
-    let regionView = null;
-    regionView = <Button type="text" onClick={this.show.bind(this)} style={{ position:"absolute", top:"560px", left:"165px", width:"100px", color: "grey", 'z-index': "1" }}>{this.state.Selectregion}</Button>
-    
+    // let profile_preview = null;
+    // if(this.state.file !== ''){
+    //   profile_preview = <img className='profile_preview' src={this.state.previewURL} style={{ position:"absolute", top:"160px", left:"45px", width:"324px", height:"324px", 'z-index':"2" }}></img>
+    // }
+    // let regionView = null;
+    // regionView = <Button type="text" onClick={this.show.bind(this)} style={{ position:"absolute", top:"560px", left:"165px", width:"100px", color: "grey", 'z-index': "1" }}>{this.state.Selectregion}</Button>
+    const {content, categoryNum} = this.state;
     return (
-
       <div className="wrap" >
         <div className="inner-box profile-background">
           <div className="header" >
             <h1>작성하기</h1>
           </div>
           <div className="content">
-            <div className="write">
-              <div style={{width:'328px', height:'328px', backgroundColor:'black'}}>
-                
+            <div className="write col-center" style={{height:'100%'}}>
+              <input type="file" accept="image/*" id="input-file" onChange={(e) => {this.setState({images : e.target.files[0]}); console.log(e.target.files[0]);}} style={{display:'none'}}/>
+              <div className="center imgArea" style={{marginBottom:'20px'}}>
+                <label className="choose" htmlFor="input-file">파일선택</label>
+                <TextArea value={content} onChange={(e)=>{this.setState({content:e.target.value})}} style={{textAlign:'center'}} rows={3} placeholder="텍스트를 입력하세요"/>
               </div>
+              <div style={{flex:'1'}}>
+                <h2 style={{marginBottom:'20px'}}>태그 붙이기</h2>
+                <div className="row border-bottom write-category">
+                  <h4 className="type">지역별</h4>
+                  <div className="tags" onClick={()=>{this.show(0);}}>눌러서 선택하세요</div>
+                </div>
+                <div className="row border-bottom write-category">
+                  <h4 className="type">대학별</h4>
+                  <div className="tags" onClick={()=>{this.show(1);}}>눌러서 선택하세요</div>
+                </div>
+                <div className="row write-category">
+                  <h4 className="type">관심사별</h4>
+                  <div className="tags" onClick={()=>{this.show(2);}}>눌러서 선택하세요</div>
+                </div>
+              </div>
+              <div style={{textAlign:'right'}}onClick={()=>{this.createPost()}}>보내기</div>
             </div>
           </div>
+          <Rodal customStyles={customStyles} visible={this.state.visible} onClose={()=>{this.hide()}}>
+            <h1>{categoriesList[categoryNum].Title}</h1>
+            {categoriesList[categoryNum].tags.map((value, index)=>{
+              return (
+                <div key={index} onClick={()=>{this.addTags(categoryNum, value)}}>
+                  {value}
+                </div>
+              );
+            })}
+          </Rodal>
         </div>
-
-        {/* <h1 style={{ position:"absolute", top:"50px", left:"150px", color: "black" }}>작성하기</h1>
-        <Square />
-        <ImageBox />
-        <div class="TextForm">
-          <TextArea id="titleid" placeholder="제목을 입력해주세요" value={this.state.title} onChange={(e)=>{this.setState({title:e.target.value})}} bordered={false} style={{ textAlign: "center", verticalAlign:"middle", position:"absolute", top:"160px", left:"45px", width:"324px", height:"324px", color: "black", 'z-index': "2" }} />
-        </div>
-        <h2 style={{ position:"absolute", top:"500px", left:"45px", color: "black", 'z-index': "1"}}>태그 붙이기</h2>
-        <h3 style={{ position:"absolute", top:"560px", left:"55px", color: "grey", 'z-index': "1"}}>지역별</h3>
-        <Button type="text" onClick={()=>{this.setState({ visible: true});}} style={{ position:"absolute", top:"560px", left:"165px", color: "grey", opacity: "0.5", 'z-index': "1" }}>{this.state.regionText}</Button>
-        <hr style={{ position:"absolute", top:"595px", left:"35px", color: "grey", width: "344px", 'z-index': "1" }}></hr>
-        <h3 style={{ position:"absolute", top:"630px", left:"55px", color: "grey", 'z-index': "1" }}>대학별</h3>
-        <Button type="text" style={{ position:"absolute", top:"630px", left:"165px", color: "grey", opacity: "0.5", 'z-index': "1" }}>눌러서 선택해주세요</Button>
-        <hr style={{ position:"absolute", top:"665px", left:"35px", color: "grey", width: "344px", 'z-index': "1" }}></hr>
-        <h3 style={{ position:"absolute", top:"700px", left:"55px", color: "grey", 'z-index': "1" }}>관심사별</h3>
-        <Button type="text" style={{ position:"absolute", top:"700px", left:"165px", color: "grey", opacity: "0.5", 'z-index': "1" }}>눌러서 선택해주세요</Button>
-        {regionView}
-        <div>
-          <input type='file' 
-            accept='image/jpg,impge/png,image/jpeg,image/gif' 
-            name='profile_img' 
-            onChange={this.handleFileOnChange}
-            style={{ position:"absolute", top:"120px", left:"45px", 'z-index': "3" }}>
-          </input>
-          {profile_preview}
-        </div>
-
-        <Rodal customStyles={customStyles} visible={this.state.visible} onClose={this.hide.bind(this)}>
-          <div>       
-            
-          </div>
-        </Rodal> */}
-
         <Navbar />
       </div>
     );
@@ -172,8 +151,9 @@ const customStyles = {
   width: '414px',
   bottom: '0%',
   top: '70%',
-  'border-radius': "35px",
-  'background-color':"pink",
+  borderRadius: "35px",
+  backgroundColor:"pink",
+
 };
 
 class Square extends React.Component{
