@@ -18,7 +18,7 @@ h1, h2, h3, h4{
 .inner-box{
   display: flex;
   flex-direction: column;
-  background: url('../assets/images/inner-box.png') no-repeat;
+  /* background: url('../assets/images/inner-box.png') no-repeat; */
 }
 
 

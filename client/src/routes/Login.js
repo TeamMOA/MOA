@@ -9,9 +9,8 @@ const Login = () => {
   const postlogin = (value) => {
     alert('소글 로그인'+value);
     window.localStorage.setItem('uid', value);
-    history.push('/main');
+    history.push('/');
   }
-
 
   return (
     <div>

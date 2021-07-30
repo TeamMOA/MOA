@@ -2,7 +2,7 @@ import { normalizeUnits } from 'moment';
 import React from 'react';
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
-import '../style/component.css';
+import './style/component.css';
 
 const slideImages = [
   'images/slide_2.jpg',

@@ -27,7 +27,7 @@ const Navbar = () =>{
               <img src="/images/Write.png" width='24' alt="작성하기"/>
               <span>작성하기</span>
             </Link>
-            <Link className="item" to="/mypage">
+            <Link className="item" to="/profile">
               <img src="/images/Profile.png" width='24' alt="프로필"/>
               <span>프로필</span>
             </Link>
