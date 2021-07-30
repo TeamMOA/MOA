@@ -41,6 +41,7 @@ class Write extends React.Component {
     this.state = {
       content:'',
       region:[],
+      region2:[],
       univ:[],
       interest:[],
       categoryNum : 0,
@@ -72,10 +73,10 @@ class Write extends React.Component {
   }
 
   createPost = async() => {
-    const {region, univ, interest} = this.state;
+    const {region2, univ, interest} = this.state;
     // const formData = new FormData();
     // formData.append('images', this.state.files);
-    console.log(region);
+    console.log(region2);
     console.log(univ);
     console.log(interest);
   }
@@ -91,16 +92,25 @@ class Write extends React.Component {
   // }
 
   handleChange(value, checked) {
-    const { region, univ, interest, categoryNum } = this.state;
+    const { region, region2, univ, interest, categoryNum } = this.state;
     if (categoryNum == 0) {
       const nextSelectedTags = checked ? [...region, value] : region.filter(t => t !== value);
       this.setState({ region: nextSelectedTags });
+      this.setState({ region2: nextSelectedTags });
     } else if (categoryNum == 1){
       const nextSelectedTags = checked ? [...univ, value] : univ.filter(t => t !== value);
       this.setState({ univ: nextSelectedTags });
     } else if (categoryNum == 2){
       const nextSelectedTags = checked ? [...interest, value] : interest.filter(t => t !== value);
       this.setState({ interest: nextSelectedTags });
+    }
+  }
+
+  removeArray(value, index) {
+    const { region2, univ, interest, categoryNum } = this.state;
+    if(categoryNum == 0) {
+      const changedArray = region2.filter(t => t !== value);
+      this.setState({region2: changedArray});
     }
   }
 
@@ -134,7 +144,7 @@ class Write extends React.Component {
                   <h4 className="type">지역별</h4>
                   <div className="tags row" onClick={()=>{this.show(0);}}>{region.length==0?'눌러서 선택하세요':region.map((value, index)=>{
                     return(
-                      <Tag key={index} closable onClose={()=>{console.log('value 값을 state에서 지우는 것 구현 필요')}}>
+                      <Tag key={index} closable onClose={()=>{this.removeArray(value, index);}}>
                         {value}
                       </Tag>
                     );})}
