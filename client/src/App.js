@@ -3,7 +3,7 @@ import "antd/dist/antd.css";
 import './App.css';
 import {Link} from 'react-router-dom';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import {Home, Login, Main, Profile, Write, setting} from './routes';
+import {Home, Login, Main, Profile, Write, setting, signup} from './routes';
 import PrivateRoute from './components/PrivateRoute';
 
 
@@ -17,6 +17,7 @@ const App = () => {
           <Route path="/profile" component={Profile}/>
           <Route path="/write" component={Write}/>
           <Route path="/setting" component={setting}/>
+          <Route path="/signup" component={signup}/>
         </Switch>
       </BrowserRouter>
     </>

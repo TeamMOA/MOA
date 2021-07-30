@@ -1,12 +1,21 @@
 import React from 'react';
 import {Menu, Navbar} from '../components';
 import instance from '../module/instance';
-import { Button, Input } from 'antd';
+import { Button, Input, Carousel } from 'antd';
 import moment from 'moment';
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
 
 const { TextArea } = Input;
+const contentStyle = {
+  height: '328px',
+  color: '#fff',
+  lineHeight: '160px',
+  textAlign: 'center',
+  background: '#333333',
+  borderRadius : '10px',
+};
+
 
 const region = ['없음', '서울', '경기', '인천', '충청', '강원' ,'전라', '경상', '제주'];
 const univ = ['없음', '숭실대', '서울대', '연세대', '고려대', '중앙대', '하버드'];
@@ -104,8 +113,22 @@ class Write extends React.Component {
     regionView = <Button type="text" onClick={this.show.bind(this)} style={{ position:"absolute", top:"560px", left:"165px", width:"100px", color: "grey", 'z-index': "1" }}>{this.state.Selectregion}</Button>
     
     return (
-      <div>
-        <h1 style={{ position:"absolute", top:"50px", left:"150px", color: "black" }}>작성하기</h1>
+
+      <div className="wrap" >
+        <div className="inner-box profile-background">
+          <div className="header" >
+            <h1>작성하기</h1>
+          </div>
+          <div className="content">
+            <div className="write">
+              <div style={{width:'328px', height:'328px', backgroundColor:'black'}}>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* <h1 style={{ position:"absolute", top:"50px", left:"150px", color: "black" }}>작성하기</h1>
         <Square />
         <ImageBox />
         <div class="TextForm">
@@ -133,24 +156,16 @@ class Write extends React.Component {
 
         <Rodal customStyles={customStyles} visible={this.state.visible} onClose={this.hide.bind(this)}>
           <div>       
-            <Button onClick={() => this.setState({regionText: "", isSelectedRegion1:!this.state.isSelectedRegion1})} style={{ position:"absolute", top:"60px", left:"45px", color: "grey", backgroundColor:this.state.isSelectedRegion1?'red':'green' }}>서울</Button>
-            <Button onClick={() => this.setState({regionText: "", isSelectedRegion2:!this.state.isSelectedRegion2})} style={{ position:"absolute", top:"60px", left:"135px", color: "grey", backgroundColor:this.state.isSelectedRegion2?'red':'green'}}>경기</Button>
-            <Button onClick={() => this.setState({regionText: "", Selectregion:this.state.Selectregion.concat(region[3]), isSelectedRegion3:!this.state.isSelectedRegion3})} style={{ position:"absolute", top:"60px", left:"225px", color: "grey", backgroundColor:this.state.isSelectedRegion3?'red':'green' }}>인천</Button>
-            <Button onClick={() => this.setState({regionText: "", Selectregion:this.state.Selectregion.concat(region[4]), isSelectedRegion4:!this.state.isSelectedRegion4})} style={{ position:"absolute", top:"60px", left:"315px", color: "grey", backgroundColor:this.state.isSelectedRegion4?'red':'green' }}>충청</Button>
-            <Button onClick={() => this.setState({regionText: "", Selectregion:this.state.Selectregion.concat(region[5]), isSelectedRegion5:!this.state.isSelectedRegion5})} style={{ position:"absolute", top:"110px", left:"45px", color: "grey", backgroundColor:this.state.isSelectedRegion5?'red':'green' }}>강원</Button>
-            <Button onClick={() => this.setState({regionText: "", Selectregion:this.state.Selectregion.concat(region[6]), isSelectedRegion6:!this.state.isSelectedRegion6})} style={{ position:"absolute", top:"110px", left:"135px", color: "grey", backgroundColor:this.state.isSelectedRegion6?'red':'green' }}>전라</Button>
-            <Button onClick={() => this.setState({regionText: "", Selectregion:this.state.Selectregion.concat(region[7]), isSelectedRegion7:!this.state.isSelectedRegion7})} style={{ position:"absolute", top:"110px", left:"225px", color: "grey", backgroundColor:this.state.isSelectedRegion7?'red':'green' }}>경상</Button>
-            <Button onClick={() => this.setState({regionText: "", Selectregion:this.state.Selectregion.concat(region[8]), isSelectedRegion8:!this.state.isSelectedRegion8})} style={{ position:"absolute", top:"110px", left:"315px", color: "grey", backgroundColor:this.state.isSelectedRegion8?'red':'green' }}>제주</Button>
-            <Button onClick={() => this.setState({regionText: "", isSelectedRegion0:!this.state.isSelectedRegion0})} style={{ position:"absolute", top:"160px", left:"165px", color: "grey", backgroundColor:this.state.isSelectedRegion0?'red':'green' }}>없음</Button>
-            <Button onClick={() => this.getRegion() } style={{ position:"absolute", top:"260px", left:"165px", color: "grey" }}>확인</Button>
+            
           </div>
-        </Rodal>
-        {/*bottom navigation*/}
-      <Navbar />
+        </Rodal> */}
+
+        <Navbar />
       </div>
     );
   }
 };
+
 
 const customStyles = {
   height: '300px',
