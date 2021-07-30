@@ -14,17 +14,16 @@ async function login(req, res) {
 
         const pw = secret.pw
 
-        let userInfo = await db.query('select userID, email, nickname, introduce, followerCount, followingCount from users where email = ? AND password = ?', [userEmail, pw])
+        let userInfo = await db.query('select userID, email, nickname, introduce from users where email = ? AND password = ?', [userEmail, pw])
 
         if(userInfo.length > 0){
             userInfo = userInfo[0]
             const returnObj = {
+                success : true,
                 userId : userInfo.userID,
                 userEmail : userInfo.email,
                 nickname : userInfo.nickname,
                 introduce : userInfo.introduce,
-                followerCount : userInfo.followerCount,
-                followingCount : userInfo.followingCount
             }
             res.status(httpStatus.OK).send(returnObj)
         } else{
@@ -42,13 +41,13 @@ async function login(req, res) {
 // 회원가입
 async function signUp(req, res) {
     try {
+        console.log(req.body);
+        const userEmail = req.body.email;
+        const userPw = req.body.userPw;
+        const nickname = req.body.nickname;
+        const introduce = req.body.introduce;
+        const secret = await security.security(userPw);
         
-        const userEmail = req.body.userEmail
-        const userPw = req.body.userPw
-        const nickname = req.body.nickname
-        const introduce = req.body.introduce
-        const secret = await security.security(userPw)
-
         let signUp = await db.query('insert into users set ?', {
             email : userEmail,
             password : secret.pw,
@@ -56,7 +55,6 @@ async function signUp(req, res) {
             nickname : nickname,
             introduce : introduce
         })
-
         if(signUp.errno > 0) {
             res.status(httpStatus.NOT_FOUND).send({
                 success : false,
@@ -75,7 +73,6 @@ async function signUp(req, res) {
         res.status(httpStatus.INTERNAL_SERVER_ERROR).send([])
     }
 }
-
 
 export default {
     login,

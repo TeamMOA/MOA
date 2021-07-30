@@ -2,7 +2,6 @@ var express = require('express');
 import user from '../controller/user'
 const router = express.Router();
 
-
 // 로그인
 router.post('/login', user.login)
 
