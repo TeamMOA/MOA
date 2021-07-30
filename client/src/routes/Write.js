@@ -79,7 +79,7 @@ class Write extends React.Component {
     formData.append('images', this.state.files);
   }
 
-  addTags(categoryNum, value) {
+  addTags=(categoryNum, value)=>{
     if (categoryNum == 0) {
       this.setState({region:this.state.region.concat(value)});
     } else if (categoryNum == 1){
@@ -96,7 +96,7 @@ class Write extends React.Component {
     // }
     // let regionView = null;
     // regionView = <Button type="text" onClick={this.show.bind(this)} style={{ position:"absolute", top:"560px", left:"165px", width:"100px", color: "grey", 'z-index': "1" }}>{this.state.Selectregion}</Button>
-    const {content, categoryNum} = this.state;
+    const {content, categoryNum, region, univ, interest} = this.state;
     return (
       <div className="wrap" >
         <div className="inner-box profile-background">
@@ -114,15 +114,33 @@ class Write extends React.Component {
                 <h2 style={{marginBottom:'20px'}}>태그 붙이기</h2>
                 <div className="row border-bottom write-category">
                   <h4 className="type">지역별</h4>
-                  <div className="tags" onClick={()=>{this.show(0);}}>눌러서 선택하세요</div>
+                  <div className="tags row" onClick={()=>{this.show(0);}}>{region.length==0?'눌러서 선택하세요':region.map((value, index)=>{
+                    return(
+                      <div key={index}>
+                        {value}
+                      </div>
+                    );})}
+                  </div>
                 </div>
                 <div className="row border-bottom write-category">
                   <h4 className="type">대학별</h4>
-                  <div className="tags" onClick={()=>{this.show(1);}}>눌러서 선택하세요</div>
+                  <div className="tags" onClick={()=>{this.show(1);}}>{univ.length==0?'눌러서 선택하세요':univ.map((value, index)=>{
+                    return(
+                      <div key={index}>
+                        {value}
+                      </div>
+                    );})}
+                  </div>
                 </div>
                 <div className="row write-category">
                   <h4 className="type">관심사별</h4>
-                  <div className="tags" onClick={()=>{this.show(2);}}>눌러서 선택하세요</div>
+                  <div className="tags" onClick={()=>{this.show(2);}}>{interest.length==0?'눌러서 선택하세요':interest.map((value, index)=>{
+                    return(
+                      <div key={index}>
+                        {value}
+                      </div>
+                    );})}
+                  </div>
                 </div>
               </div>
               <div style={{textAlign:'right'}}onClick={()=>{this.createPost()}}>보내기</div>
