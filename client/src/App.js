@@ -12,9 +12,8 @@ const App = () => {
     <>
       <BrowserRouter>
         <Switch>
-          <PrivateRoute exact path="/" component={Home}/>
+          <PrivateRoute exact path="/" component={Main}/>
           <Route path="/login" component={Login}/>
-          <Route path="/main" component={Main}/>
           <Route path="/mypage" component={MyPage}/>
           <Route path="/write" component={Write}/>
           <Route path="/setting" component={setting}/>

@@ -19,7 +19,7 @@ const Navbar = () =>{
     return(
         <Mobile>
           <div className="nav">
-            <Link className="item" to="/main">
+            <Link className="item" to="/">
               <img src="/images/Feedmoa.png" width='24' alt="피드모아"/>
               <span>피드모아</span>
             </Link>

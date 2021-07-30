@@ -1,11 +1,16 @@
 import React from 'react';
 import {Menu, Navbar} from '../components';
+import instance from '../module/instance';
 import { Button, Input } from 'antd';
 import moment from 'moment';
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
 
 const { TextArea } = Input;
+
+const region = ['서울', '대전', '대구', '부산'];
+const univ = [];
+const interest = [];
 
 class Write extends React.Component {
   constructor(props){
@@ -14,12 +19,14 @@ class Write extends React.Component {
       text: "지역별",
       visible: false,
       showCloseButton: false,
+      Selectregion : [],
       universityText: "눌러서 선택해주세요",
       university: ["없음", "숭실대", "서울대", "승강기대"],
       universityInput: "",
       title: "음",
       file : '',
-      previewURL : ''
+      previewURL : '',
+      isSelected : false,
     };
 
     this.getUniversity = this.getUniversity.bind(this);
@@ -27,11 +34,11 @@ class Write extends React.Component {
   
   show() {
     this.setState({ visible: true });
-    this.setState({ title: document.getElementById("titleid").value });
   }
 
   hide() {
     this.setState({ visible: false });
+    console.log(this.state.Selectregion);
   }
 
   getUniversity = (universityNum) => {
@@ -69,11 +76,11 @@ class Write extends React.Component {
         <Square />
         <ImageBox />
         <div class="TextForm">
-          <TextArea id="titleid" placeholder="제목을 입력해주세요" bordered={false} style={{ 'text-align': "center", 'vertical-align':"middle", position:"absolute", top:"160px", left:"45px", width:"324px", height:"324px", color: "black", 'z-index': "2" }} />
+          <TextArea id="titleid" placeholder="제목을 입력해주세요" value={this.state.title} onChange={(e)=>{this.setState({title:e.target.value})}} bordered={false} style={{ textAlign: "center", verticalAlign:"middle", position:"absolute", top:"160px", left:"45px", width:"324px", height:"324px", color: "black", 'z-index': "2" }} />
         </div>
         <h2 style={{ position:"absolute", top:"500px", left:"45px", color: "black", 'z-index': "1"}}>태그 붙이기</h2>
         <h3 style={{ position:"absolute", top:"560px", left:"55px", color: "grey", 'z-index': "1"}}>지역별</h3>
-        <Button type="text" onClick={this.show.bind(this)} style={{ position:"absolute", top:"560px", left:"165px", color: "grey", opacity: "0.5", 'z-index': "1" }}>{this.state.universityText}</Button>
+        <Button type="text" onClick={()=>{this.setState({ visible: true});}} style={{ position:"absolute", top:"560px", left:"165px", color: "grey", opacity: "0.5", 'z-index': "1" }}>{this.state.universityText}</Button>
         <hr style={{ position:"absolute", top:"595px", left:"35px", color: "grey", width: "344px", 'z-index': "1" }}></hr>
         <h3 style={{ position:"absolute", top:"630px", left:"55px", color: "grey", 'z-index': "1" }}>대학별</h3>
         <Button type="text" style={{ position:"absolute", top:"630px", left:"165px", color: "grey", opacity: "0.5", 'z-index': "1" }}>눌러서 선택해주세요</Button>
@@ -93,6 +100,12 @@ class Write extends React.Component {
 
         <Rodal customStyles={customStyles} visible={this.state.visible} onClose={this.hide.bind(this)}>
           <div>
+            {region.map((value, index) =>{
+              return (<Button key={index} onClick={() => {
+                this.setState({Selectregion:this.state.Selectregion.concat(value), isSelected:!this.state.isSelected})
+              }} style={{backgroundColor:this.state.isSelected?'red':'green'}}>{value}</Button>);
+            })}
+            
           <Button onClick={() => this.getUniversity(1)} style={{ position:"absolute", top:"60px", left:"55px", color: "grey" }}>숭실대</Button>
             <Button onClick={() => this.getUniversity(2)} style={{ position:"absolute", top:"60px", left:"165px", color: "grey" }}>서울대</Button>
             <Button onClick={() => this.getUniversity(3)} style={{ position:"absolute", top:"60px", left:"275px", color: "grey" }}>승강기대</Button>
