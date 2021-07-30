@@ -1,6 +1,6 @@
 import React from 'react';
-import {Navbar, Category, Button} from '../components';
-import {Comment, Tooltip, Avatar, Layout, Breadcrumb} from 'antd';
+import {Navbar, Category} from '../components';
+import {Comment, Tooltip, Avatar, Layout, Breadcrumb, Popover, Button} from 'antd';
 import moment from 'moment';
 // import '../style/Main.css';
 import feedIcon from '../assets/icons/feedIcon.png';
@@ -10,114 +10,51 @@ import Slideshow from '../components/slide';
 import styled from "styled-components";
 import { Menu, ActivityIndicator, NavBar } from 'antd-mobile';
 
+let clickORnot = 0;
 
-// const { Header, Content, Footer, Sider } = Layout;
-// const { SubMenu } = Menu;
+const clickedStyle = {
+  background : clickORnot === 1 ? 'red' : 'white'
+}
 
-const regionData = [
-  {
-    value: '1',
-    label: '경기',
-  }, {
-    value: '2',
-    label: '서울',
-  },
-  {
-    value: '3',
-    label: '충청',
-    isLeaf: true,
-  },
-  {
-    value: '4',
-    label: '강원',
-    isLeaf: true,
-  },
-  {
-    value: '5',
-    label: '전라',
-    isLeaf: true,
-  },
-  {
-    value: '5',
-    label: '경상',
-    isLeaf: true,
-  },
-  {
-    value: '5',
-    label: '제주',
-    isLeaf: true,
-  },
-];
+const regionContent = (
+  <div>
+    <button onClick={() => {alert(clickedStyle.background); clickORnot = 1}} style = {clickedStyle}>경기</button>
+    <button>서울</button>
+    <button>충청</button>
+    <button>강원</button>
+    <button>전라</button>
+    <button>경상</button>
+    <button>경상</button>
+  </div>
+);
 
-const univData = [
-  {
-    value: '1',
-    label: '서울대',
-  }, {
-    value: '2',
-    label: '숭실대',
-  },
-  {
-    value: '3',
-    label: '고려대',
-    isLeaf: true,
-  },
-  {
-    value: '4',
-    label: '홍익대',
-    isLeaf: true,
-  },
-  {
-    value: '5',
-    label: '해양대',
-    isLeaf: true,
-  },
-  {
-    value: '6',
-    label: '서강대',
-    isLeaf: true,
-  },
-  {
-    value: '7',
-    label: '한국대',
-    isLeaf: true,
-  },
-];
+const univContent = (
+  <div>
+    <button>서울대</button>
+    <button>숭실대</button>
+    <button>고려대</button>
+    <button>홍익대</button>
+    <button>해양대</button>
+    <button>한국대</button>
+    <button>서강대</button>
+    <button>+</button>
+  </div>
+);
 
-const interestData = [
-  {
-    value: '1',
-    label: '미술',
-  }, {
-    value: '2',
-    label: '게임',
-  },
-  {
-    value: '3',
-    label: '운동',
-    isLeaf: true,
-  },
-  {
-    value: '4',
-    label: '음악',
-    isLeaf: true,
-  },
-  {
-    value: '5',
-    label: '취업',
-    isLeaf: true,
-  },
-  {
-    value: '6',
-    label: '공부',
-    isLeaf: true,
-  },
-  {
-    value: '7',
-    label: '뜨개질',
-    isLeaf: true,
-  },
-];
+const interestContent = (
+  <div>
+    <button>미술</button>
+    <button>게임</button>
+    <button>운동</button>
+    <button>음악</button>
+    <button>취업</button>
+    <button>공부</button>
+    <button>뜨개질</button>
+    <button>+</button>
+  </div>
+);
+
+const buttonWidth = 70;
 
 class Main extends React.Component {
   
@@ -151,14 +88,15 @@ class Main extends React.Component {
               {/* 클릭되면 폰트 색 바뀌게  */}
               </div>
               <div className="categoryButtonWrap">
-                {/* <input type="button" value="지역별" className="categoryButton region"></input>
-                <input type="button" value="대학별" className="categoryButton university" onClick={() => {
-                  this.state.region = ['서울', '부산', '대전'];
-                }}></input>
-                <input type="button" value="관심사별" className="categoryButton interest" onClick={() => {alert('지역별')}}></input> */}
-              <Button categoryName="지역별" data={regionData}/>
-              <Button categoryName="학교별" data={univData}/>
-              <Button categoryName="관심사별" data={interestData}/>
+              <Popover placement="bottom" content={regionContent} trigger="click">
+                <Button className="categoryButton">지역별</Button>
+              </Popover>
+              <Popover placement="bottom" content={univContent} trigger="click">
+                <Button className="categoryButton">학교별</Button>
+              </Popover>
+              <Popover placement="bottom" content={interestContent} trigger="click">
+                <Button className="categoryButton">관심사별</Button>
+              </Popover>
             </div>
             <div className="feedWrap">
               <div className="feedTitle">
