@@ -5,7 +5,6 @@ import security from '../middleware/security'
 // 로그인
 async function login(req, res) {
     try {
-
         const userEmail = req.body.userEmail
         const userPw = req.body.userPw
 
@@ -77,33 +76,8 @@ async function signUp(req, res) {
     }
 }
 
-// 프로필
-async function profile(req, res) {
-    try {
-
-        const userId = req.params.userId
-
-        let userInfo = await db.query('select userID, email, nickname, introduce, followerCount, followingCount from users where userID = ?', [userId])
-
-        let userPost = await db.query('select postID, content, imgPath from posts where userID = ? order by timestamp desc', [userId])
-
-        const returnObj = {
-            userInfo : userInfo,
-            userPost : userPost
-        }
-
-        res.status(httpStatus.OK).send(returnObj)
-
-
-        
-    } catch (error) {
-        console.error(error, "profile api error")
-        res.status(httpStatus.INTERNAL_SERVER_ERROR).send([])
-    }
-}
 
 export default {
     login,
     signUp,
-    profile
 }
