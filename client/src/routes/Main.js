@@ -9,69 +9,24 @@ import travel1 from '../assets/images/travel1.png'
 import travel2 from '../assets/images/travel2.png'
 import travel3 from '../assets/images/travel3.png'
 
-let clickORnot = '';
-
-const clickedStyle = {
-  background : clickORnot.length === 1 ? 'red' : 'white'
-}
-
-const region = ["경기", "서울", "충청", "강원", "전라", "경상", "제주"]
-const univ = ["서울대", "숭실대", "고려대", "홍익대", "해양대", "한국대", "서강대", "+",]
-const interest = ["미술", "게암", "운동", "취업", "공부", "뜨개질", "+"]
-
-
-// const regionContent = (
-//   <div>
-    
-//     <button>경기</button>
-//     <button>서울</button>
-//     <button>충청</button>
-//     <button>강원</button>
-//     <button>전라</button>
-//     <button>경상</button>
-//     <button>제주</button>
-//   </div>
-// );
-
-// const univContent = (
-//   <div>
-//     <button>서울대</button>
-//     <button>숭실대</button>
-//     <button>고려대</button>
-//     <button>홍익대</button>
-//     <button>해양대</button>
-//     <button>한국대</button>
-//     <button>서강대</button>
-//     <button>+</button>
-//   </div>
-// );
-
-// const interestContent = (
-//   <div>
-//     <button>미술</button>
-//     <button>게임</button>
-//     <button>운동</button>
-//     <button>음악</button>
-//     <button>취업</button>
-//     <button>공부</button>
-//     <button>뜨개질</button>
-//     <button>+</button>
-//   </div>
-// );
 
 function onChange(a, b, c) {
   console.log(a, b, c);
 }
 
 const contentStyle = {
-  height: '160px',
+  fontSize: '30px',
+  fontWeight: 'bold',
+  width: '328px',
+  height: '328px',
   color: '#fff',
-  lineHeight: '160px',
+  lineHeight: '328px',
   textAlign: 'center',
-  background: '#364d79',
+  float: 'left',
+  position: 'relative',
+  top: '-328px',
+  left: '23px',
 };
-
-const buttonWidth = 70;
 
 class Main extends React.Component {
   
@@ -95,7 +50,7 @@ class Main extends React.Component {
   
 
   componentDidMount = async() => {
-    await instance.get("/api/post/3")
+    await instance.get("/api/post")
       .then((res) => {
         console.log(res.data);
         if(res.data.success){
@@ -168,14 +123,14 @@ class Main extends React.Component {
               <div className="feedTitle">
                 <img className="feedLogo" src={feedIcon} width="18px" height="16px"></img>
                 <h2 className="recentFeed">{this.state.headTitle}</h2>
-                <h3 className="postNum">{this.state.postNum}개</h3>
+                <h3 className="postNum">{this.state.posts.length}개</h3>
               </div>
               <Carousel afterChange={onChange}>
                 {this.state.posts.map((value, index)=>{
                   return (
                     <div width="328px" height="328px" key={index}>
                       <img className="slideImage" src={value.img} width="328px" height="328px"></img>
-                      <h3 style={contentStyle}>{value.content}</h3>
+                      <div style={contentStyle}>{value.content}</div>
                     </div>
                   );
                 })}
