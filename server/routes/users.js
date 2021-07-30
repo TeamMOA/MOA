@@ -10,4 +10,7 @@ router.post('/login', user.login)
 router.post('/signUp', user.signUp)
 
 
+// 아이디 중복 확인
+router.post('/checkID', user.checkDuplicate)
+
 export default router
