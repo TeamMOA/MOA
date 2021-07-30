@@ -2,7 +2,7 @@ import React from 'react';
 import {Navbar, Category} from '../components';
 import {Comment, Tooltip, Avatar, Layout, Breadcrumb} from 'antd';
 import moment from 'moment';
-import '../style/Main.css';
+// import '../style/Main.css';
 import feedIcon from '../assets/icons/feedIcon.png';
 import 'react-slideshow-image/dist/styles.css'
 import { Slide } from 'react-slideshow-image';

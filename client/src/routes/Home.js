@@ -1,6 +1,4 @@
 import React from 'react';
-import {Menu} from '../components';
-import {Button} from 'antd';
 class Home extends React.Component {
   
   constructor(props){
@@ -17,7 +15,7 @@ class Home extends React.Component {
   render(){
     return (
       <div>
-        <h1>로그인</h1>
+        <h1>홈 화면 입니다.</h1>
         <h1>Hello World!</h1>
         <h2>Hello World!</h2>
         <h3>Hello World!</h3>

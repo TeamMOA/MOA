@@ -1,7 +1,6 @@
 import React from 'react';
 import {Navbar} from '../components';
 import instance from '../module/instance';
-import '../style/Profile.css';
 
 class Profile extends React.Component {
   

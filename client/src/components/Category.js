@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import '../style/component.css';
 class Category extends React.Component {
     
     constructor(props){
@@ -9,7 +8,7 @@ class Category extends React.Component {
 
     render(){
         return(
-            <input type="button" value="{this.props.value}"></input>
+            <input type="button" value={this.props.value}></input>
         );
     }
 }
