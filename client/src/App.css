@@ -116,7 +116,7 @@ a:hover{color:#000000;}
   /* background: url('../assets/images/recentFeed.png') no-repeat;
   background-size: contain; */
   position: relative;
-  bottom: -122px;
+  bottom: -52px;
 
   display: flex;
   flex-direction: column;
@@ -222,7 +222,7 @@ a:hover{color:#000000;}
   border: none;
 }
 
-.ant-btn:active, .ant-btn:focus, .ant-btn::selection{
+.ant-btn:active, .ant-btn:focus, .ant-btn:visited{
   color: #ffffff;
   background-color: #FA959B;
   border-color: #FA959B;
@@ -428,4 +428,20 @@ input.interest{
 
 .slideImage{
   margin: 0 auto;
+}
+
+.slideUser{
+  display: inline-block;
+  box-sizing: content-box;
+  width: 151px;
+  height: 35px;
+  line-height: 35px;
+  font-size: 16px;
+  color: white;
+  margin: 0 auto;
+  position: relative;
+  top: -365px;
+  right: 50px;
+  text-align: right;
+  float: right;
 }
