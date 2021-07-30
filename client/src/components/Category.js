@@ -8,7 +8,7 @@ class Category extends React.Component {
 
     render(){
         return(
-            <input type="button" value={this.props.value}></input>
+            <input type="button" value={this.props.value}>{this.props.children}</input>
         );
     }
 }
