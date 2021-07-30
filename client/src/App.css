@@ -430,6 +430,7 @@ input.interest{
   margin: 0 auto;
 }
 
+
 .slideUser{
   display: inline-block;
   box-sizing: content-box;
@@ -444,4 +445,58 @@ input.interest{
   right: 50px;
   text-align: right;
   float: right;
+
+
+/* 작성 Write Screen*/
+
+.content .imgArea {
+  width:328px;
+  height:328px;
+  background-Color:black;
+  display:block;
+}
+
+.content .imgArea > TextArea {
+  border-width:0px;
+  color:#ffffff;
+  background-color:#000;
+  font-family: 'Noto Sans KR',sans-serif;
+}
+
+.choose{
+  position:relative;
+  top : 0px;
+  right : 0px;
+  color:#ffffff;
+}
+
+.border-bottom{
+  border-bottom:solid;
+  border-width:0.5px;
+  border-color:#CCCCCC;
+}
+
+.write-category{
+  padding:15px;
+}
+
+.write-category .type{
+  flex:1;
+  text-align:center;
+}
+
+.write-category .tags{
+  flex:2;
+}
+
+.ant-input:focus, .ant-input-focused {
+  border-color: #000000;
+  border-right-width: 0px !important;
+  outline: 0;
+  box-shadow: 0 0 0 2px rgb(24 144 255 / 20%);
+}
+.ant-input:hover {
+  border-color: #000000;
+  border-right-width: 0px !important;
+
 }
