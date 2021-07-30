@@ -55,11 +55,7 @@ class Write extends React.Component {
   }
 
   hide() {
-    const {region, univ, interest} = this.state;
     this.setState({ visible: false });
-    console.log(region);
-    console.log(univ);
-    console.log(interest);
   }
   
   handleFileOnChange = (event) => {
@@ -76,8 +72,12 @@ class Write extends React.Component {
   }
 
   createPost = async() => {
-    const formData = new FormData();
-    formData.append('images', this.state.files);
+    const {region, univ, interest} = this.state;
+    // const formData = new FormData();
+    // formData.append('images', this.state.files);
+    console.log(region);
+    console.log(univ);
+    console.log(interest);
   }
 
   // addTags=(categoryNum, value)=>{
@@ -134,9 +134,9 @@ class Write extends React.Component {
                   <h4 className="type">지역별</h4>
                   <div className="tags row" onClick={()=>{this.show(0);}}>{region.length==0?'눌러서 선택하세요':region.map((value, index)=>{
                     return(
-                      <div key={index}>
+                      <Tag key={index} closable onClose={()=>{console.log('value 값을 state에서 지우는 것 구현 필요')}}>
                         {value}
-                      </div>
+                      </Tag>
                     );})}
                   </div>
                 </div>
@@ -144,9 +144,9 @@ class Write extends React.Component {
                   <h4 className="type">대학별</h4>
                   <div className="tags row" onClick={()=>{this.show(1);}}>{univ.length==0?'눌러서 선택하세요':univ.map((value, index)=>{
                     return(
-                      <div key={index}>
+                      <Tag key={index} closable onClose={()=>{console.log('value 값을 state에서 지우는 것 구현 필요')}}>
                         {value}
-                      </div>
+                      </Tag>
                     );})}
                   </div>
                 </div>
@@ -154,9 +154,9 @@ class Write extends React.Component {
                   <h4 className="type">관심사별</h4>
                   <div className="tags row" onClick={()=>{this.show(2);}}>{interest.length==0?'눌러서 선택하세요':interest.map((value, index)=>{
                     return(
-                      <div key={index}>
+                      <Tag key={index} closable onClose={()=>{console.log('value 값을 state에서 지우는 것 구현 필요')}}>
                         {value}
-                      </div>
+                      </Tag>
                     );})}
                   </div>
                 </div>
