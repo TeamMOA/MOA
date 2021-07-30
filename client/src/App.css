@@ -117,6 +117,9 @@ a:hover{color:#000000;}
   background-size: contain; */
   position: relative;
   bottom: -122px;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .feedTitle{
@@ -225,48 +228,6 @@ a:hover{color:#000000;}
   border-color: #FA959B;
 }
 
-/* 
-.am-navbar-title {
-  color: #FFF!important;
-}
-
-.menu-mask {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.4;
-  z-index: 89;
-}
-
-.am-list-body{
-  width: 414px;
-  height: 62px;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-around;
-  align-content: space-around;
-  margin-top: 31px;
-}
-
-.am-list-item{
-  background: #FFFFFF;
-  border-radius: 100px;
-
-  color: #FA959B;
-  width: 64px; height: 26px;
-  text-align: center;
-  margin-left: 10px;
-  margin-right: 10px;
-  line-height: 26px;
-  font-size: 13px;
-}
-
-.am-radio-input{
-  display: none;
-} */
 
 /*background*/
 .login-background {
@@ -445,4 +406,26 @@ input.interest{
 .btn-white {
   background-color: #FFFFFF;
   color : #FA959B;
+}
+
+/*슬라이더*/
+
+.ant-carousel{
+  width: 100%; height: 328px;
+  padding-top: 60px;
+  padding-left: auto;
+  padding-right: auto;
+}
+
+.slick-slider .slick-slide{
+  
+  width: 328px; height: 328px;
+}
+
+.slick-dots{
+  display: none;
+}
+
+.slideImage{
+  margin: 0 auto;
 }
