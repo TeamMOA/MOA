@@ -503,9 +503,9 @@ textarea.ant-input {
 
 .signupContent {
   flex:1;
-  width: 70vw;
+  width: 80vw;
   padding : 10px;
-  margin-top: 320px;
+  margin-top: 220px;
 }
 
 .signupText h4 {
@@ -517,7 +517,7 @@ textarea.ant-input {
 .signupBoxContainer {
   border-radius: 10px;
   border: none;
-  height: 50px;
+  height: 40px;
 }
 
 input::placeholder {

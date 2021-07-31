@@ -10,6 +10,7 @@ class signup extends React.Component {
       super(props);
       this.state = {
         name: "",
+        id:"",
         mail: "",
         pwd: "",
         checkPwd: ""
@@ -25,7 +26,7 @@ class signup extends React.Component {
     }
 
     confirm = () => {
-        console.log(this.state);
+        console.log(this.state.id);
     }
 
     confirmInfo = () => {
@@ -58,7 +59,7 @@ class signup extends React.Component {
         var formData = new FormData();
         formData.append('nickname', this.state.name);
         formData.append('email', this.state.mail);
-        formData.append('userID', "user1234");
+        formData.append('userID', this.state.id);
         formData.append('userPw', this.state.pwd);
 
         await instance.post("/api/user/signUp", formData)
@@ -80,14 +81,20 @@ class signup extends React.Component {
                             <h4>닉네임</h4>
                         </div>
                         <Input className="signupBoxContainer" id="name" value={this.state.name} onChange={(e)=>{this.setState({name:e.target.value})}} placeholder="닉네임을 입력하세요" /> 
-                        <div style={{marginTop:'30px'}}>
+                        <div style={{marginTop:'40px'}}>
+                            <div className="signupText">
+                                <h4>아이디</h4>
+                            </div>
+                                <Input className="signupBoxContainer" value={this.state.id} onChange={(e)=>{this.setState({id:e.target.value})}} id="id" placeholder="아이디를 입력하세요" />                               
+                        
+                        <div style={{marginTop:'40px'}}>
                             <div className="signupText">
                                 <h4>이메일</h4>
                             </div>
-                                <Input className="signupBoxContainer" value={this.state.frontMail} onChange={(e)=>{this.setState({mail:e.target.value})}} id="mail" placeholder="이메일을 입력하세요" />                               
+                                <Input className="signupBoxContainer" value={this.state.mail} onChange={(e)=>{this.setState({mail:e.target.value})}} id="mail" placeholder="이메일을 입력하세요" />                               
                         </div>
                         <div>
-                        <div style={{marginTop:'30px'}}>
+                        <div style={{marginTop:'40px'}}>
                             <div className="signupText">
                                 <h4>비밀번호</h4>
                             </div>
@@ -95,7 +102,7 @@ class signup extends React.Component {
                         </div>
                         </div>
                         <div>
-                        <div style={{marginTop:'10px'}}>
+                        <div style={{marginTop:'20px'}}>
                             <div className="signupText">
                                 <h4>비밀번호 확인</h4>
                             </div>
@@ -104,10 +111,11 @@ class signup extends React.Component {
                         </div>
                     </div>
                     </div>
-                        <div onClick={this.postSignUp} className="btn btn-lg btn-white" style={{marginBottom:'60px'}}>
+                        <div onClick={this.postSignUp} className="btn btn-lg btn-white" style={{marginBottom:'50px'}}>
                             회원가입
                         </div>
                 </div>
+            </div>
             </div>
         );
     }  
