@@ -1,5 +1,5 @@
 import React from 'react';
-import {Navbar, Category} from '../components';
+import {Navbar, Like} from '../components';
 import instance from '../module/instance';
 import {Popover, Button, Carousel} from 'antd';
 import feedDefault from '../assets/icons/feedDefault.png';
@@ -184,18 +184,23 @@ class Main extends React.Component {
                   var splitedUniv = value.univ.split(',')
 
                   return (
-                    <div width="328px" height="328px" key={index}>
+                    <div key={index}>
                       <img className="slideImage" src={value.img} width="328px" height="328px"></img>
                       <div style={contentStyle}>{value.content}</div>
                       {/* 지역 여러개 있는 것 짤림 (어떻게 할지 얘기해보기) */}
-                      <h3 className="slideUser">{value.nickname} · {splitedRegion[0]} · {splitedUniv[0]}</h3>
-                    </div>
+                      <h3 className="slideUser">{splitedRegion[0]} · {splitedUniv[0]}</h3>
+                      
+                      </div>
                   );
                 })}
               </Carousel>
+              <div className="feedProfileWrap">
+                <div className="nameProfile">
+                  {/* <img src={value.profileImg}></img> */}
+                </div>
+                <Like />
+              </div>
             </div>
-            
-            {/*파드*/}
             
           </div>
 
