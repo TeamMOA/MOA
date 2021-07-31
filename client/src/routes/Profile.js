@@ -28,7 +28,8 @@ class Profile extends React.Component {
       .then((res) => {
         if (res.data.success){
           const userInfo = res.data.userInfo[0];
-          this.setState({nickname:userInfo.nickname, introduce:userInfo.introduce, profile_img:userInfo.profile_img});
+          console.log(userInfo);
+          this.setState({nickname:userInfo.nickname, introduce:userInfo.introduce, profile_img:userInfo.profileImg});
         }
       }).catch((error)=>{
         console.log(error);
@@ -46,7 +47,7 @@ class Profile extends React.Component {
           <div className="content">
             <div className="profile" style={{display:'flex', paddingTop:'20px', borderWidth:'0.5px', borderBottom:'solid #CCCCCC'}}>
               <div className="center">
-                <Image style={{flex:1, borderRadius:"50%"}} width={80} height={80} src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"/>
+                <Image style={{flex:1, borderRadius:"50%"}} width={80} height={80} src={profile_img}/>
               </div>
               <div className="center" style={{flex:3}}>
                 <h2 >{nickname}</h2>
