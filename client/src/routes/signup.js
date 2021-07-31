@@ -57,7 +57,7 @@ class signup extends React.Component {
     postSignUp = async() => {
         var formData = new FormData();
         formData.append('nickname', this.state.name);
-        formData.append('email', this.state.frontMail+"@"+this.state.backMail);
+        formData.append('email', this.state.mail);
         formData.append('userID', "user1234");
         formData.append('userPw', this.state.pwd);
 
