@@ -10,7 +10,7 @@ import 'react-slideshow-image/dist/styles.css'
 
 const region = ["경기", "서울", "인천", "충청", "강원", "전라", "경상", "제주"];
 const univ = ["서울대", "숭실대", "고려대", "홍익대", "해양대", "한국대", "서강대"];
-const interest = ["미술", "게임", "운동", "여행", "공부", "음식", "쇼핑", "사진찍기"];
+const interest = ["미술", "게임", "운동", "여행", "공부", "음식", "쇼핑", "사진"];
 
 
 function onChange(a, b, c) {
@@ -204,13 +204,35 @@ class Main extends React.Component {
               <Carousel afterChange={onChange}>
                 {/* {this.state.posts.map((value, index)=>{ */}
                 {this.state.posts.map((value, index)=>{
-                  var splitedRegion = value.region.split(',')
-                  var splitedUniv = value.univ.split(',')
+
+                  var splitedRegion = ''
+                  var splitedUniv = ''
+                  var splitedInterest = ''
+
+                  const slideUserInfo = []
+                  
+                  if (value.region){
+                    splitedRegion = value.region.split(',')
+                    slideUserInfo.push(splitedRegion[0])
+                  }
+                  
+                  if (value.univ){
+                    splitedUniv = value.univ.split(',')
+                    slideUserInfo.push(splitedUniv[0])
+                  }
+
+                  if (value.interest){
+                    splitedInterest = value.interest.split(',')
+                    slideUserInfo.push(splitedInterest[0])
+                  }
+                  
+                  // sliderUserResult = slideUserInfo.join(' · ')
+
                   return (
                     <div width="328px" key={index}>
                       <img className="slideImage" src={value.img} width="328px" height="328px"></img>
                       <div className="feedContent">{value.content}</div>
-                      <h3 className="slideUser">{value.nickname} · {splitedRegion[0]} · {splitedUniv[0]}</h3>
+                      <h3 className="slideUser">{slideUserInfo.join(" · ")}</h3>
                       <div className="feedProfileWrap">
                         <div className="nameProfile">
                           <Image style={{flex:1, borderRadius:"50%", objectFit:'cover'}} width={50} height={50} src={value.profileImg}/>
