@@ -145,21 +145,10 @@ a:hover{color:#000000;}
 }
 
 .feedTitle h3{
+  width: 40px;
   color: #666666;
   font-size: 22px;
-}
-
-/*누르면 펼쳐지는 것*/
-.single-foo-menu {
-  position: absolute;
-  left: 0;
-  z-index: 90 !important;
-  width: 414px;
-  text-align: center;
-}
-
-.single-menu-active .single-top-nav-bar{
-  z-index: 90;
+  white-space: nowrap;
 }
 
 
@@ -217,7 +206,7 @@ a:hover{color:#000000;}
   margin-left: 10px;
   margin-right: 10px;
   margin-top: 10px;
-  line-height: 26px;
+  line-height: 20px;
   font-size: 13px;
   border: none;
 }
@@ -438,7 +427,7 @@ input.interest{
 .slideUser{
   display: inline-block;
   box-sizing: content-box;
-  width: 151px;
+  width: 200px;
   height: 35px;
   line-height: 35px;
   font-size: 16px;
