@@ -56,18 +56,17 @@ class signup extends React.Component {
     }
 
     postSignUp = async() => {
-        var formData = new FormData();
-        formData.append('nickname', this.state.name);
-        formData.append('email', this.state.mail);
-        formData.append('userID', this.state.id);
-        formData.append('userPw', this.state.pwd);
-
-        await instance.post("/api/user/signUp", formData)
-            .then((res)=>{
-                console.log(res);
-            }).catch((error)=>{
-                console.log(error);
-            })
+        await instance.post("/api/user/signUp", {
+            email : this.state.email,
+            userID : this.state.id,
+            userPw : this.state.pwd,
+            nickname : this.state.nickname
+        }).then((res)=>{
+            console.log(res.data);
+        }).catch((error)=>{
+            console.log(error);
+            alert('회원가입에 실패하였습니다!');
+        });
     }
 
 
