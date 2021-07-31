@@ -12,7 +12,7 @@ const Login = () => {
   const postlogin = async() => {
     await instance.post("/api/user/login", {
       email : email,
-      userPw, userPw
+      userPw: userPw
     }).then((res)=>{
       console.log(res.data);
       if (res.data.success){

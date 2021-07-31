@@ -60,7 +60,7 @@ class Profile extends React.Component {
           <div className="content">
             <div className="profile" style={{display:'flex', paddingTop:'20px', borderWidth:'0.5px', borderBottom:'solid #CCCCCC'}}>
               <div className="center">
-                <Image style={{flex:1, borderRadius:"50%", objectFit:'cover'}} width={80} height={80} src={profile_img}/>
+                <Image style={{flex:1, borderRadius:"50%", objectFit:'cover'}} width={80} height={80} src={profile_img} alt="profileImg"/>
               </div>
               <div className="center" style={{flex:3}}>
                 <h2 >{nickname}</h2>
@@ -92,7 +92,7 @@ class Profile extends React.Component {
                   {this.state.posts.map((value, index)=>{
                     return (
                       <div width="328px" height="328px" key={index}>
-                        <img className="slideImage" src={value.img} width="328px" height="328px"></img>
+                        <img className="slideImage" src={value.img} width="328px" height="328px" alt="contentImg"></img>
                         <div style={contentStyle}>{value.content}</div>
                         {/* 지역 여러개 있는 것 짤림 (어떻게 할지 얘기해보기) */}
                         <h3 className="slideUser">{value.nickname} · {value.region} · {value.univ}</h3>

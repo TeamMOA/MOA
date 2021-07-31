@@ -1,8 +1,6 @@
 import React from 'react';
-import { useHistory } from 'react-router';
-import { Input, Button, Select } from 'antd';
+import { Input} from 'antd';
 import instance from '../module/instance';
-const { Option } = Select;
 
 class signup extends React.Component {
   
@@ -17,10 +15,6 @@ class signup extends React.Component {
       }
     }
 
-    postlogin = (value) => {
-        alert(value);
-    }
-
     componentDidmount= () =>{
         
     }
@@ -30,14 +24,14 @@ class signup extends React.Component {
     }
 
     confirmInfo = () => {
-        if(this.state.pwd != this.state.checkPwd) {
+        if(this.state.pwd !== this.state.checkPwd) {
             alert("비밀번호가 다릅니다.");        
         }
         else {
-            if(this.state.name!="" && this.state.year!="" && 
-            this.state.month!="" && this.state.date!="" && 
-            this.state.frontMail!="" && this.state.backMail!="" &&
-            this.state.pwd!="" && this.state.checkPwd!="") {
+            if(this.state.name!=="" && this.state.year!=="" && 
+            this.state.month!=="" && this.state.date!=="" && 
+            this.state.frontMail!=="" && this.state.backMail!=="" &&
+            this.state.pwd!=="" && this.state.checkPwd!=="") {
                 alert("good")
             } else {
                 alert("빈칸을 모두 채워주세요");
