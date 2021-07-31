@@ -57,9 +57,9 @@ async function update(req, res) {
         const region = req.body.region;
         const univ = req.body.univ;
         const interest = req.body.interest;
-        const profileimg = "/images/"+req.file.filename;
+        const profileimg = "http://roothyo.com:5000/images/"+req.file.filename;
         
-        let update = await db.query('update into users set nickname=?, introduce=?, profileimg=? where uid = ?',[nickname, introduce, profileimg, uid]);
+        let update = await db.query('UPDATE users set nickname=?, introduce=?, region=?, univ=?, interest=?, profileimg=? where uid = ?',[nickname, introduce, profileimg, uid]);
 
         if(update.errno > 0) {
             res.status(httpStatus.NOT_FOUND).send({

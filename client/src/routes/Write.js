@@ -1,10 +1,8 @@
 import React from 'react';
-import {Menu, Navbar} from '../components';
+import { Navbar} from '../components';
 import instance from '../module/instance';
-import { ImagePicker} from 'antd-mobile';
 import {Input, Tag} from 'antd';
 import 'antd-mobile/dist/antd-mobile.css';
-import moment from 'moment';
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
 
@@ -93,14 +91,14 @@ class Write extends React.Component {
 
   handleChange(value, checked) {
     const { region, region2, univ, interest, categoryNum } = this.state;
-    if (categoryNum == 0) {
+    if (categoryNum === 0) {
       const nextSelectedTags = checked ? [...region, value] : region.filter(t => t !== value);
       this.setState({ region: nextSelectedTags });
       this.setState({ region2: nextSelectedTags });
-    } else if (categoryNum == 1){
+    } else if (categoryNum === 1){
       const nextSelectedTags = checked ? [...univ, value] : univ.filter(t => t !== value);
       this.setState({ univ: nextSelectedTags });
-    } else if (categoryNum == 2){
+    } else if (categoryNum === 2){
       const nextSelectedTags = checked ? [...interest, value] : interest.filter(t => t !== value);
       this.setState({ interest: nextSelectedTags });
     }
