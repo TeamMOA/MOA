@@ -85,7 +85,7 @@ async function createPost (req, res) {
         const region = req.body.region;
         const univ = req.body.univ;
         const interest = req.body.interest;
-        const img = "https://roothyo.com:5000/images/"+req.file.filename;
+        const img = "http://roothyo.com:5000/images/"+req.file.filename;
         const link = req.body.link;
 
         let post = await db.query('insert into posts set ?', {
