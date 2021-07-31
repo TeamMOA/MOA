@@ -47,11 +47,8 @@ class Write extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-<<<<<<< HEAD
       uid : window.localStorage.getItem('uid'),
       nickname : window.localStorage.getItem('nickname'),
-=======
->>>>>>> 140314df08fd04ba93365a10c18fdebfc514479c
       content:'',
       region:[],
       region2:[],
