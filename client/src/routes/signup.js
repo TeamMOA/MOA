@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 import { Input, Button, Select } from 'antd';
+import instance from '../module/instance';
 const { Option } = Select;
 
 class signup extends React.Component {
@@ -29,7 +30,7 @@ class signup extends React.Component {
     }
 
     confirm = () => {
-        console.log(this.state.date);
+        console.log(this.state);
     }
 
     confirmInfo = () => {
@@ -57,6 +58,22 @@ class signup extends React.Component {
     dateChange = (value) => {
         this.setState({ date:value });
     }
+
+    postSignUp = async() => {
+        var formData = new FormData();
+        formData.append('nickname', this.state.name);
+        formData.append('email', this.state.frontMail+"@"+this.state.backMail);
+        formData.append('userID', "user1234");
+        formData.append('userPw', this.state.pwd);
+
+        await instance.post("/api/user/signUp", formData)
+            .then((res)=>{
+                console.log(res);
+            }).catch((error)=>{
+                console.log(error);
+            })
+    }
+
 
     render(){
         return (
@@ -134,14 +151,14 @@ class signup extends React.Component {
                         </div>
                         <div>
                         <div>비밀번호</div>
-                            <Input value={this.state.pwd} onChange={(e)=>{this.setState({pwd:e.target.value})}} id="pwd" className="inputBox1" placeholder="비밀번호를 입력하세요" />
+                            <Input type={"password"} value={this.state.pwd} onChange={(e)=>{this.setState({pwd:e.target.value})}} id="pwd" className="inputBox1" placeholder="비밀번호를 입력하세요" />
                         </div>
                         <div>
                             <div>비밀번호 확인</div>
-                            <Input value={this.state.checkPwd} onChange={(e)=>{this.setState({checkPwd:e.target.value})}} id="checkPwd" className="inputBox1" placeholder="비밀번호를 다시 입력하세요" />
+                            <Input type={"password"} value={this.state.checkPwd} onChange={(e)=>{this.setState({checkPwd:e.target.value})}} id="checkPwd" className="inputBox1" placeholder="비밀번호를 다시 입력하세요" />
                         </div>
                     </div>
-                        <div onClick={this.confirmInfo} className="btn btn-lg btn-white" style={{margin:'10px'}}>
+                        <div onClick={this.postSignUp} className="btn btn-lg btn-white" style={{margin:'10px'}}>
                             회원가입
                         </div>
                 </div>

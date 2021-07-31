@@ -7,6 +7,11 @@ import 'antd-mobile/dist/antd-mobile.css';
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
 
+import addPhoto from '../assets/icons/addPhoto.png';
+import Center from '../assets/icons/Center.png';
+import sendBtn from '../assets/icons/sendBtn.png';
+import noImage from '../assets/images/noImage.png';
+
 const {TextArea} = Input;
 const { CheckableTag } = Tag;
 
@@ -40,7 +45,7 @@ class Write extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      content:'',
+      content:'테스트 글귀입니다',
       region:[],
       region2:[],
       univ:[],
@@ -48,22 +53,22 @@ class Write extends React.Component {
       interest:[],
       interest2:[],
       categoryNum : 0,
-      images:null,
       visible: false,
       selectedTags: ['Books'],
-      files: data
+      file:null,
+      previewURL : null,
     };
   }
   
   show=(value)=>{
     this.setState({ visible: true, categoryNum:value });
-    if(value == 0) {
+    if(value === 0) {
       this.setState({ region: [] });
       this.setState({ region2: [] });
-    } else if(value == 1) {
+    } else if(value === 1) {
       this.setState({ univ: [] });
       this.setState({ univ2: [] });
-    } else if(value == 2) {
+    } else if(value === 2) {
       this.setState({ interest: [] });
       this.setState({ interest2: [] });
     }
@@ -94,6 +99,8 @@ class Write extends React.Component {
     console.log(univ2);
     console.log(interest2);
     console.log(content);
+    console.log(this.state.file);
+    console.log(this.state.previewURL);
   }
 
   // addTags=(categoryNum, value)=>{
@@ -126,13 +133,13 @@ class Write extends React.Component {
 
   removeArray(value, index) {
     const { region2, univ, univ2, interest, interest2, categoryNum } = this.state;
-    if(index == 0) {
+    if(index === 0) {
       const changedArray = region2.filter(t => t !== value);
       this.setState({region2: changedArray});
-    } else if(index == 1) {
+    } else if(index === 1) {
       const changedArray = univ2.filter(t => t !== value);
       this.setState({univ2: changedArray});
-    } else if(index == 2) {
+    } else if(index === 2) {
       const changedArray = interest2.filter(t => t !== value);
       this.setState({interest2: changedArray});
     }
@@ -152,7 +159,7 @@ class Write extends React.Component {
     // }
     // let regionView = null;
     // regionView = <Button type="text" onClick={this.show.bind(this)} style={{ position:"absolute", top:"560px", left:"165px", width:"100px", color: "grey", 'z-index': "1" }}>{this.state.Selectregion}</Button>
-    const { files, content, categoryNum, region, univ, interest} = this.state;
+    const {content, categoryNum, region, univ, interest, previewURL} = this.state;
     const type = [region, univ, interest];
     return (
       <div className="wrap" >
@@ -162,22 +169,20 @@ class Write extends React.Component {
           </div>
           <div className="content">
             <div className="write col-center" style={{height:'100%'}}>
-              <input type="file" accept="image/*" id="input-file" onChange={(e) => {this.setState({images : e.target.files[0]}); console.log(e.target.files[0]);}} style={{display:'none'}}/>    
-              <div className="center imgArea" style={{marginBottom:'20px'}}> 
-              {/*<label className="choose" htmlFor="input-file">파일선택</label>*/}
-                  <ImagePicker 
-                  length="1"
-                  files={files}
-                  onChange={this.onChange}
-                  onImageClick={(index, fs) => console.log(index, fs)}
-                  selectable={files.length < 1}
-                  accept="image/gif,image/jpeg,image/jpg,image/png"
-                />
-                <div>
-                <TextArea value={content} onChange={(e)=>{this.setState({content:e.target.value})}} style={{position:"absolute", top:"200px", left:"50px", width:"300px", height:"300px", textAlign:'center', backgroundColor:"black", opacity:"0.5"}} rows={3} placeholder="텍스트를 입력하세요"/>
+              <input type="file" accept="image/*" id="input-file" onChange={this.handleFileOnChange} style={{display:'none'}}/>    
+              <div className="imgArea" style={{marginBottom:'20px', backgroundImage: `url(${previewURL?previewURL:noImage})`, backgroundSize:'cover', backgroundPosition:'center center'}}>
+                <div className="choose">
+                  <label htmlFor="input-file">
+                    <img src={addPhoto} width={18} height={18} style={{margin:'5px'}}></img>
+                  </label>
+                  <img src={Center} width={18} height={18} style={{margin:'5px'}} onClick={()=>{alert('center')}}></img>
+                </div>
+                <div className="text">
+                  <div style={{alignSelf:'center'}}>{this.state.content}</div>  
                 </div>
               </div>
               <div style={{flex:'1'}}>
+                <TextArea value={content} onChange={(e)=>{this.setState({content:e.target.value})}} style={{width:"300px", height:"50px", textAlign:'center'}} rows={3} placeholder="텍스트를 입력하세요"/>
                 <h2 style={{marginBottom:'20px'}}>태그 붙이기</h2>
                 <div className="row border-bottom write-category">
                   <h4 className="type">지역별</h4>
