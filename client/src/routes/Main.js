@@ -36,7 +36,7 @@ class Main extends React.Component {
       backgroundColor: '#ffffff',
       upDown: '-52px',
       filteredPost: [],
-      filterData = ''
+      filterData: ''
     }
     this.setRegion = this.setRegion.bind(this);
     this.setUniv = this.setUniv.bind(this);
@@ -67,7 +67,7 @@ class Main extends React.Component {
 
     console.log(this.state.posts);
 
-    const data = this.state.
+    const data = this.state.filterData
     
     await instance.post("/api/post/filter", data)
     .then((res)=>{
@@ -189,19 +189,19 @@ class Main extends React.Component {
                     <div width="328px" key={index}>
                       <img className="slideImage" src={value.img} width="328px" height="328px"></img>
                       <div style={contentStyle}>{value.content}</div>
-                      {/* 지역 여러개 있는 것 짤림 (어떻게 할지 얘기해보기) */}
                       <h3 className="slideUser">{value.nickname} · {splitedRegion[0]} · {splitedUniv[0]}</h3>
-                      <Image style={{flex:1, borderRadius:"50%", objectFit:'cover'}} width={80} height={80} src={value.profileImg}/>
+                      <div className="feedProfileWrap">
+                        <div className="nameProfile">
+                          <Image style={{flex:1, borderRadius:"50%", objectFit:'cover'}} width={50} height={50} src={value.profileImg}/>
+                          <span className="name">{value.region}</span>
+                        </div>
+                        <Like />
+                      </div>
                     </div>
                   );
                 })}
               </Carousel>
-              <div className="feedProfileWrap">
-                <div className="nameProfile">
-                  {/* <img src={value.profileImg}></img> */}
-                </div>
-                <Like />
-              </div>
+              
             </div>
             
           </div>
