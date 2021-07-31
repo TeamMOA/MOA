@@ -191,7 +191,10 @@ async function getPostFilter (req, res) {
             }
             res.status(httpStatus.OK).send(returnObj)
         } else{
-            res.status(httpStatus.NOT_FOUND).send()
+            res.status(httpStatus.OK).send({
+                success : false,
+                msg : '필터링된 포스트가 없습니다.'
+            })
         }
    } catch(error) {
         console.error(error, "posts api error")

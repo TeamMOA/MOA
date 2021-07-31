@@ -186,18 +186,18 @@ class Main extends React.Component {
               <div className="categoryButtonWrap">
               <Popover placement="bottom" content={regionContent} trigger="click">
               {/*  */}
-                <Button className="categoryButton" onClick={this.setRegion, this.feedRegionIcon, this.upDown}>지역별</Button>
+                <Button className="categoryButton" onClick={()=>{this.setRegion(); this.feedRegionIcon(); this.upDown();}}>지역별</Button>
               </Popover>
               <Popover placement="bottom" content={univContent} trigger="click">
-                <Button className="categoryButton" onClick={this.setUniv, this.feedUnivIcon, this.upDown}>학교별</Button>
+                <Button className="categoryButton" onClick={()=>{this.setUniv(); this.feedUnivIcon(); this.upDown();}}>학교별</Button>
               </Popover>
               <Popover placement="bottom" content={interestContent} trigger="click">
-                <Button className="categoryButton" onClick={this.setInterest, this.feedInterestIcon, this.upDown}>관심사별</Button>
+                <Button className="categoryButton" onClick={()=>{this.setInterest(); this.feedInterestIcon(); this.upDown();}}>관심사별</Button>
               </Popover>
             </div>
             <div className="feedWrap" style={{bottom: this.state.upDown}}>
               <div className="feedTitle">
-                <img className="feedLogo" src={this.state.feedIcon} width="18px" height="16px"></img>
+                <img className="feedLogo" src={this.state.feedIcon} width="18px" height="16px" alt="FeedLogo"></img>
                 <h2 className="recentFeed">{this.state.headTitle}</h2>
                 <h3 className="postNum">{this.state.posts.length}개</h3>
               </div>
@@ -230,12 +230,12 @@ class Main extends React.Component {
 
                   return (
                     <div width="328px" key={index}>
-                      <img className="slideImage" src={value.img} width="328px" height="328px"></img>
+                      <img className="slideImage" src={value.img} width="328px" height="328px" alt="slideImage"></img>
                       <div className="feedContent">{value.content}</div>
                       <h3 className="slideUser">{slideUserInfo.join(" · ")}</h3>
                       <div className="feedProfileWrap">
                         <div className="nameProfile">
-                          <Image style={{flex:1, borderRadius:"50%", objectFit:'cover'}} width={50} height={50} src={value.profileImg}/>
+                          <Image style={{flex:1, borderRadius:"50%", objectFit:'cover'}} width={50} height={50} src={value.profileImg} alt="profileImg"/>
                           <div className="name">{value.nickname}</div>
                         </div>
                         <Like />

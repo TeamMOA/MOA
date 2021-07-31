@@ -1,9 +1,8 @@
 import {React} from 'react';
 import "antd/dist/antd.css";
 import './App.css';
-import {Link} from 'react-router-dom';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import {Home, Login, Main, Profile, Write, setting, signup} from './routes';
+import {Login, Main, Profile, Write, setting, signup} from './routes';
 import PrivateRoute from './components/PrivateRoute';
 
 
