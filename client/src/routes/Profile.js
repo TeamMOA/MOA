@@ -3,15 +3,6 @@ import {Navbar} from '../components';
 import {Image, Carousel} from 'antd';
 import instance from '../module/instance';
 
-const contentStyle = {
-  height: '328px',
-  color: '#fff',
-  lineHeight: '160px',
-  textAlign: 'center',
-  background: '#333333',
-  borderRadius : '10px',
-};
-
 class Profile extends React.Component {
   
   constructor(props){
@@ -77,18 +68,16 @@ class Profile extends React.Component {
               <h2>최근 올린 피드</h2>
               <div style={{borderRadius:'10px'}}>
                 <Carousel autoplay dotPosition={"Top"} autoplaySpeed={5000}>
-                  <div>
-                    <h3 style={contentStyle}>1</h3>
-                  </div>
-                  <div>
-                    <h3 style={contentStyle}>2</h3>
-                  </div>
-                  <div>
-                    <h3 style={contentStyle}>3</h3>
-                  </div>
-                  <div>
-                    <h3 style={contentStyle}>4</h3>
-                  </div>
+                  {this.state.posts.map((value, index)=>{
+                    return (
+                      <div width="328px" height="328px" key={index}>
+                        <img className="slideImage" src={value.img} width="328px" height="328px"></img>
+                        <div style={contentStyle}>{value.content}</div>
+                        {/* 지역 여러개 있는 것 짤림 (어떻게 할지 얘기해보기) */}
+                        <h3 className="slideUser">{value.nickname} · {value.region} · {value.univ}</h3>
+                      </div>
+                    );
+                  })}
                 </Carousel>
               </div>
             </div>
@@ -110,3 +99,13 @@ const IntoduceStyle = {
   WebkitLineClamp: 3,
   WebkitBoxOrient: 'vertical',
 }
+
+const contentStyle = {
+  width:'328px',
+  height:'328px',
+  color: '#fff',
+  lineHeight: '160px',
+  textAlign: 'center',
+  background: '#333333',
+  borderRadius : '10px',
+};
