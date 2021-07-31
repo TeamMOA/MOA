@@ -646,3 +646,34 @@ input::placeholder {
   font-weight: 400;
   display:inline-block;
 }
+
+.profileWrap{
+  display: flex;
+  flex-direction: row;
+  width: 328px; height: 59px;
+  margin: 0 auto;
+  position: relative;
+  bottom: 80px;
+}
+
+img{
+  object-fit: cover;
+}
+
+
+.nameProfileProfile{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 280px;
+}
+
+.name{
+  display: inline-block;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 24px;
+  font-weight: bold;
+  width: 243px;
+  padding-left: 20px;
+}

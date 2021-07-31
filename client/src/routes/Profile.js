@@ -1,5 +1,5 @@
 import React from 'react';
-import {Navbar} from '../components';
+import {Navbar, Like} from '../components';
 import {Image, Carousel} from 'antd';
 import {Input, Button} from 'antd';
 import instance from '../module/instance';
@@ -88,18 +88,49 @@ class Profile extends React.Component {
             <div className="profile">
               <h2>최근 올린 피드</h2>
               <div style={{borderRadius:'10px'}}>
-                <Carousel autoplay dotPosition={"Top"} autoplaySpeed={5000}>
-                  {this.state.posts.map((value, index)=>{
-                    return (
-                      <div width="328px" height="328px" key={index}>
-                        <img className="slideImage" src={value.img} width="328px" height="328px" alt="contentImg"></img>
-                        <div style={contentStyle}>{value.content}</div>
-                        {/* 지역 여러개 있는 것 짤림 (어떻게 할지 얘기해보기) */}
-                        <h3 className="slideUser">{value.nickname} · {value.region} · {value.univ}</h3>
+              <Carousel >
+                {/* {this.state.posts.map((value, index)=>{ */}
+                {this.state.posts.map((value, index)=>{
+
+                  var splitedRegion = ''
+                  var splitedUniv = ''
+                  var splitedInterest = ''
+
+                  const slideUserInfo = []
+                  
+                  if (value.region){
+                    splitedRegion = value.region.split(',')
+                    slideUserInfo.push(splitedRegion[0])
+                  }
+                  
+                  if (value.univ){
+                    splitedUniv = value.univ.split(',')
+                    slideUserInfo.push(splitedUniv[0])
+                  }
+
+                  if (value.interest){
+                    splitedInterest = value.interest.split(',')
+                    slideUserInfo.push(splitedInterest[0])
+                  }
+                  
+                  
+
+                  return (
+                    <div width="328px" key={index}>
+                      <img className="slideImage" src={value.img}  alt="slideImage" width="312px" height="312px"></img>
+                      <div className="feedContent">{value.content}</div>
+                      <h3 className="slideUser">{slideUserInfo.join(" · ")}</h3>
+                      <div className="profileWrap">
+                        <div className="nameProfileProfile">
+                          <Image style={{flex:1, borderRadius:"50%", objectFit:'cover'}} width={50} height={50} src={profile_img} alt="profileImg"/>
+                          <div className="name">{value.nickname}</div>
+                        </div>
+                        <Like />
                       </div>
-                    );
-                  })}
-                </Carousel>
+                    </div>
+                  );
+                })}
+              </Carousel>
               </div>
             </div>
           </div>
