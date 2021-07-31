@@ -1,7 +1,7 @@
 import React from 'react';
 import {Navbar, Category} from '../components';
 import instance from '../module/instance';
-import {Popover, Button, Carousel} from 'antd';
+import {Popover, Button, Carousel, Image} from 'antd';
 import feedDefault from '../assets/icons/feedDefault.png';
 import feedRegion from '../assets/icons/feedRegion.png';
 import feedUniv from '../assets/icons/feedUniv.png';
@@ -14,23 +14,8 @@ function onChange(a, b, c) {
 }
 
 const contentStyle = {
-  
   fontSize: '20px',
   fontWeight: 'bold',
-  width: '328px',
-  height: '328px',
-  color: '#fff',
-  textAlign: 'center',
-  float: 'left',
-  position: 'relative',
-  top: '-328px',
-  left: '23px',
-  overflow: 'hidden',
-  wordBreak: 'break-all',
-  verticalAlign: 'middle',
-  paddingTop: '150px',
-  paddingLeft: "20px",
-  paddingRight: "20px",
 }
 
 class Main extends React.Component {
@@ -182,13 +167,13 @@ class Main extends React.Component {
                 {this.state.posts.map((value, index)=>{
                   var splitedRegion = value.region.split(',')
                   var splitedUniv = value.univ.split(',')
-
                   return (
-                    <div width="328px" height="328px" key={index}>
+                    <div width="328px" key={index}>
                       <img className="slideImage" src={value.img} width="328px" height="328px"></img>
                       <div style={contentStyle}>{value.content}</div>
                       {/* 지역 여러개 있는 것 짤림 (어떻게 할지 얘기해보기) */}
                       <h3 className="slideUser">{value.nickname} · {splitedRegion[0]} · {splitedUniv[0]}</h3>
+                      <Image style={{flex:1, borderRadius:"50%", objectFit:'cover'}} width={80} height={80} src={value.profileImg}/>
                     </div>
                   );
                 })}

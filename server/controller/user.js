@@ -14,13 +14,14 @@ async function login(req, res) {
 
         const pw = secret.pw
 
-        let userInfo = await db.query('select userID, email, nickname from users where email = ? AND password = ?', [userEmail, pw])
+        let userInfo = await db.query('select uid, userID, email, nickname from users where email = ? AND password = ?', [userEmail, pw])
 
         if(userInfo.length > 0){
             userInfo = userInfo[0]
             const returnObj = {
                 success : true,
                 msg:'로그인에 성공해따...',
+                uid : userInfo.uid,
                 userId : userInfo.userID,
                 userEmail : userInfo.email,
                 nickname : userInfo.nickname,

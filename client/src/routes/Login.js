@@ -1,13 +1,35 @@
-import {React, Button} from 'react';
+import React,{useState} from 'react';
+import {Link} from 'react-router-dom';
+import {Input} from 'antd';
 import { useHistory } from 'react-router';
+import instance from '../module/instance';
 
 const Login = () => {
-  
+  const [email, setEmail] = useState('');
+  const [userPw, setPassword] = useState('');
   const history = useHistory();
 
-  const postlogin = (value) => {
-    alert('소글 로그인'+value);
+  const postlogin = async(value) => {
+    await instance.post("/api/user/login", {
+      email : email,
+      userPw, userPw
+    }).then((res)=>{
+      console.log(res.data);
+      if (res.data.success){
+        window.localStorage.setItem('uid', res.data.uid);
+        window.localStorage.setItem('userId', res.data.userId);
+        window.localStorage.setItem('nickname', res.data.nickname);
+        history.push('/');
+      }
+    }).catch((err)=>{
+      console.log(err);
+    });
+  }
+
+  const soglelogin = async(value) => {
+    alert(value,"로 로그인");
     window.localStorage.setItem('uid', value);
+    window.localStorage.setItem('nickname', '김소글');
     history.push('/');
   }
 
@@ -15,13 +37,22 @@ const Login = () => {
     <div>
       <div className="wrap" >
         <div className="inner-box login-background">
-          <div className="center" style={{height:'100vh'}}>
-            <div className="btn btn-lg btn-pink" style={{margin:'10px'}} onClick={()=>{postlogin(5)}}>
-              김소글로 로그인 하기
+          <div className="center" style={{marginTop:"366px"}}>
+            <div className="logincontent">
+              <h3>이메일</h3>
+              <Input className="input input-lg" style={{margin:'5px'}} value={email} onChange={(e)=>{setEmail(e.target.value)}} id="mail" placeholder="이메일을 입력하세요" />
             </div>
-            <div className="btn btn-lg btn-white" style={{margin:'10px'}} onClick={()=>{postlogin(6)}}>
-              하글소로 로그인 하기
+            <div className="logincontent">
+              <h3>비밀번호</h3>
+              <Input type={"password"} className="input input-lg" style={{margin:'5px'}} value={userPw} onChange={(e)=>{setPassword(e.target.value)}} id="pwd" placeholder="비밀번호를 입력하세요" />
             </div>
+            <div className="btn btn-lg btn-pink" style={{marginTop:'100px', marginBottom:'10px'}} onClick={()=>{soglelogin(5)}}>
+              소글이로 로그인 하기
+            </div>
+            <div className="btn btn-lg btn-white" style={{marginBottom:'10px'}} onClick={()=>{postlogin(5)}}>
+              로그인 하기
+            </div>
+            <Link to="/signup">회원가입 하러가기</Link>
           </div>
         </div>
       </div>
