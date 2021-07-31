@@ -289,7 +289,7 @@ class Write extends React.Component {
                   key={value}
                   checked={(type[categoryNum].indexOf(value) > -1)} 
                   onChange={checked => this.handleChange(value, checked)}
-                  style={{color:"white", fontSize:"20px", marginTop:"15px"}}
+                  style={{color:"white", fontSize:"20px", marginTop:"15px", borderRadius:"10px"}}
                 >
                   {value}
                 </CheckableTag>
