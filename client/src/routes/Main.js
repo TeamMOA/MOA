@@ -13,9 +13,7 @@ const univ = ["서울대", "숭실대", "고려대", "홍익대", "해양대", "
 const interest = ["미술", "게임", "운동", "여행", "공부", "음식", "쇼핑", "사진"];
 
 
-function onChange(a, b, c) {
-  console.log(a, b, c);
-}
+
 
 class Main extends React.Component {
   
@@ -97,15 +95,12 @@ class Main extends React.Component {
   componentDidMount = async() => {
     await instance.get("/api/post")
       .then((res) => {
-        console.log(res.data);
         if(res.data.success){
           this.setState({posts:res.data.posts});
         }
       }).catch((error)=>{
-        console.log(error);
       })
 
-    console.log(this.state.posts);
   }
 
   getPostFilter = async() => {
@@ -117,13 +112,11 @@ class Main extends React.Component {
     
     await instance.post("/api/post/filter", data)
     .then((res)=>{
-      console.log(res.data);
       if(res.data.success){
         this.setState({posts:res.data.posts});
-        console.log(this.state.posts);
       }
     }).catch((err)=>{
-      console.log(err);
+    
     })
   }
 
@@ -201,7 +194,7 @@ class Main extends React.Component {
                 <h2 className="recentFeed">{this.state.headTitle}</h2>
                 <h3 className="postNum">{this.state.posts.length}개</h3>
               </div>
-              <Carousel afterChange={onChange}>
+              <Carousel >
                 {/* {this.state.posts.map((value, index)=>{ */}
                 {this.state.posts.map((value, index)=>{
 
