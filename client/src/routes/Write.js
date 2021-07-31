@@ -31,11 +31,11 @@ const data = []
 const categoriesList = [
   {
     Title : '지역을 선택해주세요',
-    tags : ['없음', '서울', '경기', '인천', '충청', '강원' ,'전라', '경상', '제주'],
+    tags : ['서울', '경기', '인천', '충청', '강원' ,'전라', '경상', '제주'],
   },
   {
     Title : '대학을 선택해주세요',
-    tags : ['서울대', '숭실대', '고려대', '홍익대','해양대', '한국대', '서강대', '건국대']
+    tags : ['서울대', '숭실대', '고려대', '홍익대','해양대', '한국대', '서강대']
   },
   {
     Title : '관심사를 선택해주세요',
@@ -266,13 +266,14 @@ class Write extends React.Component {
             </div>
           </div>
           <Rodal customStyles={customStyles} visible={this.state.visible} onClose={()=>{this.hide()}}>
-            <h1>{categoriesList[categoryNum].Title}</h1>
+            <h1 style={{textAlign:"center", color:"white"}}>{categoriesList[categoryNum].Title}</h1>
             {categoriesList[categoryNum].tags.map((value, index)=>{
               return (
                 <CheckableTag
                   key={value}
                   checked={(type[categoryNum].indexOf(value) > -1)} 
                   onChange={checked => this.handleChange(value, checked)}
+                  style={{color:"white", fontSize:"20px", marginTop:"15px"}}
                 >
                   {value}
                 </CheckableTag>
@@ -293,7 +294,7 @@ class Write extends React.Component {
 
 const customStyles = {
   height: '300px',
-  width: '414px',
+  width: '100vw',
   bottom: '0%',
   top: '70%',
   borderRadius: "35px",
