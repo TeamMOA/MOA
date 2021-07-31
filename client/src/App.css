@@ -428,7 +428,7 @@ input.interest{
 .slideUser{
   display: inline-block;
   box-sizing: content-box;
-  width: 200px;
+  width: 328px;
   height: 35px;
   line-height: 35px;
   font-size: 16px;
@@ -436,7 +436,6 @@ input.interest{
   margin: 0 auto;
   position: relative;
   top: -365px;
-  right: 50px;
   text-align: right;
 }
 
@@ -499,6 +498,26 @@ textarea.ant-input {
 }
 .ant-input:hover {
   border : 0px;
+}
+
+.feedProfileWrap{
+  display: flex;
+  flex-direction: row;
+  width: 328px; height: 59px;
+  margin: 0 auto;
+  position: relative;
+  top: 20px;
+}
+
+.nameProfile{
+  width: 137px; height: 50px;
+}
+
+.like-container{
+  width: 25px; height: 50px;
+  float: right;
+  padding-left: 166px;
+  line-height: 60px;
 }
 
 .signupContent {
