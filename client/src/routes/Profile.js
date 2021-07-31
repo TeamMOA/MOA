@@ -13,6 +13,7 @@ class Profile extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      uid : window.localStorage.getItem('uid'),
       nickname : '',
       introduce : '',
       profile_img : '',
@@ -22,7 +23,7 @@ class Profile extends React.Component {
   }
 
   componentDidMount = async() => {
-    await instance.get("/api/profile/detail/"+window.localStorage.getItem('uid'))
+    await instance.get("/api/profile/detail/"+this.state.uid)
       .then((res) => {
         if (res.data.success){
           console.log(res.data);

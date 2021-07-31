@@ -17,11 +17,6 @@ function onChange(a, b, c) {
   console.log(a, b, c);
 }
 
-const contentStyle = {
-  fontSize: '20px',
-  fontWeight: 'bold',
-}
-
 class Main extends React.Component {
   
   constructor(props){
@@ -91,8 +86,18 @@ class Main extends React.Component {
     })
   }
 
-  handleFilterChange = async(value) => {
+  handleRegionFilterChange = async(value) => {
     await this.setState({region:value});
+    this.getPostFilter();
+  }
+  
+  handleUnivFilterChange = async(value) => {
+    await this.setState({univ:value});
+    this.getPostFilter();
+  }
+
+  handleInterestFilterChange = async(value) => {
+    await this.setState({interest:value});
     this.getPostFilter();
   }
 
@@ -154,17 +159,17 @@ class Main extends React.Component {
     // style={{color: this.state.color, backgroundColor: this.state.backgroundColor}} onClick={this.setColor}
 
     const regionContent = () => {
-      const result = region.map((value, index)=>{return (<Button key={index} onClick={()=>{this.handleFilterChange(value)}}>{value}</Button>);})
+      const result = region.map((value, index)=>{return (<Button key={index} onClick={()=>{this.handleRegionFilterChange(value)}}>{value}</Button>);})
       return <div>{result}</div>
     };
 
     const univContent = () => {
-      const result = univ.map((value, index)=>{return (<Button key={index}>{value}</Button>);})
+      const result = univ.map((value, index)=>{return (<Button key={index} onClick={()=>{this.handleUnivFilterChange(value)}}>{value}</Button>);})
       return <div>{result}</div>
     };
 
     const interestContent = () => {
-      const result = interest.map((value, index)=>{return (<Button key={index} >{value}</Button>);})
+      const result = interest.map((value, index)=>{return (<Button key={index} onClick={()=>{this.handleInterestFilterChange(value)}}>{value}</Button>);})
       return <div>{result}</div>
     };
     
@@ -197,18 +202,19 @@ class Main extends React.Component {
                 <h3 className="postNum">{this.state.posts.length}개</h3>
               </div>
               <Carousel afterChange={onChange}>
+                {/* {this.state.posts.map((value, index)=>{ */}
                 {this.state.posts.map((value, index)=>{
                   var splitedRegion = value.region.split(',')
                   var splitedUniv = value.univ.split(',')
                   return (
                     <div width="328px" key={index}>
                       <img className="slideImage" src={value.img} width="328px" height="328px"></img>
-                      <div style={contentStyle}>{value.content}</div>
+                      <div className="feedContent">{value.content}</div>
                       <h3 className="slideUser">{value.nickname} · {splitedRegion[0]} · {splitedUniv[0]}</h3>
                       <div className="feedProfileWrap">
                         <div className="nameProfile">
                           <Image style={{flex:1, borderRadius:"50%", objectFit:'cover'}} width={50} height={50} src={value.profileImg}/>
-                          <span className="name">{value.region}</span>
+                          <div className="name">{value.nickname}</div>
                         </div>
                         <Like />
                       </div>
