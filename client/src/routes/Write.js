@@ -298,7 +298,7 @@ const customStyles = {
   bottom: '0%',
   top: '70%',
   borderRadius: "35px",
-  backgroundColor:"pink",
+  backgroundColor:"#fcbfc3",
 
 };
 
