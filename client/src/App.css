@@ -621,12 +621,12 @@ input::placeholder {
 
 .img-buttonProfile {
   vertical-align: middle;
-  background: url( "./assets/icons/Write.png" ) no-repeat;
+  background: url( "./assets/icons/Edit.png" ) no-repeat;
   border: none;
   float:right;
   align-items: center;
-  width: 7px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
   margin-top: 8px;
   cursor: pointer;
 }
