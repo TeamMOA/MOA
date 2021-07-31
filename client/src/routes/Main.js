@@ -8,6 +8,10 @@ import feedUniv from '../assets/icons/feedUniv.png';
 import feedInterest from '../assets/icons/feedInterest.png';
 import 'react-slideshow-image/dist/styles.css'
 
+const region = ["경기", "서울", "충청", "강원", "전라", "경상", "제주"];
+const univ = ["서울대", "숭실대", "고려대", "홍익대", "해양대", "한국대", "서강대"];
+const interest = ["미술", "게암", "운동", "취업", "공부", "뜨개질"];
+
 
 function onChange(a, b, c) {
   console.log(a, b, c);
@@ -28,9 +32,9 @@ class Main extends React.Component {
       posts : [],
       headTitle : "최신 피드",
       postNum : 0,
-      region : ["경기", "서울", "충청", "강원", "전라", "경상", "제주"],
-      univ : ["서울대", "숭실대", "고려대", "홍익대", "해양대", "한국대", "서강대", "+",],
-      interest : ["미술", "게암", "운동", "취업", "공부", "뜨개질", "+"],
+      region : '',
+      univ : '',
+      interest : '',
       feedIcon : feedDefault,
       color: '#FA959B',
       backgroundColor: '#ffffff',
@@ -66,17 +70,21 @@ class Main extends React.Component {
       })
 
     console.log(this.state.posts);
+  }
 
-    const data={
-      region : '서울'
-    };
+  getPostFilter = async() => {
+    const data = {
+      region : this.state.region,
+      univ : this.state.univ,
+      interest : this.state.interest
+    }
     
     await instance.post("/api/post/filter", data)
     .then((res)=>{
       console.log(res.data);
       if(res.data.success){
-        this.setState({filteredPost:res.data.posts});
-        console.log(this.state.filteredPost);
+        this.setState({posts:res.data.posts});
+        console.log(this.state.posts);
       }
     }).catch((err)=>{
       console.log(err);
@@ -141,17 +149,17 @@ class Main extends React.Component {
     // style={{color: this.state.color, backgroundColor: this.state.backgroundColor}} onClick={this.setColor}
 
     const regionContent = () => {
-      const result = this.state.region.map((value, index)=>{return (<Button key="index">{value}</Button>);})
+      const result = region.map((value, index)=>{return (<Button key={index}>{value}</Button>);})
       return <div>{result}</div>
     };
 
     const univContent = () => {
-      const result = this.state.univ.map((value, index)=>{return (<Button key="index">{value}</Button>);})
+      const result = univ.map((value, index)=>{return (<Button key={index}>{value}</Button>);})
       return <div>{result}</div>
     };
 
     const interestContent = () => {
-      const result = this.state.interest.map((value, index)=>{return (<Button key="index" >{value}</Button>);})
+      const result = interest.map((value, index)=>{return (<Button key={index} >{value}</Button>);})
       return <div>{result}</div>
     };
     
@@ -191,19 +199,19 @@ class Main extends React.Component {
                     <div width="328px" key={index}>
                       <img className="slideImage" src={value.img} width="328px" height="328px"></img>
                       <div style={contentStyle}>{value.content}</div>
-                      {/* 지역 여러개 있는 것 짤림 (어떻게 할지 얘기해보기) */}
                       <h3 className="slideUser">{value.nickname} · {splitedRegion[0]} · {splitedUniv[0]}</h3>
-                      <Image style={{flex:1, borderRadius:"50%", objectFit:'cover'}} width={80} height={80} src={value.profileImg}/>
+                      <div className="feedProfileWrap">
+                        <div className="nameProfile">
+                          <Image style={{flex:1, borderRadius:"50%", objectFit:'cover'}} width={50} height={50} src={value.profileImg}/>
+                          <span className="name">{value.region}</span>
+                        </div>
+                        <Like />
+                      </div>
                     </div>
                   );
                 })}
               </Carousel>
-              <div className="feedProfileWrap">
-                <div className="nameProfile">
-                  {/* <img src={value.profileImg}></img> */}
-                </div>
-                <Like />
-              </div>
+              
             </div>
             
           </div>
