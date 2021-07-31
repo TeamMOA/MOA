@@ -1,6 +1,6 @@
 import React from 'react';
 import {Navbar} from '../components';
-import {Image, Divider, Carousel} from 'antd';
+import {Image, Carousel} from 'antd';
 import instance from '../module/instance';
 
 const contentStyle = {

@@ -1,10 +1,9 @@
 import React from 'react';
-import {Menu, Navbar} from '../components';
+import { Navbar} from '../components';
 import instance from '../module/instance';
 import { ImagePicker, WingBlank, SegmentedControl } from 'antd-mobile';
 import {Input, Tag} from 'antd';
 import 'antd-mobile/dist/antd-mobile.css';
-import moment from 'moment';
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
 
@@ -19,6 +18,8 @@ const contentStyle = {
   background: '#333333',
   borderRadius : '10px',
 };
+
+const data = []
 
 const categoriesList = [
   {
@@ -50,6 +51,7 @@ class Write extends React.Component {
       images:null,
       visible: false,
       selectedTags: ['Books'],
+      files: data
     };
   }
   
@@ -85,12 +87,13 @@ class Write extends React.Component {
   }
 
   createPost = async() => {
-    const {region2, univ2, interest2} = this.state;
+    const {region2, univ2, interest2, content} = this.state;
     // const formData = new FormData();
     // formData.append('images', this.state.files);
     console.log(region2);
     console.log(univ2);
     console.log(interest2);
+    console.log(content);
   }
 
   // addTags=(categoryNum, value)=>{
@@ -110,7 +113,7 @@ class Write extends React.Component {
       const nextSelectedTags = checked ? [...region, value] : region.filter(t => t !== value);
       this.setState({ region: nextSelectedTags });
       this.setState({ region2: nextSelectedTags });
-    } else if (categoryNum == 1){
+    } else if (categoryNum === 1){
       const nextSelectedTags = checked ? [...univ, value] : univ.filter(t => t !== value);
       this.setState({ univ: nextSelectedTags });
       this.setState({ univ2: nextSelectedTags });
@@ -135,7 +138,12 @@ class Write extends React.Component {
     }
   }
 
-  
+  onChange = (files, type, index) => {
+    console.log(files, type, index);
+    this.setState({
+      files,
+    });
+  }
 
   render(){
     // let profile_preview = null;
@@ -144,7 +152,7 @@ class Write extends React.Component {
     // }
     // let regionView = null;
     // regionView = <Button type="text" onClick={this.show.bind(this)} style={{ position:"absolute", top:"560px", left:"165px", width:"100px", color: "grey", 'z-index': "1" }}>{this.state.Selectregion}</Button>
-    const {content, categoryNum, region, univ, interest} = this.state;
+    const { files, content, categoryNum, region, univ, interest} = this.state;
     const type = [region, univ, interest];
     return (
       <div className="wrap" >
@@ -154,10 +162,20 @@ class Write extends React.Component {
           </div>
           <div className="content">
             <div className="write col-center" style={{height:'100%'}}>
-              <input type="file" accept="image/*" id="input-file" onChange={(e) => {this.setState({images : e.target.files[0]}); console.log(e.target.files[0]);}} style={{display:'none'}}/>
-              <div className="center imgArea" style={{marginBottom:'20px'}}>
-                <label className="choose" htmlFor="input-file">파일선택</label>
-                <TextArea value={content} onChange={(e)=>{this.setState({content:e.target.value})}} style={{textAlign:'center'}} rows={3} placeholder="텍스트를 입력하세요"/>
+              <input type="file" accept="image/*" id="input-file" onChange={(e) => {this.setState({images : e.target.files[0]}); console.log(e.target.files[0]);}} style={{display:'none'}}/>    
+              <div className="center imgArea" style={{marginBottom:'20px'}}> 
+              {/*<label className="choose" htmlFor="input-file">파일선택</label>*/}
+                  <ImagePicker 
+                  length="1"
+                  files={files}
+                  onChange={this.onChange}
+                  onImageClick={(index, fs) => console.log(index, fs)}
+                  selectable={files.length < 1}
+                  accept="image/gif,image/jpeg,image/jpg,image/png"
+                />
+                <div>
+                <TextArea value={content} onChange={(e)=>{this.setState({content:e.target.value})}} style={{position:"absolute", top:"200px", left:"50px", width:"300px", height:"300px", textAlign:'center', backgroundColor:"black", opacity:"0.5"}} rows={3} placeholder="텍스트를 입력하세요"/>
+                </div>
               </div>
               <div style={{flex:'1'}}>
                 <h2 style={{marginBottom:'20px'}}>태그 붙이기</h2>
