@@ -32,7 +32,7 @@ async function detail(req, res) {
 
         let userInfo = await db.query('select userID, nickname, email, introduce, region, univ, interest, profileImg from users where uid = ?', [uid]);
 
-        let userPost = await db.query('select * from posts where uid = ? order by timestamp desc', [uid])
+        let userPost = await db.query('select * from posts where uid = ? order by posttime desc', [uid]);
         const returnObj = {
             success : true,
             userInfo : userInfo,

@@ -20,6 +20,7 @@ class Profile extends React.Component {
       nickname : '',
       introduce : '',
       profile_img : '',
+      posts : [],
     }
   }
 
@@ -27,9 +28,10 @@ class Profile extends React.Component {
     await instance.get("/api/profile/detail/"+window.localStorage.getItem('uid'))
       .then((res) => {
         if (res.data.success){
+          console.log(res.data);
           const userInfo = res.data.userInfo[0];
-          console.log(userInfo);
-          this.setState({nickname:userInfo.nickname, introduce:userInfo.introduce, profile_img:userInfo.profileImg});
+          const posts = res.data.userPost;
+          this.setState({nickname:userInfo.nickname, introduce:userInfo.introduce, profile_img:userInfo.profileImg, posts:posts});
         }
       }).catch((error)=>{
         console.log(error);
@@ -47,7 +49,7 @@ class Profile extends React.Component {
           <div className="content">
             <div className="profile" style={{display:'flex', paddingTop:'20px', borderWidth:'0.5px', borderBottom:'solid #CCCCCC'}}>
               <div className="center">
-                <Image style={{flex:1, borderRadius:"50%"}} width={80} height={80} src={profile_img}/>
+                <Image style={{flex:1, borderRadius:"50%", objectFit:'cover'}} width={80} height={80} src={profile_img}/>
               </div>
               <div className="center" style={{flex:3}}>
                 <h2 >{nickname}</h2>
