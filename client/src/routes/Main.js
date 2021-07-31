@@ -14,18 +14,24 @@ function onChange(a, b, c) {
 }
 
 const contentStyle = {
+  
   fontSize: '20px',
   fontWeight: 'bold',
   width: '328px',
   height: '328px',
   color: '#fff',
-  lineHeight: '328px',
   textAlign: 'center',
   float: 'left',
   position: 'relative',
   top: '-328px',
   left: '23px',
-};
+  overflow: 'hidden',
+  wordBreak: 'break-all',
+  verticalAlign: 'middle',
+  paddingTop: '150px',
+  paddingLeft: "20px",
+  paddingRight: "20px",
+}
 
 class Main extends React.Component {
   
@@ -128,18 +134,20 @@ class Main extends React.Component {
 
   render(){
     
+    // style={{color: this.state.color, backgroundColor: this.state.backgroundColor}} onClick={this.setColor}
+
     const regionContent = () => {
-      const result = this.state.region.map((value, index)=>{return (<button key="index" style={{color: this.state.color, backgroundColor: this.state.backgroundColor}} onClick={this.setColor}>{value}</button>);})
+      const result = this.state.region.map((value, index)=>{return (<Button key="index">{value}</Button>);})
       return <div>{result}</div>
     };
 
     const univContent = () => {
-      const result = this.state.univ.map((value, index)=>{return (<button key="index" onClick={() => alert(value)}>{value}</button>);})
+      const result = this.state.univ.map((value, index)=>{return (<Button key="index">{value}</Button>);})
       return <div>{result}</div>
     };
 
     const interestContent = () => {
-      const result = this.state.interest.map((value, index)=>{return (<button key="index" onClick={() => alert(value)}>{value}</button>);})
+      const result = this.state.interest.map((value, index)=>{return (<Button key="index" >{value}</Button>);})
       return <div>{result}</div>
     };
     
@@ -172,12 +180,15 @@ class Main extends React.Component {
               </div>
               <Carousel afterChange={onChange}>
                 {this.state.posts.map((value, index)=>{
+                  var splitedRegion = value.region.split(',')
+                  var splitedUniv = value.univ.split(',')
+
                   return (
                     <div width="328px" height="328px" key={index}>
                       <img className="slideImage" src={value.img} width="328px" height="328px"></img>
                       <div style={contentStyle}>{value.content}</div>
                       {/* 지역 여러개 있는 것 짤림 (어떻게 할지 얘기해보기) */}
-                      <h3 className="slideUser">{value.nickname} · {value.region} · {value.univ}</h3>
+                      <h3 className="slideUser">{value.nickname} · {splitedRegion[0]} · {splitedUniv[0]}</h3>
                     </div>
                   );
                 })}
