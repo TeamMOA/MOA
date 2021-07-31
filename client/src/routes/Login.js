@@ -9,7 +9,7 @@ const Login = () => {
   const [userPw, setPassword] = useState('');
   const history = useHistory();
 
-  const postlogin = async(value) => {
+  const postlogin = async() => {
     await instance.post("/api/user/login", {
       email : email,
       userPw, userPw
@@ -26,9 +26,8 @@ const Login = () => {
     });
   }
 
-  const soglelogin = async(value) => {
-    alert(value,"로 로그인");
-    window.localStorage.setItem('uid', value);
+  const soglelogin = async() => {
+    window.localStorage.setItem('uid', 5);
     window.localStorage.setItem('nickname', '김소글');
     history.push('/');
   }
@@ -46,10 +45,10 @@ const Login = () => {
               <h3>비밀번호</h3>
               <Input type={"password"} className="input input-lg" style={{margin:'5px'}} value={userPw} onChange={(e)=>{setPassword(e.target.value)}} id="pwd" placeholder="비밀번호를 입력하세요" />
             </div>
-            <div className="btn btn-lg btn-pink" style={{marginTop:'100px', marginBottom:'10px'}} onClick={()=>{soglelogin(5)}}>
+            <div className="btn btn-lg btn-pink" style={{marginTop:'100px', marginBottom:'10px'}} onClick={()=>{soglelogin()}}>
               소글이로 로그인 하기
             </div>
-            <div className="btn btn-lg btn-white" style={{marginBottom:'10px'}} onClick={()=>{postlogin(5)}}>
+            <div className="btn btn-lg btn-white" style={{marginBottom:'10px'}} onClick={()=>{postlogin()}}>
               로그인 하기
             </div>
             <Link to="/signup">회원가입 하러가기</Link>
