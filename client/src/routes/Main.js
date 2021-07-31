@@ -1,5 +1,5 @@
 import React from 'react';
-import {Navbar, Category} from '../components';
+import {Navbar, Like} from '../components';
 import instance from '../module/instance';
 import {Popover, Button, Carousel, Image} from 'antd';
 import feedDefault from '../assets/icons/feedDefault.png';
@@ -178,9 +178,13 @@ class Main extends React.Component {
                   );
                 })}
               </Carousel>
+              <div className="feedProfileWrap">
+                <div className="nameProfile">
+                  {/* <img src={value.profileImg}></img> */}
+                </div>
+                <Like />
+              </div>
             </div>
-            
-            {/*파드*/}
             
           </div>
 

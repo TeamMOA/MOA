@@ -45,7 +45,7 @@ class setting extends React.Component {
                   <h2 className="settingText">이용약관</h2>   
                   <input type="button" class="img-button"></input>           
             </div>
-            <div className="profile" style={{marginTop:"25px"}}>
+            <div className="profile" style={{marginTop:"40px"}}>
                   <h1 style={{fontSize:"15px", fontWeight:"500"}}>1조 소글소글</h1>      
                   <hr width="320px" style={{marginTop:"-5px", borderTop:"solid 1px gray"}}></hr>
                   <h2 className="settingText" style={{fontSize:"13px"}}>팀원: 강효근, 이수민, 이은경, 장환곤</h2> 
