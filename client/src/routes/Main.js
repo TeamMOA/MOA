@@ -36,7 +36,7 @@ class Main extends React.Component {
       backgroundColor: '#ffffff',
       upDown: '-52px',
       filteredPost: [],
-      filterData: ''
+      filterData : ''
     }
     this.setRegion = this.setRegion.bind(this);
     this.setUniv = this.setUniv.bind(this);
