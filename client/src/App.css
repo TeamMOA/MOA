@@ -543,6 +543,11 @@ textarea.ant-input {
   bottom: 80px;
 }
 
+img{
+  object-fit: cover;
+}
+
+
 .nameProfile{
   display: flex;
   flex-direction: row;
