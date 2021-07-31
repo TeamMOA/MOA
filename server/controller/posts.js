@@ -166,7 +166,7 @@ async function getPostFilter (req, res) {
     let wheremsg = `WHERE ${msg.join(" AND ")}`;
     console.log(wheremsg);
     try {
-        let result = await db.query(`SELECT pid, content, userCount, posttime, p.region, p.univ, p.interest, img, u.uid, u.nickname, u.profileImg FROM posts p JOIN users u ON p.uid=u.uid ${region||univ||interest?wheremsg:null} ORDER BY posttime DESC LIMIT ?;`, [pageSize]);
+        let result = await db.query(`SELECT pid, content, userCount, posttime, p.region, p.univ, p.interest, img, u.uid, u.nickname, u.profileImg FROM posts p JOIN users u ON p.uid=u.uid ${region||univ||interest?wheremsg:''} ORDER BY posttime DESC LIMIT ?;`, [pageSize]);
         let posts = [];
         if(result.length > 0){
             result.map((val) => {

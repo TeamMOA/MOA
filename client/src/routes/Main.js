@@ -8,6 +8,10 @@ import feedUniv from '../assets/icons/feedUniv.png';
 import feedInterest from '../assets/icons/feedInterest.png';
 import 'react-slideshow-image/dist/styles.css'
 
+const region = ["경기", "서울", "충청", "강원", "전라", "경상", "제주"];
+const univ = ["서울대", "숭실대", "고려대", "홍익대", "해양대", "한국대", "서강대"];
+const interest = ["미술", "게암", "운동", "취업", "공부", "뜨개질"];
+
 
 function onChange(a, b, c) {
   console.log(a, b, c);
@@ -28,9 +32,9 @@ class Main extends React.Component {
       posts : [],
       headTitle : "최신 피드",
       postNum : 0,
-      region : ["경기", "서울", "충청", "강원", "전라", "경상", "제주"],
-      univ : ["서울대", "숭실대", "고려대", "홍익대", "해양대", "한국대", "서강대", "+",],
-      interest : ["미술", "게암", "운동", "취업", "공부", "뜨개질", "+"],
+      region : '',
+      univ : '',
+      interest : '',
       feedIcon : feedDefault,
       color: '#FA959B',
       backgroundColor: '#ffffff',
@@ -66,19 +70,30 @@ class Main extends React.Component {
       })
 
     console.log(this.state.posts);
+  }
 
-    const data = this.state.filterData
+  getPostFilter = async() => {
+    const data = {
+      region : this.state.region,
+      univ : this.state.univ,
+      interest : this.state.interest
+    }
     
     await instance.post("/api/post/filter", data)
     .then((res)=>{
       console.log(res.data);
       if(res.data.success){
-        this.setState({filteredPost:res.data.posts});
-        console.log(this.state.filteredPost);
+        this.setState({posts:res.data.posts});
+        console.log(this.state.posts);
       }
     }).catch((err)=>{
       console.log(err);
     })
+  }
+
+  handleFilterChange = async(value) => {
+    await this.setState({region:value});
+    this.getPostFilter();
   }
 
   setRegion() {
@@ -139,17 +154,17 @@ class Main extends React.Component {
     // style={{color: this.state.color, backgroundColor: this.state.backgroundColor}} onClick={this.setColor}
 
     const regionContent = () => {
-      const result = this.state.region.map((value, index)=>{return (<Button key="index">{value}</Button>);})
+      const result = region.map((value, index)=>{return (<Button key={index} onClick={()=>{this.handleFilterChange(value)}}>{value}</Button>);})
       return <div>{result}</div>
     };
 
     const univContent = () => {
-      const result = this.state.univ.map((value, index)=>{return (<Button key="index">{value}</Button>);})
+      const result = univ.map((value, index)=>{return (<Button key={index}>{value}</Button>);})
       return <div>{result}</div>
     };
 
     const interestContent = () => {
-      const result = this.state.interest.map((value, index)=>{return (<Button key="index" >{value}</Button>);})
+      const result = interest.map((value, index)=>{return (<Button key={index} >{value}</Button>);})
       return <div>{result}</div>
     };
     
