@@ -88,7 +88,7 @@ class Profile extends React.Component {
             <div className="profile">
               <h2>최근 올린 피드</h2>
               <div style={{borderRadius:'10px'}}>
-              <Carousel >
+              <Carousel autoplay autoplaySpeed={5000}>
                 {/* {this.state.posts.map((value, index)=>{ */}
                 {this.state.posts.map((value, index)=>{
 

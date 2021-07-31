@@ -57,6 +57,8 @@ class signup extends React.Component {
             nickname : this.state.nickname
         }).then((res)=>{
             console.log(res.data);
+            alert('회원가입에 성공하였습니다!');
+            
         }).catch((error)=>{
             console.log(error);
             alert('회원가입에 실패하였습니다!');

@@ -194,7 +194,7 @@ class Main extends React.Component {
                 <h2 className="recentFeed">{this.state.headTitle}</h2>
                 <h3 className="postNum">{this.state.posts.length}개</h3>
               </div>
-              <Carousel >
+              <Carousel autoplay autoplaySpeed={5000}>
                 {/* {this.state.posts.map((value, index)=>{ */}
                 {this.state.posts.map((value, index)=>{
 
