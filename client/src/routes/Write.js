@@ -1,7 +1,7 @@
 import React from 'react';
 import {Menu, Navbar} from '../components';
 import instance from '../module/instance';
-import { ImagePicker} from 'antd-mobile';
+import { ImagePicker, WingBlank, SegmentedControl } from 'antd-mobile';
 import {Input, Tag} from 'antd';
 import 'antd-mobile/dist/antd-mobile.css';
 import moment from 'moment';
@@ -43,7 +43,9 @@ class Write extends React.Component {
       region:[],
       region2:[],
       univ:[],
+      univ2:[],
       interest:[],
+      interest2:[],
       categoryNum : 0,
       images:null,
       visible: false,
@@ -53,6 +55,16 @@ class Write extends React.Component {
   
   show=(value)=>{
     this.setState({ visible: true, categoryNum:value });
+    if(value == 0) {
+      this.setState({ region: [] });
+      this.setState({ region2: [] });
+    } else if(value == 1) {
+      this.setState({ univ: [] });
+      this.setState({ univ2: [] });
+    } else if(value == 2) {
+      this.setState({ interest: [] });
+      this.setState({ interest2: [] });
+    }
   }
 
   hide() {
@@ -73,12 +85,12 @@ class Write extends React.Component {
   }
 
   createPost = async() => {
-    const {region2, univ, interest} = this.state;
+    const {region2, univ2, interest2} = this.state;
     // const formData = new FormData();
     // formData.append('images', this.state.files);
     console.log(region2);
-    console.log(univ);
-    console.log(interest);
+    console.log(univ2);
+    console.log(interest2);
   }
 
   // addTags=(categoryNum, value)=>{
@@ -92,7 +104,8 @@ class Write extends React.Component {
   // }
 
   handleChange(value, checked) {
-    const { region, region2, univ, interest, categoryNum } = this.state;
+    const { region, region2, univ, univ2, interest, interest2, categoryNum } = this.state;
+    console.log(checked);   
     if (categoryNum == 0) {
       const nextSelectedTags = checked ? [...region, value] : region.filter(t => t !== value);
       this.setState({ region: nextSelectedTags });
@@ -100,17 +113,25 @@ class Write extends React.Component {
     } else if (categoryNum == 1){
       const nextSelectedTags = checked ? [...univ, value] : univ.filter(t => t !== value);
       this.setState({ univ: nextSelectedTags });
+      this.setState({ univ2: nextSelectedTags });
     } else if (categoryNum == 2){
       const nextSelectedTags = checked ? [...interest, value] : interest.filter(t => t !== value);
       this.setState({ interest: nextSelectedTags });
+      this.setState({ interest2: nextSelectedTags });
     }
   }
 
   removeArray(value, index) {
-    const { region2, univ, interest, categoryNum } = this.state;
-    if(categoryNum == 0) {
+    const { region2, univ, univ2, interest, interest2, categoryNum } = this.state;
+    if(index == 0) {
       const changedArray = region2.filter(t => t !== value);
       this.setState({region2: changedArray});
+    } else if(index == 1) {
+      const changedArray = univ2.filter(t => t !== value);
+      this.setState({univ2: changedArray});
+    } else if(index == 2) {
+      const changedArray = interest2.filter(t => t !== value);
+      this.setState({interest2: changedArray});
     }
   }
 
@@ -144,7 +165,7 @@ class Write extends React.Component {
                   <h4 className="type">지역별</h4>
                   <div className="tags row" onClick={()=>{this.show(0);}}>{region.length==0?'눌러서 선택하세요':region.map((value, index)=>{
                     return(
-                      <Tag key={index} closable onClose={()=>{this.removeArray(value, index);}}>
+                      <Tag key={index} closable onClose={()=>{this.removeArray(value, 0);}}>
                         {value}
                       </Tag>
                     );})}
@@ -154,7 +175,7 @@ class Write extends React.Component {
                   <h4 className="type">대학별</h4>
                   <div className="tags row" onClick={()=>{this.show(1);}}>{univ.length==0?'눌러서 선택하세요':univ.map((value, index)=>{
                     return(
-                      <Tag key={index} closable onClose={()=>{console.log('value 값을 state에서 지우는 것 구현 필요')}}>
+                      <Tag key={index} closable onClose={()=>{this.removeArray(value, 1);}}>
                         {value}
                       </Tag>
                     );})}
@@ -164,7 +185,7 @@ class Write extends React.Component {
                   <h4 className="type">관심사별</h4>
                   <div className="tags row" onClick={()=>{this.show(2);}}>{interest.length==0?'눌러서 선택하세요':interest.map((value, index)=>{
                     return(
-                      <Tag key={index} closable onClose={()=>{console.log('value 값을 state에서 지우는 것 구현 필요')}}>
+                      <Tag key={index} closable onClose={()=>{this.removeArray(value, 2);}}>
                         {value}
                       </Tag>
                     );})}
@@ -179,8 +200,8 @@ class Write extends React.Component {
             {categoriesList[categoryNum].tags.map((value, index)=>{
               return (
                 <CheckableTag
-                  key={index}
-                  checked={type[categoryNum].indexOf(value) > -1}
+                  key={value}
+                  checked={(type[categoryNum].indexOf(value) > -1)} 
                   onChange={checked => this.handleChange(value, checked)}
                 >
                   {value}
