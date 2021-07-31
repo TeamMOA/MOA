@@ -1,22 +1,29 @@
 import React from 'react';
 import {Navbar} from '../components';
 import {Image, Carousel} from 'antd';
+import {Input, Button} from 'antd';
 import instance from '../module/instance';
+import Rodal from 'rodal';
+import 'rodal/lib/rodal.css';
+
+const {TextArea} = Input;
 
 class Profile extends React.Component {
   
   constructor(props){
     super(props);
     this.state = {
+      uid : window.localStorage.getItem('uid'),
       nickname : '',
       introduce : '',
       profile_img : '',
       posts : [],
+      visible : false,
     }
   }
 
   componentDidMount = async() => {
-    await instance.get("/api/profile/detail/"+window.localStorage.getItem('uid'))
+    await instance.get("/api/profile/detail/"+this.state.uid)
       .then((res) => {
         if (res.data.success){
           console.log(res.data);
@@ -27,6 +34,19 @@ class Profile extends React.Component {
       }).catch((error)=>{
         console.log(error);
       })
+  }
+
+  configIntroduction = () => {
+    console.log("1");
+    this.setState({ visible: true });
+  }
+
+  show=()=>{
+    this.setState({ visible: true });
+  }
+
+  hide() {
+    this.setState({ visible: false });
   }
 
   render(){
@@ -61,7 +81,8 @@ class Profile extends React.Component {
               </div>
             </div>
             <div className="profile">
-              <h2>자기소개</h2>
+              <h2 className="settingTextProfile">자기소개</h2>
+              <input type="button" class="img-buttonProfile" onClick={this.configIntroduction}></input>
               <h4 style={IntoduceStyle}>{introduce}</h4>
             </div>
             <div className="profile">
@@ -82,6 +103,13 @@ class Profile extends React.Component {
               </div>
             </div>
           </div>
+          <Rodal customStyles={customStyles} visible={this.state.visible} onClose={()=>{this.hide()}}>
+            <div style={{flex:'1', marginTop:"0px", padding:"20px 10px 10px 20px" }}>
+              <h2 className="settingTextProfile">자기소개</h2>
+              <TextArea value={introduce} onChange={(e)=>{this.setState({introduce:e.target.value})}} style={{width:"350px", height:"50px", textAlign:'left', borderRadius:"10px", border:"solid 1px pink"}} rows={3} placeholder="자기소개를 수정하세요"/>
+              <Button style={{marginLeft:"270px"}} onClick={()=>{this.hide()}}>수정하기</Button>
+            </div>
+          </Rodal>
         </div>
         <Navbar />
       </div>
@@ -108,4 +136,14 @@ const contentStyle = {
   textAlign: 'center',
   background: '#333333',
   borderRadius : '10px',
+};
+
+const customStyles = {
+  height: '300px',
+  width: '100vw',
+  bottom: '0%',
+  top: '70%',
+  borderRadius: "35px",
+  backgroundColor:"#fdd5d7",
+
 };

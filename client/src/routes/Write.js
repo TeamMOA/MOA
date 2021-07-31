@@ -1,11 +1,11 @@
 import React from 'react';
 import { Navbar} from '../components';
 import instance from '../module/instance';
-import { ImagePicker, WingBlank, SegmentedControl } from 'antd-mobile';
 import {Input, Tag} from 'antd';
 import 'antd-mobile/dist/antd-mobile.css';
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
+import axios from 'axios';
 
 import addPhoto from '../assets/icons/addPhoto.png';
 import Center from '../assets/icons/Center.png';
@@ -47,6 +47,8 @@ class Write extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      uid : window.localStorage.getItem('uid'),
+      nickname : window.localStorage.getItem('nickname'),
       content:'',
       region:[],
       region2:[],
@@ -92,40 +94,54 @@ class Write extends React.Component {
       })
     }
     reader.readAsDataURL(file);
+
+    console.log(file);
   }
 
   createPost = async() => {
-    const {region2, univ2, interest2, content} = this.state;
-    // const formData = new FormData();
-    // formData.append('images', this.state.files);
-    // await instance.post("/api/post", formData, {
-    //   headers: {
-    //     'Content-Type': 'multipart/form-data'
-    //   }
-    // }).then((res)=>{
-    //   console.log(res)
-    // }).catch((error)=>{
-    //   console.log(error)
-    // });
+    const {uid, nickname, region2, univ2, interest2, content, file} = this.state;
 
     console.log(region2);
     console.log(univ2);
     console.log(interest2);
     console.log(content);
-    console.log(this.state.file);
-    console.log(this.state.previewURL);
+    console.log()
+    let formData = new FormData();
+    formData.append('uid', uid);
+    formData.append('content', content);
+    formData.append('nickname', nickname);
+    formData.append('region', region2.join('|'));
+    formData.append('univ', univ2.join('|'));
+    formData.append('interest', interest2.join('|'));
+    formData.append('images', file);
 
-    const data = {
-      region : "서울",
-      interest : "여행"
-    }
-    await instance.post("/api/post/filter", data)
-    .then((res)=>{
-      console.log(res.data);
-    }).catch((err)=>{
-      console.log(err);
-    })
+    await instance.post("/api/post", formData, {
+      headers:{"Content-Type":"multipart/form-data"}
+    }).then((res)=>{
+      console.log(res.data)
+      if (res.data.success){
+        alert('업로드에 성공했습니다.');
+      }
+    }).catch((error)=>{
+      console.log("axios error"+error);
+    });
 
+    // await axios({
+    //   method : 'post',
+    //   url : 'http://localhost:5000/api/post',
+    //   data: formData,
+    //   headers:{"Content-Type":"multipart/form-data"},
+    // }).then((res)=>{
+    //   console.log(res.data)
+    //   if (res.data.success){
+    //     alert('업로드에 성공했습니다.');
+    //   }
+    // }).catch((error)=>{
+    //   console.log("axios error"+error);
+    // });
+
+    // console.log(this.state.file);
+    // console.log(this.state.previewURL);
   }
 
   // addTags=(categoryNum, value)=>{
@@ -260,8 +276,8 @@ class Write extends React.Component {
                   </div>
                 </div>
               </div>
-              <div style={{textAlign:'right'}}onClick={()=>{this.createPost()}}>
-                <img src={sendBtn}></img>
+              <div style={{textAlign:'right'}} >
+                <img src={sendBtn} onClick={()=>{this.createPost()}}></img>
               </div>
             </div>
           </div>
@@ -298,7 +314,7 @@ const customStyles = {
   bottom: '0%',
   top: '70%',
   borderRadius: "35px",
-  backgroundColor:"pink",
+  backgroundColor:"#fcbfc3",
 
 };
 

@@ -619,10 +619,30 @@ input::placeholder {
   cursor: pointer;
 }
 
+.img-buttonProfile {
+  vertical-align: middle;
+  background: url( "./assets/icons/Write.png" ) no-repeat;
+  border: none;
+  float:right;
+  align-items: center;
+  width: 7px;
+  height: 14px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
 .settingText {
   margin-top: 10px;
   font-size: 15px;
   color:gray;
+  font-weight: 400;
+  display:inline-block;
+}
+
+.settingTextProfile {
+  margin-top: 10px;
+  font-size: 20px;
+  color:black;
   font-weight: 400;
   display:inline-block;
 }
