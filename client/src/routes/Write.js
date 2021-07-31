@@ -9,6 +9,8 @@ import 'rodal/lib/rodal.css';
 
 import addPhoto from '../assets/icons/addPhoto.png';
 import Center from '../assets/icons/Center.png';
+import right from '../assets/icons/right.png';
+import left from '../assets/icons/left.png';
 import sendBtn from '../assets/icons/sendBtn.png';
 import noImage from '../assets/images/noImage.png';
 
@@ -45,7 +47,7 @@ class Write extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      content:'테스트 글귀입니다',
+      content:'',
       region:[],
       region2:[],
       univ:[],
@@ -57,6 +59,7 @@ class Write extends React.Component {
       selectedTags: ['Books'],
       file:null,
       previewURL : null,
+      imgValue:0,
     };
   }
   
@@ -174,6 +177,17 @@ class Write extends React.Component {
     });
   }
 
+  imgChange = () => {
+    const { imgValue } = this.state;
+    if(imgValue==2) {
+      this.setState({imgValue:0});
+    } else if(imgValue==1){   
+      this.setState({imgValue:2});
+    } else if(imgValue==0) {   
+      this.setState({imgValue:1});
+    }
+  }
+
   render(){
     // let profile_preview = null;
     // if(this.state.file !== ''){
@@ -181,7 +195,7 @@ class Write extends React.Component {
     // }
     // let regionView = null;
     // regionView = <Button type="text" onClick={this.show.bind(this)} style={{ position:"absolute", top:"560px", left:"165px", width:"100px", color: "grey", 'z-index': "1" }}>{this.state.Selectregion}</Button>
-    const {content, categoryNum, region, univ, interest, previewURL} = this.state;
+    const {content, categoryNum, region, univ, interest, previewURL, imgValue} = this.state;
     const type = [region, univ, interest];
     return (
       <div className="wrap" >
@@ -197,14 +211,23 @@ class Write extends React.Component {
                   <label htmlFor="input-file">
                     <img src={addPhoto} width={18} height={18} style={{margin:'5px'}}></img>
                   </label>
-                  <img src={Center} width={18} height={18} style={{margin:'5px'}} onClick={()=>{alert('center')}}></img>
+                  <img src={(imgValue==0)?(Center):(imgValue==1)?(left):(right)} width={18} height={18} style={{margin:'5px'}} onClick={this.imgChange}></img>
                 </div>
-                <div className="text">
-                  <div style={{alignSelf:'center'}}>{this.state.content}</div>  
+                <div className="text" style={(imgValue==0)?({justifyContent:"center", textAlign:"center", fontSize:"30px"}):(imgValue==1)?({justifyContent:"flex-start", textAlign:"left", fontSize:"30px"}):({justifyContent:"flex-end", textAlign:"right", fontSize:"30px"})}>
+                  <div style={{alignSelf:"center"}}>
+                    {this.state.content.split('\n').map((line) => {
+                      return (
+                        <span>
+                          {line}
+                          <br />
+                        </span>
+                      );                 
+                    })}
+                  </div>
                 </div>
               </div>
               <div style={{flex:'1'}}>
-                <TextArea value={content} onChange={(e)=>{this.setState({content:e.target.value})}} style={{width:"300px", height:"50px", textAlign:'center'}} rows={3} placeholder="텍스트를 입력하세요"/>
+                <TextArea value={content} onChange={(e)=>{this.setState({content:e.target.value})}} style={{width:"300px", height:"50px", textAlign:'left', borderRadius:"10px", border:"solid 1px black"}} rows={3} placeholder="텍스트를 입력하세요"/>
                 <h2 style={{marginBottom:'20px'}}>태그 붙이기</h2>
                 <div className="row border-bottom write-category">
                   <h4 className="type">지역별</h4>
