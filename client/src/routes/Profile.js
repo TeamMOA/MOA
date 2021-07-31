@@ -140,7 +140,7 @@ const contentStyle = {
 
 const customStyles = {
   height: '300px',
-  width: '100vw',
+  width: '95vw',
   bottom: '0%',
   top: '70%',
   borderRadius: "35px",
