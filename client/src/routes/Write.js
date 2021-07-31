@@ -95,6 +95,16 @@ class Write extends React.Component {
     const {region2, univ2, interest2, content} = this.state;
     // const formData = new FormData();
     // formData.append('images', this.state.files);
+    // await instance.post("/api/post", formData, {
+    //   headers: {
+    //     'Content-Type': 'multipart/form-data'
+    //   }
+    // }).then((res)=>{
+    //   console.log(res)
+    // }).catch((error)=>{
+    //   console.log(error)
+    // });
+
     console.log(region2);
     console.log(univ2);
     console.log(interest2);
