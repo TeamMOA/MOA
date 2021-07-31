@@ -120,13 +120,6 @@ class Profile extends React.Component {
                       <img className="slideImage" src={value.img}  alt="slideImage" width="312px" height="312px"></img>
                       <div className="feedContent">{value.content}</div>
                       <h3 className="slideUser">{slideUserInfo.join(" · ")}</h3>
-                      <div className="profileWrap">
-                        <div className="nameProfileProfile">
-                          <Image style={{flex:1, borderRadius:"50%", objectFit:'cover'}} width={50} height={50} src={profile_img} alt="profileImg"/>
-                          <div className="name">{value.nickname}</div>
-                        </div>
-                        <Like />
-                      </div>
                     </div>
                   );
                 })}
