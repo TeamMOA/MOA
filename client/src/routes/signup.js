@@ -15,7 +15,6 @@ class signup extends React.Component {
       }
     }
 
-
     postlogin = (value) => {
         alert(value);
     }
