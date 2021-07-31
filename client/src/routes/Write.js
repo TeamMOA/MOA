@@ -5,7 +5,6 @@ import {Input, Tag} from 'antd';
 import 'antd-mobile/dist/antd-mobile.css';
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
-import axios from 'axios';
 
 import addPhoto from '../assets/icons/addPhoto.png';
 import Center from '../assets/icons/Center.png';
@@ -16,17 +15,6 @@ import noImage from '../assets/images/noImage.png';
 
 const {TextArea} = Input;
 const { CheckableTag } = Tag;
-
-const contentStyle = {
-  height: '328px',
-  color: '#fff',
-  lineHeight: '160px',
-  textAlign: 'center',
-  background: '#333333',
-  borderRadius : '10px',
-};
-
-const data = []
 
 const categoriesList = [
   {
@@ -101,18 +89,13 @@ class Write extends React.Component {
   createPost = async() => {
     const {uid, nickname, region2, univ2, interest2, content, file} = this.state;
 
-    console.log(region2);
-    console.log(univ2);
-    console.log(interest2);
-    console.log(content);
-    console.log()
     let formData = new FormData();
     formData.append('uid', uid);
     formData.append('content', content);
     formData.append('nickname', nickname);
-    formData.append('region', region2.join('|'));
-    formData.append('univ', univ2.join('|'));
-    formData.append('interest', interest2.join('|'));
+    formData.append('region', region2.join(','));
+    formData.append('univ', univ2.join(','));
+    formData.append('interest', interest2.join(','));
     formData.append('images', file);
 
     await instance.post("/api/post", formData, {
@@ -125,23 +108,6 @@ class Write extends React.Component {
     }).catch((error)=>{
       console.log("axios error"+error);
     });
-
-    // await axios({
-    //   method : 'post',
-    //   url : 'http://localhost:5000/api/post',
-    //   data: formData,
-    //   headers:{"Content-Type":"multipart/form-data"},
-    // }).then((res)=>{
-    //   console.log(res.data)
-    //   if (res.data.success){
-    //     alert('업로드에 성공했습니다.');
-    //   }
-    // }).catch((error)=>{
-    //   console.log("axios error"+error);
-    // });
-
-    // console.log(this.state.file);
-    // console.log(this.state.previewURL);
   }
 
   // addTags=(categoryNum, value)=>{
@@ -155,9 +121,9 @@ class Write extends React.Component {
   // }
 
   handleChange(value, checked) {
-    const { region, region2, univ, univ2, interest, interest2, categoryNum } = this.state;
+    const { region, univ, interest, categoryNum } = this.state;
     console.log(checked);   
-    if (categoryNum == 0) {
+    if (categoryNum === 0) {
       const nextSelectedTags = checked ? [...region, value] : region.filter(t => t !== value);
       this.setState({ region: nextSelectedTags });
       this.setState({ region2: nextSelectedTags });
@@ -165,7 +131,7 @@ class Write extends React.Component {
       const nextSelectedTags = checked ? [...univ, value] : univ.filter(t => t !== value);
       this.setState({ univ: nextSelectedTags });
       this.setState({ univ2: nextSelectedTags });
-    } else if (categoryNum == 2){
+    } else if (categoryNum === 2){
       const nextSelectedTags = checked ? [...interest, value] : interest.filter(t => t !== value);
       this.setState({ interest: nextSelectedTags });
       this.setState({ interest2: nextSelectedTags });
@@ -173,7 +139,7 @@ class Write extends React.Component {
   }
 
   removeArray(value, index) {
-    const { region2, univ, univ2, interest, interest2, categoryNum } = this.state;
+    const { region2, univ2, interest2, } = this.state;
     if(index === 0) {
       const changedArray = region2.filter(t => t !== value);
       this.setState({region2: changedArray});
@@ -195,11 +161,11 @@ class Write extends React.Component {
 
   imgChange = () => {
     const { imgValue } = this.state;
-    if(imgValue==2) {
+    if(imgValue===2) {
       this.setState({imgValue:0});
-    } else if(imgValue==1){   
+    } else if(imgValue===1){   
       this.setState({imgValue:2});
-    } else if(imgValue==0) {   
+    } else if(imgValue===0) {   
       this.setState({imgValue:1});
     }
   }
@@ -225,15 +191,15 @@ class Write extends React.Component {
               <div className="imgArea" style={{backgroundImage: `url(${previewURL?previewURL:noImage})`, backgroundSize:'cover', backgroundPosition:'center center'}}>
                 <div className="choose">
                   <label htmlFor="input-file">
-                    <img src={addPhoto} width={18} height={18} style={{margin:'5px'}}></img>
+                    <img src={addPhoto} width={18} height={18} style={{margin:'5px'}} alt="addPhoto"></img>
                   </label>
-                  <img src={(imgValue==0)?(Center):(imgValue==1)?(left):(right)} width={18} height={18} style={{margin:'5px'}} onClick={this.imgChange}></img>
+                  <img src={(imgValue===0)?(Center):(imgValue===1)?(left):(right)} width={18} height={18} style={{margin:'5px'}} onClick={this.imgChange} alt="TextAlign"></img>
                 </div>
-                <div className="text" style={(imgValue==0)?({justifyContent:"center", textAlign:"center", fontSize:"30px"}):(imgValue==1)?({justifyContent:"flex-start", textAlign:"left", fontSize:"30px"}):({justifyContent:"flex-end", textAlign:"right", fontSize:"30px"})}>
+                <div className="text" style={(imgValue===0)?({justifyContent:"center", textAlign:"center", fontSize:"30px"}):(imgValue===1)?({justifyContent:"flex-start", textAlign:"left", fontSize:"30px"}):({justifyContent:"flex-end", textAlign:"right", fontSize:"30px"})}>
                   <div style={{alignSelf:"center"}}>
-                    {this.state.content.split('\n').map((line) => {
+                    {this.state.content.split('\n').map((line, index) => {
                       return (
-                        <span>
+                        <span key={index}>
                           {line}
                           <br />
                         </span>
@@ -247,7 +213,7 @@ class Write extends React.Component {
                 <h2 style={{marginBottom:'20px'}}>태그 붙이기</h2>
                 <div className="row border-bottom write-category">
                   <h4 className="type">지역별</h4>
-                  <div className="tags row" onClick={()=>{this.show(0);}}>{region.length==0?'눌러서 선택하세요':region.map((value, index)=>{
+                  <div className="tags row" onClick={()=>{this.show(0);}}>{region.length===0?'눌러서 선택하세요':region.map((value, index)=>{
                     return(
                       <Tag key={index} closable onClose={()=>{this.removeArray(value, 0);}}>
                         {value}
@@ -257,7 +223,7 @@ class Write extends React.Component {
                 </div>
                 <div className="row border-bottom write-category">
                   <h4 className="type">대학별</h4>
-                  <div className="tags row" onClick={()=>{this.show(1);}}>{univ.length==0?'눌러서 선택하세요':univ.map((value, index)=>{
+                  <div className="tags row" onClick={()=>{this.show(1);}}>{univ.length===0?'눌러서 선택하세요':univ.map((value, index)=>{
                     return(
                       <Tag key={index} closable onClose={()=>{this.removeArray(value, 1);}}>
                         {value}
@@ -267,7 +233,7 @@ class Write extends React.Component {
                 </div>
                 <div className="row write-category">
                   <h4 className="type">관심사별</h4>
-                  <div className="tags row" onClick={()=>{this.show(2);}}>{interest.length==0?'눌러서 선택하세요':interest.map((value, index)=>{
+                  <div className="tags row" onClick={()=>{this.show(2);}}>{interest.length===0?'눌러서 선택하세요':interest.map((value, index)=>{
                     return(
                       <Tag key={index} closable onClose={()=>{this.removeArray(value, 2);}}>
                         {value}
@@ -277,7 +243,7 @@ class Write extends React.Component {
                 </div>
               </div>
               <div style={{textAlign:'right'}} >
-                <img src={sendBtn} onClick={()=>{this.createPost()}}></img>
+                <img src={sendBtn} onClick={()=>{this.createPost()}} alt="sendBtn"></img>
               </div>
             </div>
           </div>
@@ -315,57 +281,6 @@ const customStyles = {
   top: '70%',
   borderRadius: "35px",
   backgroundColor:"#fcbfc3",
-
 };
-
-class Square extends React.Component{
-  constructor(props){
-  super(props);
-  }
-  render(){
-    const style ={
-      position:"absolute",
-      top:"110px",
-      left:"20px",
-      width:"374px",
-      height:"818px",
-      'background-color':"white",
-      display:"inline-block",
-      'box-shadow': "0px 0px 5px #000",
-      'border-radius': "20px",
-      'z-index': "1"
-    };
-  
-    return(
-        <div style ={style}>
-      </div>
-    )
-  }  
-}
-
-class ImageBox extends React.Component{
-  constructor(props){
-  super(props);
-}
-render(){
-  const style ={
-    position:"absolute",
-    top:"160px",
-    left:"45px",
-    width:"324px",
-    height:"324px",
-    'background-color':"grey",
-    display:"inline-block",
-    'border-radius': "8px",
-    'z-index': "2",
-    opacity: "0.5"
-  };
-  
-  return(
-      <div style ={style}>
-     </div>
-  )
-}  
-}
 
 export default Write;

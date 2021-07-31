@@ -21,9 +21,9 @@ class Like extends Component {
             onClick={() => this.toggle()}
           >
             {this.state.liked === false ? (
-                <img src={unlike}></img>
+                <img src={unlike} alt="unlike"></img>
             ) : (
-                <img src={like}></img>
+                <img src={like} alt="like"></img>
             )}
           </div>
         </center>

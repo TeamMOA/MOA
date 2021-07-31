@@ -8,9 +8,9 @@ import feedUniv from '../assets/icons/feedUniv.png';
 import feedInterest from '../assets/icons/feedInterest.png';
 import 'react-slideshow-image/dist/styles.css'
 
-const region = ["경기", "서울", "충청", "강원", "전라", "경상", "제주"];
+const region = ["경기", "서울", "인천", "충청", "강원", "전라", "경상", "제주"];
 const univ = ["서울대", "숭실대", "고려대", "홍익대", "해양대", "한국대", "서강대"];
-const interest = ["미술", "게암", "운동", "취업", "공부", "뜨개질"];
+const interest = ["미술", "게임", "운동", "여행", "공부", "음식", "쇼핑", "사진찍기"];
 
 
 function onChange(a, b, c) {
@@ -50,57 +50,6 @@ class Main extends React.Component {
     this.setColor = this.setColor.bind(this);
   }
   
-
-
-  /*posts에 불러오기*/
-  componentDidMount = async() => {
-    await instance.get("/api/post")
-      .then((res) => {
-        console.log(res.data);
-        if(res.data.success){
-          this.setState({posts:res.data.posts});
-        }
-      }).catch((error)=>{
-        console.log(error);
-      })
-
-    console.log(this.state.posts);
-  }
-
-  getPostFilter = async() => {
-    const data = {
-      region : this.state.region,
-      univ : this.state.univ,
-      interest : this.state.interest
-    }
-    
-    await instance.post("/api/post/filter", data)
-    .then((res)=>{
-      console.log(res.data);
-      if(res.data.success){
-        this.setState({posts:res.data.posts});
-        console.log(this.state.posts);
-      }
-    }).catch((err)=>{
-      console.log(err);
-    })
-  }
-
-  handleRegionFilterChange = async(value) => {
-    await this.setState({region:value});
-    this.getPostFilter();
-  }
-  
-  handleUnivFilterChange = async(value) => {
-    await this.setState({univ:value});
-    this.getPostFilter();
-  }
-
-  handleInterestFilterChange = async(value) => {
-    await this.setState({interest:value});
-    this.getPostFilter();
-  }
-
   setRegion() {
     this.setState({
       headTitle: "지역별 피드"
@@ -141,6 +90,56 @@ class Main extends React.Component {
     this.setState({
       upDown: '-122px'
     })
+  }
+
+
+  /*posts에 불러오기*/
+  componentDidMount = async() => {
+    await instance.get("/api/post")
+      .then((res) => {
+        console.log(res.data);
+        if(res.data.success){
+          this.setState({posts:res.data.posts});
+        }
+      }).catch((error)=>{
+        console.log(error);
+      })
+
+    console.log(this.state.posts);
+  }
+
+  getPostFilter = async() => {
+    const data = {
+      region : this.state.region,
+      univ : this.state.univ,
+      interest : this.state.interest
+    }
+    
+    await instance.post("/api/post/filter", data)
+    .then((res)=>{
+      console.log(res.data);
+      if(res.data.success){
+        this.setState({posts:res.data.posts});
+        console.log(this.state.posts);
+      }
+    }).catch((err)=>{
+      console.log(err);
+    })
+  }
+
+  handleRegionFilterChange = async(value) => {
+    await this.setState({region: value, univ: "", interest: ""});
+    this.getPostFilter();
+  }
+  
+  handleUnivFilterChange = async(value) => {
+    await this.setState({region: "", univ: value, interest: ""});
+    this.getPostFilter();
+  }
+
+  handleInterestFilterChange = async(value) => {
+    await this.setState({region: "", univ: "", interest: value});
+    this.getPostFilter();
   }
 
   // test용!!!
@@ -186,18 +185,19 @@ class Main extends React.Component {
               </div>
               <div className="categoryButtonWrap">
               <Popover placement="bottom" content={regionContent} trigger="click">
-                <Button className="categoryButton" onClick={this.setRegion, this.feedRegionIcon, this.upDown}>지역별</Button>
+              {/*  */}
+                <Button className="categoryButton" onClick={()=>{this.setRegion(); this.feedRegionIcon(); this.upDown();}}>지역별</Button>
               </Popover>
               <Popover placement="bottom" content={univContent} trigger="click">
-                <Button className="categoryButton" onClick={this.setUniv, this.feedUnivIcon, this.upDown}>학교별</Button>
+                <Button className="categoryButton" onClick={()=>{this.setUniv(); this.feedUnivIcon(); this.upDown();}}>학교별</Button>
               </Popover>
               <Popover placement="bottom" content={interestContent} trigger="click">
-                <Button className="categoryButton" onClick={this.setInterest, this.feedInterestIcon, this.upDown}>관심사별</Button>
+                <Button className="categoryButton" onClick={()=>{this.setInterest(); this.feedInterestIcon(); this.upDown();}}>관심사별</Button>
               </Popover>
             </div>
             <div className="feedWrap" style={{bottom: this.state.upDown}}>
               <div className="feedTitle">
-                <img className="feedLogo" src={this.state.feedIcon} width="18px" height="16px"></img>
+                <img className="feedLogo" src={this.state.feedIcon} width="18px" height="16px" alt="FeedLogo"></img>
                 <h2 className="recentFeed">{this.state.headTitle}</h2>
                 <h3 className="postNum">{this.state.posts.length}개</h3>
               </div>
@@ -208,12 +208,12 @@ class Main extends React.Component {
                   var splitedUniv = value.univ.split(',')
                   return (
                     <div width="328px" key={index}>
-                      <img className="slideImage" src={value.img} width="328px" height="328px"></img>
+                      <img className="slideImage" src={value.img} width="328px" height="328px" alt="slideImage"></img>
                       <div className="feedContent">{value.content}</div>
                       <h3 className="slideUser">{value.nickname} · {splitedRegion[0]} · {splitedUniv[0]}</h3>
                       <div className="feedProfileWrap">
                         <div className="nameProfile">
-                          <Image style={{flex:1, borderRadius:"50%", objectFit:'cover'}} width={50} height={50} src={value.profileImg}/>
+                          <Image style={{flex:1, borderRadius:"50%", objectFit:'cover'}} width={50} height={50} src={value.profileImg} alt="profileImg"/>
                           <div className="name">{value.nickname}</div>
                         </div>
                         <Like />

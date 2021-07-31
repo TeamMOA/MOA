@@ -1,5 +1,5 @@
 import React from 'react';
-import {Menu, Navbar} from '../components';
+import {Navbar} from '../components';
 
 class setting extends React.Component {
   
