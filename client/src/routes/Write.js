@@ -170,7 +170,7 @@ class Write extends React.Component {
           <div className="content">
             <div className="write col-center" style={{height:'100%'}}>
               <input type="file" accept="image/*" id="input-file" onChange={this.handleFileOnChange} style={{display:'none'}}/>    
-              <div className="imgArea" style={{marginBottom:'20px', backgroundImage: `url(${previewURL?previewURL:noImage})`, backgroundSize:'cover', backgroundPosition:'center center'}}>
+              <div className="imgArea" style={{backgroundImage: `url(${previewURL?previewURL:noImage})`, backgroundSize:'cover', backgroundPosition:'center center'}}>
                 <div className="choose">
                   <label htmlFor="input-file">
                     <img src={addPhoto} width={18} height={18} style={{margin:'5px'}}></img>
@@ -215,7 +215,9 @@ class Write extends React.Component {
                   </div>
                 </div>
               </div>
-              <div style={{textAlign:'right'}}onClick={()=>{this.createPost()}}>보내기</div>
+              <div style={{textAlign:'right'}}onClick={()=>{this.createPost()}}>
+                <img src={sendBtn}></img>
+              </div>
             </div>
           </div>
           <Rodal customStyles={customStyles} visible={this.state.visible} onClose={()=>{this.hide()}}>

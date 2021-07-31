@@ -447,8 +447,9 @@ input.interest{
   background-color:#333;
 }
 
-.content .imgArea .ant-input {
+textarea.ant-input {
   border-width: 0px;
+  margin:10px;
   font-family: 'Noto Sans KR',sans-serif;
 }
 
@@ -463,9 +464,12 @@ input.interest{
 }
 
 .choose{
-  float:right;
-  margin-right:5px;
-  margin-top:5px;
+  text-align:right;
+  padding-right:5px;
+  padding-top:5px;
+  background-color:#333;
+  opacity:0.5;
+  border-width:0px;
 }
 
 .border-bottom{
@@ -475,7 +479,7 @@ input.interest{
 }
 
 .write-category{
-  padding:15px;
+  padding:10px;
 }
 
 .write-category .type{
