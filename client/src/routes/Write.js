@@ -200,7 +200,7 @@ class Write extends React.Component {
                   <img src={Center} width={18} height={18} style={{margin:'5px'}} onClick={()=>{alert('center')}}></img>
                 </div>
                 <div className="text">
-                  <div style={{alignSelf:'center'}}>{this.state.content}</div>  
+                  <div style={{alignSelf:'center'}}>{this.state.content}</div>
                 </div>
               </div>
               <div style={{flex:'1'}}>

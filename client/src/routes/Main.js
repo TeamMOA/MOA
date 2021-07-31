@@ -91,6 +91,11 @@ class Main extends React.Component {
     })
   }
 
+  handleFilterChange = async(value) => {
+    await this.setState({region:value});
+    this.getPostFilter();
+  }
+
   setRegion() {
     this.setState({
       headTitle: "지역별 피드"
@@ -149,7 +154,7 @@ class Main extends React.Component {
     // style={{color: this.state.color, backgroundColor: this.state.backgroundColor}} onClick={this.setColor}
 
     const regionContent = () => {
-      const result = region.map((value, index)=>{return (<Button key={index}>{value}</Button>);})
+      const result = region.map((value, index)=>{return (<Button key={index} onClick={()=>{this.handleFilterChange(value)}}>{value}</Button>);})
       return <div>{result}</div>
     };
 
