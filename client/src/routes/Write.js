@@ -111,6 +111,18 @@ class Write extends React.Component {
     console.log(content);
     console.log(this.state.file);
     console.log(this.state.previewURL);
+
+    const data = {
+      region : "서울",
+      interest : "여행"
+    }
+    await instance.post("/api/post/filter", data)
+    .then((res)=>{
+      console.log(res.data);
+    }).catch((err)=>{
+      console.log(err);
+    })
+
   }
 
   // addTags=(categoryNum, value)=>{
