@@ -104,6 +104,7 @@ class Write extends React.Component {
       console.log(res.data)
       if (res.data.success){
         alert('업로드에 성공했습니다.');
+        this.props.history.push('/');
       }
     }).catch((error)=>{
       console.log("axios error"+error);
