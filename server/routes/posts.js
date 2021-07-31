@@ -13,10 +13,14 @@ var storage = multer.diskStorage({
 // var upload = multer({ dest: 'uploadedFiles/' }); // 3-1
 var upload = multer({ storage: storage }); // 3-2
 
+router.use(express.urlencoded({ extended: false }));
+router.use(express.json());
+
 /* GET users listing. */
 router.get('/', posts.getPosts);
 router.get('/:pid', posts.getPostId);
 router.post('/', upload.single('images'), posts.createPost);
+router.post('/filter', posts.getPostFilter);
 // router.put('/:pid', upload.single('images'), post.updatePost);
 router.delete('/:pid', posts.deletePost);
 
