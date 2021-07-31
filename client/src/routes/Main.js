@@ -35,6 +35,8 @@ class Main extends React.Component {
       color: '#FA959B',
       backgroundColor: '#ffffff',
       upDown: '-52px',
+      filteredPost: [],
+      filterData = ''
     }
     this.setRegion = this.setRegion.bind(this);
     this.setUniv = this.setUniv.bind(this);
@@ -50,6 +52,8 @@ class Main extends React.Component {
   }
   
 
+
+  /*posts에 불러오기*/
   componentDidMount = async() => {
     await instance.get("/api/post")
       .then((res) => {
@@ -62,6 +66,19 @@ class Main extends React.Component {
       })
 
     console.log(this.state.posts);
+
+    const data = this.state.
+    
+    await instance.post("/api/post/filter", data)
+    .then((res)=>{
+      console.log(res.data);
+      if(res.data.success){
+        this.setState({filteredPost:res.data.posts});
+        console.log(this.state.filteredPost);
+      }
+    }).catch((err)=>{
+      console.log(err);
+    })
   }
 
   setRegion() {
@@ -135,6 +152,7 @@ class Main extends React.Component {
       const result = this.state.interest.map((value, index)=>{return (<Button key="index" >{value}</Button>);})
       return <div>{result}</div>
     };
+    
     
     return (
       <div className="wrap">
