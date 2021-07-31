@@ -67,7 +67,9 @@ class Main extends React.Component {
 
     console.log(this.state.posts);
 
-    const data = this.state.
+    const data={
+      region : '서울'
+    };
     
     await instance.post("/api/post/filter", data)
     .then((res)=>{
