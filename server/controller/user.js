@@ -56,13 +56,14 @@ async function signUp(req, res) {
             const userID = req.body.userID;
             const nickname = req.body.nickname;
             const secret = await security.security(userPw);
-
+            const profileImg = "http://roothyo.com:5000/images/no-profileImg.png";
             let signUp = await db.query('insert into users set ?', {
                 email : userEmail,
                 userID : userID,
                 password : secret.pw,
                 userKey : secret.pwKey,
                 nickname : nickname,
+                profileImg : profileImg,
             })
             if(signUp.errno > 0) {
                 res.status(httpStatus.NOT_FOUND).send({
