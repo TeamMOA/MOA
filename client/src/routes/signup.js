@@ -51,14 +51,13 @@ class signup extends React.Component {
 
     postSignUp = async() => {
         await instance.post("/api/user/signUp", {
-            email : this.state.email,
+            email : this.state.mail,
             userID : this.state.id,
             userPw : this.state.pwd,
-            nickname : this.state.nickname
+            nickname : this.state.name
         }).then((res)=>{
             console.log(res.data);
             alert('회원가입에 성공하였습니다!');
-            
         }).catch((error)=>{
             console.log(error);
             alert('회원가입에 실패하였습니다!');
