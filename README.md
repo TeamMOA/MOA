@@ -247,7 +247,7 @@ tsconfig.json
 
 ## <img width=3% img src="https://user-images.githubusercontent.com/63224278/124635517-7ef5ed00-dec2-11eb-9a42-6d6d5cc72dce.png" /> Github mangement
 <details>
-<summary> Charo-Server Gitflow </summary>
+<summary> Gitflow </summary>
 <div markdown="1">       
 
 
