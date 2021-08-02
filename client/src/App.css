@@ -75,9 +75,8 @@ a:hover{color:#000000;}
   width : 100%;
   height : fit-content;
   text-align: left;
-  margin-top: 30px;
+  margin-top: 2vh;
   margin-left: 36px;
-  margin-bottom: 10px;
 }
 
 .header h1{
@@ -85,6 +84,7 @@ a:hover{color:#000000;}
   font-size: 36px;
   font-weight: bold;
   color: white;
+  margin-bottom:15px;
 }
 
 .header h4{
@@ -407,9 +407,19 @@ input.interest{
   color : #FFFFFF;
 }
 
+.btn-pink:active {
+  background-color: #FFFFFF;
+  color : #FA959B;
+}
+
 .btn-white {
   background-color: #FFFFFF;
   color : #FA959B;
+}
+
+.btn-white:active{
+  background-color: #FA959B;
+  color : #FFFFFF;
 }
 
 .input {
@@ -477,34 +487,38 @@ input.interest{
 /* 작성 Write Screen*/
 
 .content .imgArea {
-  width:328px;
-  height:328px;
+  width:80vw;
+  height:80vw;
   background-color:#333;
+  align-self:center;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+}
+
+
+.choose{
+  position:absolute;
+  top:0px;
+  right:0px;
+  text-align:right;
+  /* background-color:#333;
+  opacity:0.5; */
+  z-index:100;
 }
 
 textarea.ant-input {
   border-width: 0px;
-  margin:10px;
+  width:100%;
+  height:50px;
   font-family: 'Noto Sans KR',sans-serif;
 }
 
 .content .imgArea .text{
-  background-color:#333;
   color:#ffffff;
-  width:100%;
-  height:290px;
+  flex:1;
   display:flex;
   justify-content:center;
-  opacity:0.5;
-}
-
-.choose{
-  text-align:right;
-  padding-right:5px;
-  padding-top:5px;
-  background-color:#333;
-  opacity:0.5;
-  border-width:0px;
 }
 
 .border-bottom{
@@ -588,7 +602,7 @@ img{
   flex:1;
   width: 80vw;
   padding : 10px;
-  margin-top: 220px;
+  margin-top: 30vh;
 }
 
 .signupText h4 {

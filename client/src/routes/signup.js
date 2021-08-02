@@ -77,39 +77,39 @@ class signup extends React.Component {
                             <h4>닉네임</h4>
                         </div>
                         <Input className="signupBoxContainer" id="name" value={this.state.name} onChange={(e)=>{this.setState({name:e.target.value})}} placeholder="닉네임을 입력하세요" /> 
-                        <div style={{marginTop:'40px'}}>
+                        <div style={{marginTop:'10px'}}>
                             <div className="signupText">
                                 <h4>아이디</h4>
                             </div>
                                 <Input className="signupBoxContainer" value={this.state.id} onChange={(e)=>{this.setState({id:e.target.value})}} id="id" placeholder="아이디를 입력하세요" />                               
                         
-                        <div style={{marginTop:'40px'}}>
+                        <div style={{marginTop:'10px'}}>
                             <div className="signupText">
                                 <h4>이메일</h4>
                             </div>
                                 <Input className="signupBoxContainer" value={this.state.mail} onChange={(e)=>{this.setState({mail:e.target.value})}} id="mail" placeholder="이메일을 입력하세요" />                               
                         </div>
                         <div>
-                        <div style={{marginTop:'40px'}}>
-                            <div className="signupText">
-                                <h4>비밀번호</h4>
+                            <div style={{marginTop:'10px'}}>
+                                <div className="signupText">
+                                    <h4>비밀번호</h4>
+                                </div>
+                                    <Input type={"password"} className="signupBoxContainer" value={this.state.pwd} onChange={(e)=>{this.setState({pwd:e.target.value})}} id="pwd" placeholder="비밀번호를 입력하세요" />
                             </div>
-                                <Input type={"password"} className="signupBoxContainer" value={this.state.pwd} onChange={(e)=>{this.setState({pwd:e.target.value})}} id="pwd" placeholder="비밀번호를 입력하세요" />
-                        </div>
                         </div>
                         <div>
-                        <div style={{marginTop:'20px'}}>
-                            <div className="signupText">
-                                <h4>비밀번호 확인</h4>
+                            <div style={{marginTop:'10px'}}>
+                                <div className="signupText">
+                                    <h4>비밀번호 확인</h4>
+                                </div>
+                                <Input type={"password"} className="signupBoxContainer" value={this.state.checkPwd} onChange={(e)=>{this.setState({checkPwd:e.target.value})}} id="checkPwd" placeholder="확인을 위해 비밀번호를 다시 입력하세요" />
                             </div>
-                            <Input type={"password"} className="signupBoxContainer" value={this.state.checkPwd} onChange={(e)=>{this.setState({checkPwd:e.target.value})}} id="checkPwd" placeholder="확인을 위해 비밀번호를 다시 입력하세요" />
                         </div>
-                        </div>
-                    </div>
-                    </div>
-                        <div onClick={this.postSignUp} className="btn btn-lg btn-white" style={{marginBottom:'50px'}}>
+                        <div onClick={this.postSignUp} className="btn btn-lg btn-white" style={{width:'100%', marginTop:'10px'}}>
                             회원가입
                         </div>
+                    </div>
+                    </div>
                 </div>
             </div>
             </div>

@@ -187,8 +187,7 @@ class Write extends React.Component {
             <h1>작성하기</h1>
           </div>
           <div className="content">
-            <div className="write col-center" style={{height:'100%'}}>
-              <input type="file" accept="image/*" id="input-file" onChange={this.handleFileOnChange} style={{display:'none'}}/>    
+            <div className="write col col-center" style={{height:'100%', marginBottom:'30px'}}>
               <div className="imgArea" style={{backgroundImage: `url(${previewURL?previewURL:noImage})`, backgroundSize:'cover', backgroundPosition:'center center'}}>
                 <div className="choose">
                   <label htmlFor="input-file">
@@ -209,8 +208,8 @@ class Write extends React.Component {
                   </div>
                 </div>
               </div>
-              <div style={{flex:'1'}}>
-                <TextArea value={content} onChange={(e)=>{this.setState({content:e.target.value})}} style={{width:"300px", height:"50px", textAlign:'left', borderRadius:"10px", border:"solid 1px black"}} rows={3} placeholder="텍스트를 입력하세요"/>
+              <TextArea value={content} onChange={(e)=>{this.setState({content:e.target.value})}} style={{textAlign:'left', border:"1px solid #999999", borderRadius:"10px", marginBottom:'10px'}} rows={3} placeholder="텍스트를 입력하세요"/>
+              <div>
                 <h2 style={{marginBottom:'20px'}}>태그 붙이기</h2>
                 <div className="row border-bottom write-category">
                   <h4 className="type">지역별</h4>
@@ -268,6 +267,7 @@ class Write extends React.Component {
             })}
           </Rodal>
         </div>
+        <input type="file" accept="image/*" id="input-file" onChange={this.handleFileOnChange} style={{display:'none'}}/>
         <Navbar />
       </div>
     );
