@@ -56,7 +56,8 @@ a:hover{color:#000000;}
 
 .wrap {
   display:flex;
-  overflow:hidden;
+  width:100%;
+  overflow-x:hidden;
 }
 
 .wrap .inner-box{

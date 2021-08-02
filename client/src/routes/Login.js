@@ -36,16 +36,16 @@ const Login = () => {
     <div>
       <div className="wrap" >
         <div className="inner-box login-background">
-          <div className="center" style={{marginTop:"366px"}}>
+          <div className="center" style={{marginTop:"40vh"}}>
             <div className="logincontent">
               <h3>이메일</h3>
-              <Input className="input input-lg" style={{margin:'5px'}} value={email} onChange={(e)=>{setEmail(e.target.value)}} id="mail" placeholder="이메일을 입력하세요" />
+              <Input className="input input-lg" style={{marginTop:'5px'}} value={email} onChange={(e)=>{setEmail(e.target.value)}} id="mail" placeholder="이메일을 입력하세요" />
             </div>
             <div className="logincontent">
               <h3>비밀번호</h3>
-              <Input type={"password"} className="input input-lg" style={{margin:'5px'}} value={userPw} onChange={(e)=>{setPassword(e.target.value)}} id="pwd" placeholder="비밀번호를 입력하세요" />
+              <Input type={"password"} className="input input-lg" style={{marginTop:'5px'}} value={userPw} onChange={(e)=>{setPassword(e.target.value)}} id="pwd" placeholder="비밀번호를 입력하세요" />
             </div>
-            <div className="btn btn-lg btn-pink" style={{marginTop:'100px', marginBottom:'10px'}} onClick={()=>{soglelogin()}}>
+            <div className="btn btn-lg btn-pink" style={{marginTop:'5vh', marginBottom:'10px'}} onClick={()=>{soglelogin()}}>
               소글이로 로그인 하기
             </div>
             <div className="btn btn-lg btn-white" style={{marginBottom:'10px'}} onClick={()=>{postlogin()}}>
