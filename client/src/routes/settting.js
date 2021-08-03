@@ -25,7 +25,17 @@ class setting extends React.Component {
                   <input type="button" class="img-button"></input>
                   <hr width="320px" style={{marginTop:"5px", borderTop:"solid 1px lightgray"}}></hr>
                   <h2 className="settingText">SNS 연동하기</h2>    
-                  <input type="button" class="img-button"></input>          
+                  <input type="button" class="img-button"></input>
+                  <hr width="320px" style={{marginTop:"5px", borderTop:"solid 1px lightgray"}}></hr>
+                  <div onClick={()=>{
+                    alert('로그아웃 되었습니다.');
+                    window.localStorage.clear();
+                    this.props.history.push('/');
+                  }}>
+                    <h2 className="settingText">로그아웃</h2>    
+                    <input type="button" class="img-button"></input>  
+                  </div>
+                         
             </div>
             <div className="profile">
                   <h1 style={{fontSize:"22px"}}>시스템</h1>      

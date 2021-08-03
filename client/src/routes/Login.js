@@ -45,9 +45,9 @@ const Login = () => {
               <h3>비밀번호</h3>
               <Input type={"password"} className="input input-lg" style={{marginTop:'5px'}} value={userPw} onChange={(e)=>{setPassword(e.target.value)}} id="pwd" placeholder="비밀번호를 입력하세요" />
             </div>
-            <div className="btn btn-lg btn-pink" style={{marginTop:'5vh', marginBottom:'10px'}} onClick={()=>{soglelogin()}}>
+            {/* <div className="btn btn-lg btn-pink" style={{marginTop:'5vh', marginBottom:'10px'}} onClick={()=>{soglelogin()}}>
               소글이로 로그인 하기
-            </div>
+            </div> */}
             <div className="btn btn-lg btn-white" style={{marginBottom:'10px'}} onClick={()=>{postlogin()}}>
               로그인 하기
             </div>
