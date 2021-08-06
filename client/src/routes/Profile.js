@@ -19,6 +19,7 @@ class Profile extends React.Component {
       profile_img : '',
       posts : [],
       visible : false,
+      isEdited : false,
     }
   }
 
@@ -26,7 +27,6 @@ class Profile extends React.Component {
     await instance.get("/api/profile/detail/"+this.state.uid)
       .then((res) => {
         if (res.data.success){
-          console.log(res.data);
           const userInfo = res.data.userInfo[0];
           const posts = res.data.userPost;
           this.setState({nickname:userInfo.nickname, introduce:userInfo.introduce, profile_img:userInfo.profileImg, posts:posts});
@@ -36,9 +36,9 @@ class Profile extends React.Component {
       })
   }
 
-  configIntroduction = () => {
-    console.log("1");
-    this.setState({ visible: true });
+  updateProfile = async() => {
+    //REST API 
+    this.setState({isEdited:false});
   }
 
   show=()=>{
@@ -50,7 +50,7 @@ class Profile extends React.Component {
   }
 
   render(){
-    const {nickname, introduce, profile_img} = this.state;
+    const {nickname, introduce, profile_img, isEdited} = this.state;
     return (
       <div className="wrap" >
         <div className="inner-box profile-background">
@@ -81,9 +81,11 @@ class Profile extends React.Component {
               </div>
             </div>
             <div className="profile">
-              <h2 className="settingTextProfile">자기소개</h2>
-              <input type="button" class="img-buttonProfile" onClick={this.configIntroduction}></input>
-              <h4 style={IntoduceStyle}>{introduce}</h4>
+              <div className="row space-between">
+                <h2 className="settingTextProfile">자기소개</h2>
+                {isEdited?<button className="btn btn-sm btn-white" onClick={()=>{this.updateProfile();}}>수정하기</button>:<input type="button" class="img-buttonProfile" onClick={()=>{this.setState({isEdited:true});}}></input>}
+              </div>
+              {isEdited?<TextArea value={introduce} onChange={(e)=>{this.setState({introduce:e.target.value})}} style={{width:"350px", height:"50px", textAlign:'left', borderRadius:"10px", border:"solid 1px pink"}} rows={3} placeholder="자기소개를 수정하세요"/>:<h4 style={IntoduceStyle}>{introduce}</h4>}
             </div>
             <div className="profile">
               <h2>최근 올린 피드</h2>

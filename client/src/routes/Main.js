@@ -152,17 +152,17 @@ class Main extends React.Component {
 
     const regionContent = () => {
       const result = region.map((value, index)=>{return (<Button key={index} onClick={()=>{this.handleRegionFilterChange(value)}}>{value}</Button>);})
-      return <div>{result}</div>
+      return <div style={{backgroundColor:'#FA959B',}}>{result}</div>
     };
 
     const univContent = () => {
       const result = univ.map((value, index)=>{return (<Button key={index} onClick={()=>{this.handleUnivFilterChange(value)}}>{value}</Button>);})
-      return <div>{result}</div>
+      return <div style={{backgroundColor:'#FA959B',}}>{result}</div>
     };
 
     const interestContent = () => {
       const result = interest.map((value, index)=>{return (<Button key={index} onClick={()=>{this.handleInterestFilterChange(value)}}>{value}</Button>);})
-      return <div>{result}</div>
+      return <div style={{backgroundColor:'#FA959B',}}>{result}</div>
     };
     
     
@@ -170,81 +170,79 @@ class Main extends React.Component {
       <div className="wrap">
           <div className="inner-box main-background">
             <div className="header">
-              <div className="textHeader">
-                <h1>모아보기</h1>
-                <h4>카테고리를 선택하여 사람들과 만나봅시다!</h4>
-              </div>
-              {/* 클릭되면 폰트 색 바뀌게  */}
-              </div>
+              <h1>모아보기</h1>
+              <h4>카테고리를 선택하여 사람들과 만나봅시다!</h4>
               <div className="categoryButtonWrap">
-              <Popover placement="bottom" content={regionContent} trigger="click">
-              {/*  */}
-                <Button className="categoryButton" onClick={()=>{this.setRegion(); this.feedRegionIcon(); this.upDown();}}>지역별</Button>
-              </Popover>
-              <Popover placement="bottom" content={univContent} trigger="click">
-                <Button className="categoryButton" onClick={()=>{this.setUniv(); this.feedUnivIcon(); this.upDown();}}>학교별</Button>
-              </Popover>
-              <Popover placement="bottom" content={interestContent} trigger="click">
-                <Button className="categoryButton" onClick={()=>{this.setInterest(); this.feedInterestIcon(); this.upDown();}}>관심사별</Button>
-              </Popover>
-            </div>
-            <div className="feedWrap" style={{bottom: this.state.upDown}}>
-              <div className="feedTitle">
-                <img className="feedLogo" src={this.state.feedIcon} width="18px" height="16px" alt="FeedLogo"></img>
-                <h2 className="recentFeed">{this.state.headTitle}</h2>
-                <h3 className="postNum">{this.state.posts.length}개</h3>
+                <Popover placement="bottom" content={regionContent} trigger="click">
+                {/*  */}
+                  <Button className="categoryButton" onClick={()=>{this.setRegion(); this.feedRegionIcon(); this.upDown();}}>지역별</Button>
+                </Popover>
+                <Popover placement="bottom" content={univContent} trigger="click">
+                  <Button className="categoryButton" onClick={()=>{this.setUniv(); this.feedUnivIcon(); this.upDown();}}>학교별</Button>
+                </Popover>
+                <Popover placement="bottom" content={interestContent} trigger="click">
+                  <Button className="categoryButton" onClick={()=>{this.setInterest(); this.feedInterestIcon(); this.upDown();}}>관심사별</Button>
+                </Popover>
               </div>
-              <Carousel autoplay autoplaySpeed={5000}>
-                {/* {this.state.posts.map((value, index)=>{ */}
-                {this.state.posts.map((value, index)=>{
+            </div>
+              
+              <div className="content" style={{marginTop:"20px"}}>
+                <div className="feedTitle">
+                  <img className="feedLogo" src={this.state.feedIcon} width="18px" height="16px" alt="FeedLogo"></img>
+                  <h2 className="recentFeed">{this.state.headTitle}</h2>
+                  <h3 className="postNum">{this.state.posts.length}개</h3>
+                </div>
+                <Carousel autoplay autoplaySpeed={5000}>
+                  {/* {this.state.posts.map((value, index)=>{ */}
+                  {this.state.posts.map((value, index)=>{
 
-                  var splitedRegion = ''
-                  var splitedUniv = ''
-                  var splitedInterest = ''
+                    var splitedRegion = ''
+                    var splitedUniv = ''
+                    var splitedInterest = ''
 
-                  const slideUserInfo = []
-                  
-                  if (value.region){
-                    splitedRegion = value.region.split(',')
-                    slideUserInfo.push(splitedRegion[0])
-                  }
-                  
-                  if (value.univ){
-                    splitedUniv = value.univ.split(',')
-                    slideUserInfo.push(splitedUniv[0])
-                  }
+                    const slideUserInfo = []
+                    
+                    if (value.region){
+                      splitedRegion = value.region.split(',')
+                      slideUserInfo.push(splitedRegion[0])
+                    }
+                    
+                    if (value.univ){
+                      splitedUniv = value.univ.split(',')
+                      slideUserInfo.push(splitedUniv[0])
+                    }
 
-                  if (value.interest){
-                    splitedInterest = value.interest.split(',')
-                    slideUserInfo.push(splitedInterest[0])
-                  }
-                  
-                  // sliderUserResult = slideUserInfo.join(' · ')
+                    if (value.interest){
+                      splitedInterest = value.interest.split(',')
+                      slideUserInfo.push(splitedInterest[0])
+                    }
+                    
+                    // sliderUserResult = slideUserInfo.join(' · ')
 
-                  return (
-                    <div width="328px" key={index}>
-                      <img className="slideImage" src={value.img} width="328px" height="328px" alt="slideImage"></img>
-                      <div className="feedContent">{value.content}</div>
-                      <h3 className="slideUser">{slideUserInfo.join(" · ")}</h3>
-                      <div className="feedProfileWrap">
-                        <div className="nameProfile">
-                          <Image style={{flex:1, borderRadius:"50%", objectFit:'cover'}} width={50} height={50} src={value.profileImg} alt="profileImg"/>
-                          <div className="name">{value.nickname}</div>
+                    return (
+                      <div width="328px" key={index}>
+                        <img className="slideImage" src={value.img} width="328px" height="328px" alt="slideImage"></img>
+                        <div className="feedContent">{value.content}</div>
+                        <h3 className="slideUser">{slideUserInfo.join(" · ")}</h3>
+                        <div className="feedProfileWrap">
+                          <div className="nameProfile">
+                            <Image style={{flex:1, borderRadius:"50%", objectFit:'cover'}} width={50} height={50} src={value.profileImg} alt="profileImg"/>
+                            <div className="name">{value.nickname}</div>
+                          </div>
+                          <Like />
                         </div>
-                        <Like />
                       </div>
-                    </div>
-                  );
-                })}
-              </Carousel>
+                    );
+                  })}
+                </Carousel>
+                
+              </div>
               
             </div>
-            
-          </div>
 
-          {/*bottom navigation*/}
-        <Navbar />
-      </div>
+            {/*bottom navigation*/}
+          <Navbar />
+        </div>
     );
   }
   
