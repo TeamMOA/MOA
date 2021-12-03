@@ -1,5 +1,5 @@
 # MOA
-뫄! 온나!
+스토리 기반의 간단한 SNS 웹앱 어플리케이션
 
 ## 💻 Coding Convention   
 <details>
